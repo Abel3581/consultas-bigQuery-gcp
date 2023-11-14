@@ -2,22 +2,25 @@ package com.medici.app.service;
 
 
 import com.google.cloud.bigquery.*;
+import com.medici.app.dto.CountyNatalityFilterResidenceAndBirths;
 import com.medici.app.dto.CountyNatalityResponse;
+import com.medici.app.mapper.BitQueryMapper;
 import com.medici.app.service.injectdependency.BigQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class BigQueryService2 implements BigQueryService {
-
-    private String   GET_COUNTY_NATALITY = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 10;";
+    //county_natality, county_natality_by_abnormal_conditions, county_natality_by_congenital_abnormalities
+    private String  GET_COUNTY_NATALITY = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 10;";
+    private String GET_COUNTY_NATALITY_RESIDENCE_AND_BIRTHS = "SELECT County_of_Residence, Births FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 10";
+    private String BD_BIGQUERY_NAME = "bigquery-public-data.sdoh_cdc_wonder_natality.county_natality";
 
     private final BigQuery bigquery;
+    private final BitQueryMapper bitQueryMapper;
 
     public List<String> getConsult() throws Exception {
         List<String> jsonResults = new ArrayList<>();
@@ -56,10 +59,9 @@ public class BigQueryService2 implements BigQueryService {
     @Override
     public List<CountyNatalityResponse> getConsultTable() throws Exception {
         List<CountyNatalityResponse> responses = new ArrayList<>();
-        String GET_COUNTY_NATALITY = this.GET_COUNTY_NATALITY;
+        String getCountyNatality = this.GET_COUNTY_NATALITY;
 
-        QueryJobConfiguration queryConfig =
-                QueryJobConfiguration.newBuilder(GET_COUNTY_NATALITY).build();
+        QueryJobConfiguration queryConfig = QueryJobConfiguration.newBuilder(getCountyNatality).build();
         Job queryJob = bigquery.create(JobInfo.newBuilder(queryConfig).build());
 
         queryJob = queryJob.waitFor();
@@ -85,27 +87,43 @@ public class BigQueryService2 implements BigQueryService {
             String aveNumberOfPrenatalWks = row.get("Ave_Number_of_Prenatal_Wks").getStringValue();
             String births = row.get("Births").getStringValue();
 
-            responses.add(this.createResponse(year,countyOfResidence,aveLMPGestationalAgeWks,aveBirthWeightGms,
+            responses.add(bitQueryMapper.mapToCountyNatality(year,countyOfResidence,aveLMPGestationalAgeWks,aveBirthWeightGms,
                     countyOfResidenceFips,aveAgeOfMother,aveOeGestationalAgeWks,avePrePregnancyBmi,aveNumberOfPrenatalWks,
                     births));
         }
         return responses;
     }
 
-    private CountyNatalityResponse createResponse(String year, String countyOfResidence, String aveLMPGestationalAgeWks, String aveBirthWeightGms,
-                                                  String countyOfResidenceFips, String aveAgeOfMother,
-                                                  String aveOeGestationalAgeWks, String avePrePregnancyBmi,
-                                                  String aveNumberOfPrenatalWks, String births) {
-        return CountyNatalityResponse.builder()
-                .year(year)
-                .County_of_Residence(countyOfResidence)
-                .Ave_Age_of_Mother(aveAgeOfMother)
-                .Ave_Birth_Weight_gms(aveBirthWeightGms)
-                .Ave_LMP_Gestational_Age_Wks(aveLMPGestationalAgeWks)
-                .Ave_Number_of_Prenatal_Wks(aveNumberOfPrenatalWks)
-                .Ave_OE_Gestational_Age_Wks(aveOeGestationalAgeWks)
-                .Births(births)
-                .Ave_Pre_pregnancy_BMI(avePrePregnancyBmi)
-                .County_of_Residence_FIPS(countyOfResidenceFips).build();
+    @Override
+    public List<CountyNatalityFilterResidenceAndBirths> getCountyNatalityResidenceAndBirths() throws Exception {
+        List<CountyNatalityFilterResidenceAndBirths> responses = new ArrayList<>();
+        String getResidenceAndBirths = GET_COUNTY_NATALITY_RESIDENCE_AND_BIRTHS;
+        QueryJobConfiguration queryConfig = QueryJobConfiguration.newBuilder(getResidenceAndBirths).build();
+        Job queryJob = bigquery.create(JobInfo.newBuilder(queryConfig).build());
+
+        queryJob = queryJob.waitFor();
+
+        if(queryJob == null){
+            throw new Exception("Job no longer exixts");
+        }
+        if(queryJob.getStatus().getError() != null){
+            throw new Exception(queryJob.getStatus().getError().toString());
+        }
+        //System.out.println("Imprimiento resultados");
+        TableResult result = queryJob.getQueryResults();
+
+        for (FieldValueList row: result.iterateAll()){
+            String residence = row.get("County_of_Residence").getStringValue();
+            String births = row.get("Births").getStringValue();
+            responses.add(bitQueryMapper.mapTo(residence, births));
+        }
+        return responses;
     }
+
+
+
+
+
+
+
 }

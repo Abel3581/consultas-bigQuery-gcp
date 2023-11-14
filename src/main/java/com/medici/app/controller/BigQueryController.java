@@ -1,19 +1,19 @@
 package com.medici.app.controller;
 
+import com.medici.app.dto.CountyNatalityFilterResidenceAndBirths;
 import com.medici.app.dto.CountyNatalityResponse;
 import com.medici.app.service.BigQueryService2;
 import com.medici.app.service.injectdependency.BigQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("bigquery")
+@RequestMapping("data")
 @RequiredArgsConstructor
 public class BigQueryController {
 
@@ -26,10 +26,16 @@ public class BigQueryController {
         return ResponseEntity.status(HttpStatus.OK).body("respuesta correcta");
     }
 
-    @GetMapping("/table")
+    @GetMapping("/county-residence")
     public ResponseEntity<List<CountyNatalityResponse>> getConsultTable() throws Exception {
-        bigQueryService.getConsult();
+
         List<CountyNatalityResponse> responses = bigQueryServiceInterface.getConsultTable();
+        return ResponseEntity.status(HttpStatus.OK).body(responses);
+    }
+
+    @GetMapping("/residence-births")
+    public ResponseEntity<List<CountyNatalityFilterResidenceAndBirths>> getCountyNatalityResidenceAndBirths() throws Exception {
+        List<CountyNatalityFilterResidenceAndBirths> responses = bigQueryServiceInterface.getCountyNatalityResidenceAndBirths();
         return ResponseEntity.status(HttpStatus.OK).body(responses);
     }
 
