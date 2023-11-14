@@ -1,5 +1,7 @@
 package com.medici.app.controller;
 
+import com.medici.app.dto.AbnormalConditionsFilters;
+import com.medici.app.dto.AbnormalConditionsResponse;
 import com.medici.app.dto.CountyNatalityFilterResidenceAndBirths;
 import com.medici.app.dto.CountyNatalityResponse;
 import com.medici.app.service.BigQueryService2;
@@ -26,8 +28,8 @@ public class BigQueryController {
         return ResponseEntity.status(HttpStatus.OK).body("respuesta correcta");
     }
 
-    @GetMapping("/county-residence")
-    public ResponseEntity<List<CountyNatalityResponse>> getConsultTable() throws Exception {
+    @GetMapping("/county-natality")
+    public ResponseEntity<List<CountyNatalityResponse>> getCountyNatality() throws Exception {
 
         List<CountyNatalityResponse> responses = bigQueryServiceInterface.getConsultTable();
         return ResponseEntity.status(HttpStatus.OK).body(responses);
@@ -36,6 +38,18 @@ public class BigQueryController {
     @GetMapping("/residence-births")
     public ResponseEntity<List<CountyNatalityFilterResidenceAndBirths>> getCountyNatalityResidenceAndBirths() throws Exception {
         List<CountyNatalityFilterResidenceAndBirths> responses = bigQueryServiceInterface.getCountyNatalityResidenceAndBirths();
+        return ResponseEntity.status(HttpStatus.OK).body(responses);
+    }
+
+    @GetMapping("/abnormal-conditions")
+    public ResponseEntity<List<AbnormalConditionsResponse>> getCountyNatalityByAbnormalConditions() throws Exception {
+        List<AbnormalConditionsResponse> responses = bigQueryServiceInterface.getCountyNatalityByAbnormalConditions();
+        return ResponseEntity.status(HttpStatus.OK).body(responses);
+    }
+
+    @GetMapping("/abnormal/condition/filters")
+    public ResponseEntity<List<AbnormalConditionsFilters>> abnormalConditionsFilters(){
+        List<AbnormalConditionsFilters> responses = bigQueryServiceInterface.bnormalConditionsFilters();
         return ResponseEntity.status(HttpStatus.OK).body(responses);
     }
 

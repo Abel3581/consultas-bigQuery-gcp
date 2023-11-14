@@ -2,6 +2,8 @@ package com.medici.app.service;
 
 
 import com.google.cloud.bigquery.*;
+import com.medici.app.dto.AbnormalConditionsFilters;
+import com.medici.app.dto.AbnormalConditionsResponse;
 import com.medici.app.dto.CountyNatalityFilterResidenceAndBirths;
 import com.medici.app.dto.CountyNatalityResponse;
 import com.medici.app.mapper.BitQueryMapper;
@@ -18,6 +20,8 @@ public class BigQueryService2 implements BigQueryService {
     private String  GET_COUNTY_NATALITY = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 10;";
     private String GET_COUNTY_NATALITY_RESIDENCE_AND_BIRTHS = "SELECT County_of_Residence, Births FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 10";
     private String BD_BIGQUERY_NAME = "bigquery-public-data.sdoh_cdc_wonder_natality.county_natality";
+    private String GET_ABNORMAL_CONDITIONS = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_abnormal_conditions` LIMIT 10";
+    private String GET_ABNORMAL_CONDITIONS_FILTERS = "SELECT";
 
     private final BigQuery bigquery;
     private final BitQueryMapper bitQueryMapper;
@@ -120,10 +124,34 @@ public class BigQueryService2 implements BigQueryService {
         return responses;
     }
 
+    @Override
+    public List<AbnormalConditionsResponse> getCountyNatalityByAbnormalConditions() throws Exception {
+        List<AbnormalConditionsResponse> responses = new ArrayList<>();
+        String getAbnormalConditions = GET_ABNORMAL_CONDITIONS;
+        QueryJobConfiguration queryConfig = QueryJobConfiguration.newBuilder(getAbnormalConditions).build();
+        Job queryJob = bigquery.create(JobInfo.newBuilder(queryConfig).build());
 
+        queryJob = queryJob.waitFor();
 
+        if(queryJob == null){
+            throw new Exception("Job no longer exixts");
+        }
+        if(queryJob.getStatus().getError() != null){
+            throw new Exception(queryJob.getStatus().getError().toString());
+        }
+        //System.out.println("Imprimiento resultados");
+        TableResult result = queryJob.getQueryResults();
+        for (FieldValueList row: result.iterateAll()){
+            responses.add(bitQueryMapper.mapToRowAbnormalConditions(row));
+        }
 
+        return responses;
+    }
 
+    @Override
+    public List<AbnormalConditionsFilters> bnormalConditionsFilters() {
+        return null;
+    }
 
 
 }

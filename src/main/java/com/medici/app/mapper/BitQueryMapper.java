@@ -1,5 +1,7 @@
 package com.medici.app.mapper;
 
+import com.google.cloud.bigquery.FieldValueList;
+import com.medici.app.dto.AbnormalConditionsResponse;
 import com.medici.app.dto.CountyNatalityFilterResidenceAndBirths;
 import com.medici.app.dto.CountyNatalityResponse;
 import org.springframework.stereotype.Component;
@@ -29,6 +31,25 @@ public class BitQueryMapper {
                 .Ave_Pre_pregnancy_BMI(avePrePregnancyBmi)
                 .Ave_LMP_Gestational_Age_Wks(aveLMPGestationalAgeWks)
                 .build();
+
+    }
+
+    public AbnormalConditionsResponse mapToRowAbnormalConditions(FieldValueList row) {
+       AbnormalConditionsResponse response = new AbnormalConditionsResponse();
+       response.setAbnormalConditionsCheckedYN(row.get("Abnormal_Conditions_Checked_YN").getStringValue());
+       response.setAbnormalConditionsCheckedDesc(row.get("Abnormal_Conditions_Checked_Desc").getStringValue());
+       response.setYear(row.get("Year").getStringValue());
+       response.setBirths(row.get("Births").getStringValue());
+       response.setAve_Age_of_Mother(row.get("Ave_Age_of_Mother").getStringValue());
+       response.setAve_Birth_Weight_gms(row.get("Ave_Birth_Weight_gms").getStringValue());
+       response.setAve_LMP_Gestational_Age_Wks(row.get("Ave_LMP_Gestational_Age_Wks").getStringValue());
+       response.setAve_Number_of_Prenatal_Wks(row.get("Ave_Number_of_Prenatal_Wks").getStringValue());
+       response.setAve_OE_Gestational_Age_Wks(row.get("Ave_OE_Gestational_Age_Wks").getStringValue());
+       response.setAve_Pre_pregnancy_BMI(row.get("Ave_Pre_pregnancy_BMI").getStringValue());
+       response.setCounty_of_Residence(row.get("County_of_Residence").getStringValue());
+       response.setCounty_of_Residence_FIPS(row.get("County_of_Residence_FIPS").getStringValue());
+
+       return response;
 
     }
 }
