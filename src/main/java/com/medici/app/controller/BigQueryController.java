@@ -1,26 +1,21 @@
 package com.medici.app.controller;
 
-import com.medici.app.dto.AbnormalConditionsFilters;
-import com.medici.app.dto.AbnormalConditionsResponse;
-import com.medici.app.dto.CountyNatalityFilterResidenceAndBirths;
-import com.medici.app.dto.CountyNatalityResponse;
-import com.medici.app.service.BigQueryService2;
-import com.medici.app.service.injectdependency.BigQueryService;
+import com.medici.app.dto.*;
+import com.medici.app.service.BigQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("data")
 @RequiredArgsConstructor
 public class BigQueryController {
 
-    private final BigQueryService2 bigQueryService;
-    private final BigQueryService bigQueryServiceInterface;
+    private final BigQueryService bigQueryService;
+    private final com.medici.app.service.injectdependency.BigQueryService bigQueryServiceInterface;
 
     @GetMapping
     public ResponseEntity<?> getConsult() throws Exception {
@@ -48,10 +43,11 @@ public class BigQueryController {
     }
 
     @GetMapping("/abnormal/condition/filters")
-    public ResponseEntity<List<AbnormalConditionsFilters>> abnormalConditionsFilters(){
+    public ResponseEntity<List<AbnormalConditionsFilters>> abnormalConditionsFilters() throws Exception {
         List<AbnormalConditionsFilters> responses = bigQueryServiceInterface.bnormalConditionsFilters();
         return ResponseEntity.status(HttpStatus.OK).body(responses);
     }
+
 
 
 }

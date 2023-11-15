@@ -1,10 +1,8 @@
 package com.medici.app.service.injectdependency;
 
 
-import com.medici.app.dto.AbnormalConditionsFilters;
-import com.medici.app.dto.AbnormalConditionsResponse;
-import com.medici.app.dto.CountyNatalityFilterResidenceAndBirths;
-import com.medici.app.dto.CountyNatalityResponse;
+import com.medici.app.dto.*;
+
 import java.util.List;
 
 
@@ -15,5 +13,7 @@ public interface BigQueryService {
 
     List<AbnormalConditionsResponse> getCountyNatalityByAbnormalConditions() throws Exception;
 
-    List<AbnormalConditionsFilters> bnormalConditionsFilters();
+    List<AbnormalConditionsFilters> bnormalConditionsFilters() throws Exception;
+
+;
 }
