@@ -5,7 +5,6 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class AbnormalConditionsResponse extends CountyNatalityResponse{
 
     // AbnormalConditions

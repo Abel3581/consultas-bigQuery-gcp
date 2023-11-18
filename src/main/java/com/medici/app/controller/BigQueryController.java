@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("data")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class BigQueryController {
 
     private final BigQueryService bigQueryService;

@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ConsultRepository extends JpaRepository<CountyNatalityBase, Long> {
+
+    boolean existsByNameConsultAndNameUser(String nameConsult, String nameUser);
 }

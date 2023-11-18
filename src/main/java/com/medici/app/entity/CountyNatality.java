@@ -1,16 +1,20 @@
-package com.medici.app.dto;
+package com.medici.app.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+import javax.persistence.*;
+
+@Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CountyNatalityBaseRequest {
+@Getter @Setter
+@Table(name = "county_natality")
+public class CountyNatality {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String year;
     private String county_of_Residence;
     private String county_of_Residence_FIPS;
@@ -23,4 +27,7 @@ public class CountyNatalityBaseRequest {
     private String ave_Number_of_Prenatal_Wks;
     private String abnormalConditionsCheckedDesc;
     private String abnormalConditionsCheckedYN;
+    @ManyToOne
+    @JoinColumn(name = "county_natality_base_id") // Nombre de la columna que hace referencia al ID de CountyNatalityBase
+    private CountyNatalityBase countyNatalityBase;
 }
