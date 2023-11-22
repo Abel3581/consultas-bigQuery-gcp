@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  angular-app:
+    build:
+      context: ./ConsultasVisuales
+    ports:
+      - "9000:9000"
+    depends_on:
+      - spring-boot-app
+    networks:
+      - mynetwork
+
+  spring-boot-app:
+    build:
+      context: ./consultas-bigQuery-gcp
+    ports:
+      - "8080:8080"
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_PORT: 3306
+    depends_on:
+      - mysql-db
+    networks:
+      - mynetwork
+
+  mysql-db:
+    image: mysql:latest
+    environment:
+        MYSQL_DATABASE: consults_bd
+        MYSQL_ROOT_PASSWORD: root_pass
+    ports:
+      - "3307:3306"
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:

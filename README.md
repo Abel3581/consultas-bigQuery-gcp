@@ -1,2 +1,3 @@
-# consultas-bigQuery-gcp
-Consultas bigQuery GCP
+# pruebaTecnica-Ver-tech
+Consultas BigQuery GCP
+  angular 

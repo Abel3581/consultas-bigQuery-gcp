@@ -1,0 +1,32 @@
+<div class="  w-full h-screen flex flex-col justify-normal items-center p-8">
+    <div  class=" relative  bg-[#64c7f2] w-11/12 h-60  rounded-lg  flex flex-row justify-normal">
+        <div class=" w-3/5 flex justify-center" >
+            <h1 class="text-3xl p-20 font-bold text-gray-700">Admin</h1>
+        </div>
+        <div class="  w-2/5 flex justify-end">
+            <img
+            class=" w-48 h-32 md:w-full md:h-72 "
+            src="./../../../assets/img/admin.png"
+            alt=""
+          />
+        </div>
+    </div>
+
+
+
+
+<div class=" flex flex-row justify-center bg-white border border-gray-200  shadow absolute mt-44 w-1/2 h-32   rounded-lg pt-8">
+
+   <div class=" flex flex-row">
+    <label for="small-input" class="block mb-2 text-md font-bold text-gray-700">Usuario: </label>
+
+    <input [(ngModel)]="userAdmin.userAdmin"  id="small-input" class=" ml-2 w-72 h-10 block  p-2 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs ">
+
+   </div>
+    <div class="">
+
+        <button type="button" class="focus:outline-none font-bold text-gray-700 bg-[#64c7f2] hover:bg-[#64c7f2] focus:ring-4 focus:bg-[#64c7f2]  rounded-lg text-sm px-5 w-40 h-10 "(click)="enviarSolicitud()">Enviar</button>
+    </div>
+
+
+</div>

@@ -1,0 +1,152 @@
+<div class="  w-full h-auto flex flex-col justify-normal items-center p-8">
+  <div  class=" relative  bg-[#d8b4fe] w-11/12 h-60  rounded-lg  flex flex-row justify-normal">
+      <div class=" w-3/5 flex justify-center" >
+          <h1 class="text-3xl p-20 font-bold text-gray-700">Queries</h1>
+      </div>
+      <div class="  w-2/5 flex justify-end">
+          <img
+          class=" w-40 h-32 md:w-72 md:h-60 "
+          src="./../../../assets/img/buscar.png"
+          alt=""
+        />
+      </div>
+  </div>
+
+
+</div>
+<div class="  w-full h-screen flex flex-col justify-normal items-center p-8">
+  <div class="relative  mt-32 w-11/12 h-72 overflow-x-auto shadow-md sm:rounded-lg ">
+  <table class="w-full  text-sm text-left rtl:text-right text-gray-700">
+    <thead class="border-b text-xs text-gray-700 uppercase bg-[#c084fc]">
+      <th scope="col" class="px-6 py-4 " *ngIf="showColumn('id')">
+        Id
+      </th>
+      <th scope="col" class="px-6 py-3" *ngIf="showColumn('year')">
+        Year
+    </th>
+    <th scope="col" class="px-6 py-3" *ngIf="showColumn('county_of_Residence')">
+        County_of_Residence
+    </th>
+    <th scope="col" class="px-6 py-3" *ngIf="showColumn('county_of_Residence_FIPS')">
+        County_of_Residence_FIPS
+    </th>
+    <th scope="col" class="px-6 py-3" *ngIf="showColumn('births')">
+       Births
+    </th>
+    <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Age_of_Mother')">
+       Ave_Age_of_Mother
+    </th>
+    <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_OE_Gestational_Age_Wks')">
+      Ave_OE_Gestational_Age
+    </th>
+    <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_LMP_Gestational_Age_Wks')">
+      Ave_LMP_Gestational_Age
+    </th>
+    <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Birth_Weight_gms')">
+      Ave_Birth_Weight_gms
+    </th>
+    <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Pre_pregnancy_BMI')">
+      Ave_Pre_pregnancy_BMI
+    </th>
+    <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Number_of_Prenatal_Wks')">
+      Ave_Number_of_Prenatal_Wks
+    </th>
+    <th scope="col" class="px-6 py-3" *ngIf="showColumn('abnormalConditionsCheckedDesc')">
+      Abnormal_Conditions
+    </th>
+    <th scope="col" class="px-6 py-3" *ngIf="showColumn('abnormalConditionsCheckedDesc')">
+      Abnormal_ConditionsChecked_YN
+    </th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let detalle of consultaDetalle" class="bg-[#d8b4fe] border-b border-[#d8b4fe] ">
+        <td *ngIf="showColumn('id')" scope="row" class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap ">
+            {{detalle.id}}
+        </td>
+        <td *ngIf="showColumn('year')" class="px-6 py-4">
+            {{detalle.year}}
+        </td>
+        <td *ngIf="showColumn('county_of_Residence')" class="px-6 py-4">
+            {{detalle.county_of_Residence}}
+        </td>
+        <td *ngIf="showColumn('county_of_Residence_FIPS')" class="px-6 py-4">
+            {{detalle.county_of_Residence_FIPS}}
+        </td>
+        <td *ngIf="showColumn('births')" class="px-6 py-4">
+          {{detalle.births}}
+        </td>
+        <td *ngIf="showColumn('ave_Age_of_Mother')" class="px-6 py-4">
+          {{detalle.ave_Age_of_Mother}}
+        </td>
+        <td *ngIf="showColumn('ave_OE_Gestational_Age_Wks')" class="px-6 py-4">
+          {{detalle.ave_OE_Gestational_Age_Wks}}
+        </td>
+        <td *ngIf="showColumn('ave_LMP_Gestational_Age_Wks')" class="px-6 py-4">
+          {{detalle.ave_LMP_Gestational_Age_Wks}}
+        </td>
+        <td *ngIf="showColumn('ave_Birth_Weight_gms')" class="px-6 py-4" >
+          {{detalle.ave_Birth_Weight_gms}}
+        </td>
+        <td *ngIf="showColumn('ave_Pre_pregnancy_BMI')" class="px-6 py-4">
+          {{detalle.ave_Pre_pregnancy_BMI}}
+        </td>
+        <td *ngIf="showColumn('ave_Number_of_Prenatal_Wks')" class="px-6 py-4">
+          {{detalle.ave_Number_of_Prenatal_Wks}}
+        </td>
+        <td *ngIf="showColumn('abnormalConditionsCheckedDesc')" class="px-6 py-4">
+          {{detalle.abnormalConditionsCheckedDesc}}
+        </td>
+        <td *ngIf="showColumn('abnormalConditionsCheckedYN')" class="px-6 py-4">
+          {{detalle.abnormalConditionsCheckedYN}}
+        </td>
+    </tbody>
+    <ng-container *ngIf="consultaDetalle.length === 0">
+      <tr class=" " >
+          <td colspan="13" class=" py-4 text-center font-semibold">No hay datos disponibles</td>
+      </tr>
+    </ng-container>
+  </table>
+  </div>
+</div>
+
+
+<div class="   w-full h-screen  flex justify-center">
+
+  <div class="w-full h-3/5 max-w-md bg-white border border-gray-200 rounded-lg shadow drop-shadow-lg ">
+    <div class="flex items-center justify-center h-auto">
+      <form  [formGroup]="comentarioForm" class="mt-10 w-3/4  " >
+        <div class="bg-white  text-gray-900 text-sm rounded-lg  block p-2.5">
+          <!-- Agrega campos para el nombre de usuario, nombre de consulta y comentario -->
+          <input type="text" formControlName="nameUser" placeholder="Nombre de Usuario" class="w-full mb-2.5 p-2 border rounded-lg" />
+          <input type="text"  placeholder="Nombre de Consulta" class="w-full mb-2.5 p-2 border rounded-lg" />
+          <textarea formControlName="comment" placeholder="Comentario" class="w-full mb-2.5 p-2 border rounded-lg"></textarea>
+        </div>
+        <div class="flex flex-row mt-4 space-x-1">
+          <button  (click)="enviarComentario()" class="focus:outline-none font-bold text-white bg-[#a855f7] hover:bg-[#d9f99d] focus:ring-4 focus:bg-[#d9f99d] rounded-lg text-sm px-5 w-full h-10">
+            Guardar Comentario
+          </button>
+
+        </div>
+      </form>
+      </div>
+
+  </div>
+</div>
+
+<div class="w-full flex justify-around mb-36">
+  <div class="flex items-center justify-center h-auto">
+    <button [routerLink]="['/natalidad']" class="focus:outline-none font-bold text-gray-700 bg-[#d8b4fe] hover:bg-[#d9f99d] focus:ring-4 focus:bg-[#d9f99d] rounded-lg text-sm px-5 w-full h-10">
+        Buscador
+    </button>
+  </div>
+  <div>
+    <button [routerLink]="['/todos']" routerLinkActive="router-link-active"  class="focus:outline-none font-bold text-gray-700 bg-[#d8b4fe] hover:bg-[#d9f99d] focus:ring-4 focus:bg-[#d9f99d] rounded-lg text-sm px-5 w-full h-10">
+      Ver consultas
+  </button>
+  </div>
+</div>
+
+
+
+
+
