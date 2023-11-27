@@ -5,6 +5,7 @@ import { GraficasComponent } from './graficas/graficas.component';
 import{AdminComponent} from './admin/admin.component'
 import { SearchComponent } from './search/search.component';
 import { AllComponent } from './all/all.component';
+import { GraficoCircularComponent } from './grafico-circular/grafico-circular.component';
 
 
 
@@ -37,6 +38,9 @@ const routes: Routes = [
     {
       path: 'todos',
       component: AllComponent
+    },
+    {
+      path: 'circular', component: GraficoCircularComponent
     },
     {
       path: '',

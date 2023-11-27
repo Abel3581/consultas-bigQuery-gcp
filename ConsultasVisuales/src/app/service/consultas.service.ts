@@ -12,6 +12,8 @@ import { SavedQueriesResponse } from '../model/saved-queries-response';
 import { ConsultaDetalleResponse } from '../model/consulta-detalle-response';
 import { CommentRequest } from '../model/comment-request';
 import { AdminRequest } from '../model/admin-request';
+import { CountyNatalitySearchRequest } from '../model/county-natality-search-request';
+import { CountyNatalitySearchResponse } from '../model/county-natality-search-response';
 
 @Injectable({
   providedIn: 'root'
@@ -89,5 +91,16 @@ export class ConsultasService {
       catchError(this.handleError)
     );
   }
+
+  searchByYearAndResidence(request: CountyNatalitySearchRequest): Observable<CountyNatalitySearchResponse[]>{
+    // const params = {
+    //   year: request.year,
+    //   county_of_Residence: request.county_of_Residence
+    // };
+    return this.http.post<CountyNatalitySearchResponse[]>(`${this.urlApi}/search`, request).pipe(
+      catchError(this.handleError)
+    );
+  }
+
 
 }

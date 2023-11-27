@@ -1,12 +1,13 @@
 version: '3.9'
 services:
-  angular-app:
+
+  deploy:
     build:
       context: ./ConsultasVisuales
+    restart: always
     ports:
-      - "9000:9000"
-    depends_on:
-      - spring-boot-app
+      - '127.0.0.1:4000:80'
+    container_name: angular-app
     networks:
       - mynetwork
 
@@ -16,20 +17,20 @@ services:
     ports:
       - "8080:8080"
     environment:
-      MYSQL_HOST: mysqldb
+      MYSQL_HOST: mysql-db  #172.18.0.3:3306  # Asegúrate de proporcionar el nombre del servicio de MySQL aquí
       MYSQL_USER: root
-      MYSQL_PASSWORD: root
+      MYSQL_PASSWORD: 12345678
       MYSQL_PORT: 3306
-    depends_on:
-      - mysql-db
     networks:
       - mynetwork
 
   mysql-db:
-    image: mysql:latest
+    image: mysql:8.0.33
     environment:
-        MYSQL_DATABASE: consults_bd
-        MYSQL_ROOT_PASSWORD: root_pass
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: consult_bd
+      #MYSQL_USER: root
+      #MYSQL_PASSWORD: 12345678
     ports:
       - "3307:3306"
     networks:

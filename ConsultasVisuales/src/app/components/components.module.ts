@@ -13,6 +13,7 @@ import { AllComponent } from './all/all.component';
 import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedDataServiceService } from '../service/shared-data-service.service';
+import { GraficoCircularComponent } from './grafico-circular/grafico-circular.component';
 
 
 
@@ -23,7 +24,8 @@ import { SharedDataServiceService } from '../service/shared-data-service.service
     ConsultasComponent,
     AdminComponent,
     SearchComponent,
-    AllComponent
+    AllComponent,
+    GraficoCircularComponent
   ],
   imports: [
     CommonModule,
@@ -40,12 +42,6 @@ import { SharedDataServiceService } from '../service/shared-data-service.service
       positionClass: 'toast-top-right', // Posición del toast
 
     }),
-    // ToastrModule.forRoot({
-    //   timeOut: 3000, // Duración predeterminada del toast en milisegundos
-    //   positionClass: 'toast-top-right', // Posición del toast
-
-    // }),
-    // ToastNoAnimationModule,
 
 
 

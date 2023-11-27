@@ -11,6 +11,8 @@ import { ConsultasService } from 'src/app/service/consultas.service'
 import { SharedDataServiceService } from 'src/app/service/shared-data-service.service';
 import { GraficasComponent } from '../graficas/graficas.component';
 import { Router } from '@angular/router';
+import { CountyNatalitySearchResponse } from 'src/app/model/county-natality-search-response';
+import { CountyNatalitySearchRequest } from 'src/app/model/county-natality-search-request';
 
 
 @Component({
@@ -19,19 +21,58 @@ import { Router } from '@angular/router';
   styleUrls: ['./consultas.component.css']
 })
 export class ConsultasComponent implements OnInit{
+
+  mostrarGrafico: boolean = false;
+  // Opciones para el año
+  years: string[] = [
+    '2018-01-01',
+    '2017-01-01',
+    '2016-01-01',
+
+  ];
+
+  // Opciones para el condado de residencia
+  county_of_Residence: string[] = [
+    'Calhoun County, AL',
+    'Tulsa County, OK',
+    'Carroll County, GA',
+    'Saginaw County, MI',
+    'Hillsborough County, FL',
+    'Lake County, IN',
+    'St. Tammany Parish, LA',
+    'Osceola County, FL',
+    'Sarpy County, NE',
+    'Kane County, IL',
+    'San Juan County, NM',
+    'Douglas County, KS',
+    'Denton County, TX',
+    'Hays County, TX',
+    'Davis County, UT',
+    'Manatee County, FL',
+    'New Haven County, CT',
+    'San Mateo County, CA',
+    'San Luis Obispo County, CA',
+    'Canyon County, ID'
+  ];
+
+
+  // Variables para almacenar las selecciones
+  selectedYear!: string;
+  selectedCounty!: string;
+
   userAdmin: string = '';
 
   showChart: boolean = false;
   consultaForm: FormGroup;
-  countyNatalityData: CountyNatalityResponse [] = []; // Inicializamos como arreglo vacío
+  countyNatalityData: CountyNatalityResponse [] = [];
   countyNatalityResidenceAndBirthsData: CountyNatalityFilterResidenceAndBirths[] = [];
   countyNatalityByAbnormalConditionsData: AbnormalConditionsResponse[] = [];
   abnormalConditionsFiltersData: AbnormalConditionsFilters[] = [];
+  countySearchResponse:CountyNatalitySearchResponse[] = [];
 
   selectedOption: string = ''; // Esta propiedad almacena el valor seleccionado
 
-
-  constructor(private consultasService: ConsultasService, private fb: FormBuilder,
+constructor(private consultasService: ConsultasService, private fb: FormBuilder,
     private toastr: ToastrService, private sharedDataService: SharedDataServiceService,
     private router: Router){
     this.consultaForm = this.fb.group({
@@ -39,10 +80,32 @@ export class ConsultasComponent implements OnInit{
       nameUser: ['', Validators.required],
       comment: [''],
     });
-  }
+}
+ // Función para manejar el clic en el botón
+  onButomCircular() {
+  const county: CountyNatalitySearchRequest = {
+    year: this.selectedYear,
+    county_of_Residence: this.selectedCounty
+  };
+  this.consultasService.searchByYearAndResidence(county).subscribe(
+    response =>{
+      this.countySearchResponse = response;
+      this.mostrarGrafico = true;
+      console.log(response);
+       // Envía los datos al servicio para que otros componentes puedan recibirlos
+       this.sharedDataService.setData(this.countySearchResponse);
+    },error =>{
+      this.toastr.error('Error: ' + JSON.stringify(error));
+      console.error('Error en la solicitud:', error);
 
+    }
+  )
 
-  ngOnInit() {
+  console.log('Año seleccionado:', this.selectedYear);
+  console.log('Condado seleccionado:', this.selectedCounty);
+}
+
+ngOnInit() {
     this.sharedDataService.chartData$.subscribe(data => {
       // Actualizar lógica en respuesta a cambios en chartData
       console.log('Nuevos datos de gráfico recibidos:', data);
@@ -54,37 +117,35 @@ export class ConsultasComponent implements OnInit{
       console.log('Nuevas categorías de gráfico recibidas:', categories);
       // Lógica para actualizar el gráfico en respuesta a las nuevas categorías
     });
-  }
+}
 
-  validarYEnviar() {
+validarYEnviar() {
     if (this.userAdmin === 'admin@gmail.com') {
       // Navegar al inicio (puedes cambiar 'inicio' por la ruta que desees)
       this.router.navigate(['']);
     } else {
       alert('El usuario no es válido');
     }
-  }
+}
 
-  onButtonClick() {
+onButtonClick() {
     // Limpiar los arrays al seleccionar otra opción
     this.countyNatalityData = [];
     this.countyNatalityResidenceAndBirthsData = [];
     this.countyNatalityByAbnormalConditionsData = [];
     this.abnormalConditionsFiltersData = [];
+
     if (this.selectedOption) {
       switch (this.selectedOption) {
         case 'NDC':
           this.consultasService.getCountyNatality().subscribe(data => {
             this.countyNatalityData = data;
             console.log('Datos de Natalidad del Condado:', data);
-
-
           }, error => {
             this.toastr.error(error);
             console.error('Error en la consulta de Natalidad del Condado:', error);
-
           });
-          break;
+        break;
         case 'PRN':
           this.consultasService.getCountyNatalityResidenceAndBirths().subscribe(
             data => {
@@ -120,9 +181,9 @@ export class ConsultasComponent implements OnInit{
           break;
       }
     }
-  }
+}
 
-  noDataCondition(): boolean {
+noDataCondition(): boolean {
     return (
         (!this.selectedOption) ||
         (this.selectedOption === 'NDC' && (!this.countyNatalityData || this.countyNatalityData.length === 0)) ||
@@ -256,6 +317,7 @@ updateChartData() {
       switch (this.selectedOption) {
         case 'NDC':
           if (this.countyNatalityData && this.countyNatalityData.length > 0) {
+            categories = [];
             categories = Object.keys(this.countyNatalityData[0]);
             // Lógica específica para la opción 'NDC'
           }
@@ -263,6 +325,7 @@ updateChartData() {
 
         case 'PRN':
           if (this.countyNatalityResidenceAndBirthsData && this.countyNatalityResidenceAndBirthsData.length > 0) {
+            categories = [];
             categories = Object.keys(this.countyNatalityResidenceAndBirthsData[0]);
             // Lógica específica para la opción 'PRN'
 
@@ -271,18 +334,18 @@ updateChartData() {
           break;
         case 'NCPCA':
           if (this.countyNatalityByAbnormalConditionsData && this.countyNatalityByAbnormalConditionsData.length > 0) {
+            categories = [];
             categories = Object.keys(this.countyNatalityByAbnormalConditionsData[0]);
             // Lógica específica para la opción 'PRN'
           }
         break;
         case 'CAE':
           if (this.abnormalConditionsFiltersData && this.abnormalConditionsFiltersData.length > 0) {
+            categories = [];
             categories = Object.keys(this.abnormalConditionsFiltersData[0]);
             // Lógica específica para la opción 'PRN'
           }
         break;
-
-
         default:
           break;
       }
@@ -336,6 +399,15 @@ getDataForCategory(category: string): (number | null)[] {
     default:
       return [];
   }
+}
+
+
+abrirGrafico() {
+  this.mostrarGrafico = true;
+}
+
+cerrarGrafico() {
+  this.mostrarGrafico = false;
 }
 
 

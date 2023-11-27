@@ -1,6 +1,7 @@
 package com.medici.app.mapper;
 
 import com.google.cloud.bigquery.FieldValueList;
+import com.google.cloud.bigquery.TableResult;
 import com.medici.app.dto.*;
 import org.springframework.stereotype.Component;
 
@@ -70,5 +71,25 @@ public class BitQueryMapper {
     }
 
 
+    public CountyNatalitySearchResponse mapToSearchRequest(FieldValueList row) {
+        return CountyNatalitySearchResponse.builder()
+                .Nacimientos(row.get("Births").getStringValue())
+                .Edad_Promedio_de_la_Madre(row.get("Ave_Age_of_Mother").getStringValue())
+                .IMC_Promedio_Previo_al_Embarazo(row.get("Ave_Pre_pregnancy_BMI").getStringValue())
 
+                .Edad_OE_Promedio_Gestacional_Semanas(row.get("Ave_OE_Gestational_Age_Wks").getStringValue())
+                .Número_Promedio_de_Semanas_Prenatales(row.get("Ave_Number_of_Prenatal_Wks").getStringValue())
+
+                .Edad_LMP_Promedio_Gestacional_Semanas(row.get("Ave_LMP_Gestational_Age_Wks").getStringValue())
+                .build();
+    }
+
+    private int parseIntOrZero(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            // Si no se puede convertir, devuelve 0 o maneja el error de alguna manera
+            return 0;
+        }
+    }
 }

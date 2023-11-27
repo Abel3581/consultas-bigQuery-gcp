@@ -22,19 +22,11 @@ import { SharedDataServiceService } from './service/shared-data-service.service'
     ComponentsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut: 4000, // Duración predeterminada del toast en milisegundos
-      positionClass: 'toast-top-right', // Posición del toast
-      preventDuplicates: true, // Evitar duplicados
+      // timeOut: 3000, // Duración predeterminada del toast en milisegundos
+      // positionClass: 'toast-top-right', // Posición del toast
+      // preventDuplicates: false, // Evitar duplicados
     }),
      ToastNoAnimationModule,
-    // ToastNoAnimationModule,
-    // NgApexchartsModule,
-    // ToastrModule.forRoot({
-    //   timeOut: 3000, // Duración predeterminada del toast en milisegundos
-    //   positionClass: 'toast-top-right', // Posición del toast
-
-    // }),
-
 
   ],
 

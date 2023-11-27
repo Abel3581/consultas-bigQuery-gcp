@@ -4,14 +4,17 @@ package com.medici.app.service;
 import com.google.cloud.bigquery.*;
 import com.medici.app.dto.*;
 import com.medici.app.mapper.BitQueryMapper;
+import com.medici.app.service.injectdependency.BigQueryService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Log
 @Service
 @RequiredArgsConstructor
-public class BigQueryService implements com.medici.app.service.injectdependency.BigQueryService {
+public class BigQueryServiceImpl implements BigQueryService {
     //county_natality, county_natality_by_abnormal_conditions, county_natality_by_congenital_abnormalities
 
     private String  GET_COUNTY_NATALITY = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 10;";
@@ -19,6 +22,7 @@ public class BigQueryService implements com.medici.app.service.injectdependency.
     private String BD_BIGQUERY_NAME = "bigquery-public-data.sdoh_cdc_wonder_natality.county_natality";
     private String GET_ABNORMAL_CONDITIONS = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_abnormal_conditions` LIMIT 10";
     private String GET_ABNORMAL_CONDITIONS_FILTERS = "SELECT County_of_Residence, Births, Abnormal_Conditions_Checked_Desc, Ave_Age_of_Mother FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_abnormal_conditions` LIMIT 10";
+    private static String GET_COUNTY_NATALITY_SEARCH_BY_YEAR_AND_RESIDENCE = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` WHERE Year = DATE '2018-01-01'AND County_of_Residence = 'Calhoun County, AL'LIMIT 10";
 
     private final BigQuery bigquery;
 
@@ -167,7 +171,29 @@ public class BigQueryService implements com.medici.app.service.injectdependency.
         return responses;
     }
 
+    @Override
+    public List<CountyNatalitySearchResponse> searchByYearAndResidence(CountyNatalitySearchRequest request) throws Exception {
+        List<CountyNatalitySearchResponse> responses = new ArrayList<>();
+        String GET_COUNTY_NATALITY_SEARCH_BY_YEAR_AND_RESIDENCE = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` " + "WHERE TIMESTAMP(Year) = TIMESTAMP('" + request.getYear() + "') " + "AND County_of_Residence = '" + request.getCounty_of_Residence() + "' " + "LIMIT 10";
 
+        QueryJobConfiguration queryJobConfiguration = QueryJobConfiguration.newBuilder(GET_COUNTY_NATALITY_SEARCH_BY_YEAR_AND_RESIDENCE).build();
+        Job job = bigquery.create(JobInfo.newBuilder(queryJobConfiguration).build());
+        job = job.waitFor();
+        if(job == null){
+            throw new Exception("Job no longer exixts");
+        }
+        if(job.getStatus().getError() != null){
+            throw new Exception(job.getStatus().getError().toString());
+        }
+        //System.out.println("Imprimiento resultados");
+        TableResult result = job.getQueryResults();
+            for (FieldValueList row: result.iterateAll()){
+                log.info("Row" + row.toString());
+                responses.add(bitQueryMapper.mapToSearchRequest(row));
+            }
+        return responses;
+
+    }
 
 
 }

@@ -1,12 +1,13 @@
 package com.medici.app.controller;
 
 import com.medici.app.dto.*;
-import com.medici.app.service.BigQueryService;
+import com.medici.app.service.BigQueryServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -15,12 +16,12 @@ import java.util.List;
 @CrossOrigin("*")
 public class BigQueryController {
 
-    private final BigQueryService bigQueryService;
-    private final com.medici.app.service.injectdependency.BigQueryService bigQueryServiceInterface;
+    private final BigQueryServiceImpl bigQueryServiceInterface;
+
 
     @GetMapping
     public ResponseEntity<?> getConsult() throws Exception {
-        bigQueryService.getConsult();
+        bigQueryServiceInterface.getConsult();
         return ResponseEntity.status(HttpStatus.OK).body("respuesta correcta");
     }
 
@@ -47,6 +48,12 @@ public class BigQueryController {
     public ResponseEntity<List<AbnormalConditionsFilters>> abnormalConditionsFilters() throws Exception {
         List<AbnormalConditionsFilters> responses = bigQueryServiceInterface.bnormalConditionsFilters();
         return ResponseEntity.status(HttpStatus.OK).body(responses);
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<List<CountyNatalitySearchResponse>> searchByYearAndResidence(@RequestBody CountyNatalitySearchRequest request) throws Exception {
+        List<CountyNatalitySearchResponse> response = bigQueryServiceInterface.searchByYearAndResidence(request);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
 

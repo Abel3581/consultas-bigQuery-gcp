@@ -25,6 +25,9 @@ export class AllComponent implements OnInit{
       response => {
         this.queriesResonses = response;
         console.log(response);
+        if(response.length === 0){
+          this.toastr.warning("No hay consultas guardadas");
+        }
       },error => {
         console.log("Error al cargar consultas", error);
         this.toastr.error(error.message);

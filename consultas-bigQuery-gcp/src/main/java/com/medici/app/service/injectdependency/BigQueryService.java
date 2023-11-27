@@ -15,5 +15,7 @@ public interface BigQueryService {
 
     List<AbnormalConditionsFilters> bnormalConditionsFilters() throws Exception;
 
-;
+    List<CountyNatalitySearchResponse> searchByYearAndResidence(CountyNatalitySearchRequest request) throws Exception;
+
+    ;
 }
