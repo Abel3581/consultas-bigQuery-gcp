@@ -33,7 +33,7 @@ public class ConsultServiceImpl implements ConsultService {
         CountyNatalityBase base = consultMapper.maptoConsultRequest(request);
         if(consultRepository.existsByNameConsultAndNameUser(request.getNameConsult(), request.getNameUser())){
             log.error("Este nombre de consulta para este usuario ya esta creada ");
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Este nombre de consulta para este usuario ya esta creada ");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Este nombre de consulta para este usuario ya esta creada");
         }
         List<CountyNatality> countyNatalities = consultMapper.maptoCountyNatalityBaseList(request.getCountyNatalityBaseList());
         countyNatalities.forEach(natality -> natality.setCountyNatalityBase(base));

@@ -14,6 +14,10 @@ import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedDataServiceService } from '../service/shared-data-service.service';
 import { GraficoCircularComponent } from './grafico-circular/grafico-circular.component';
+import { DistributedColumnsComponent } from './distributed-columns/distributed-columns.component';
+import { AppModule } from '../app.module';
+import { NavbarComponent } from '../shareds/navbar/navbar.component';
+
 
 
 
@@ -25,7 +29,9 @@ import { GraficoCircularComponent } from './grafico-circular/grafico-circular.co
     AdminComponent,
     SearchComponent,
     AllComponent,
-    GraficoCircularComponent
+    GraficoCircularComponent,
+    DistributedColumnsComponent,
+    NavbarComponent
   ],
   imports: [
     CommonModule,
@@ -38,15 +44,10 @@ import { GraficoCircularComponent } from './grafico-circular/grafico-circular.co
     ToastNoAnimationModule,
     NgApexchartsModule,
     ToastrModule.forRoot({
-      timeOut: 3000, // Duración predeterminada del toast en milisegundos
+      timeOut: 2000, // Duración predeterminada del toast en milisegundos
       positionClass: 'toast-top-right', // Posición del toast
 
     }),
-
-
-
-
-
 
 
   ],providers:[ConsultasService, SharedDataServiceService]

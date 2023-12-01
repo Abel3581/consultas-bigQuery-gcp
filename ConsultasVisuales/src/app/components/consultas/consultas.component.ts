@@ -13,6 +13,7 @@ import { GraficasComponent } from '../graficas/graficas.component';
 import { Router } from '@angular/router';
 import { CountyNatalitySearchResponse } from 'src/app/model/county-natality-search-response';
 import { CountyNatalitySearchRequest } from 'src/app/model/county-natality-search-request';
+import { min } from 'rxjs';
 
 
 @Component({
@@ -23,6 +24,7 @@ import { CountyNatalitySearchRequest } from 'src/app/model/county-natality-searc
 export class ConsultasComponent implements OnInit{
 
   mostrarGrafico: boolean = false;
+  mostrarGraficoColumnas: boolean = false;
   // Opciones para el año
   years: string[] = [
     '2018-01-01',
@@ -57,8 +59,8 @@ export class ConsultasComponent implements OnInit{
 
 
   // Variables para almacenar las selecciones
-  selectedYear!: string;
-  selectedCounty!: string;
+  selectedYear: string = "2018-01-01";
+  selectedCounty : string = "Calhoun County, AL";
 
   userAdmin: string = '';
 
@@ -70,15 +72,15 @@ export class ConsultasComponent implements OnInit{
   abnormalConditionsFiltersData: AbnormalConditionsFilters[] = [];
   countySearchResponse:CountyNatalitySearchResponse[] = [];
 
-  selectedOption: string = ''; // Esta propiedad almacena el valor seleccionado
+  selectedOption: string = 'VAC'; // Esta propiedad almacena el valor seleccionado
 
 constructor(private consultasService: ConsultasService, private fb: FormBuilder,
     private toastr: ToastrService, private sharedDataService: SharedDataServiceService,
     private router: Router){
     this.consultaForm = this.fb.group({
+      nameUser: ['', [Validators.required, Validators.email]],
       nameConsult: ['', [Validators.required]],
-      nameUser: ['', Validators.required],
-      comment: [''],
+      comment: ['',[Validators.required]],
     });
 }
  // Función para manejar el clic en el botón
@@ -100,7 +102,28 @@ constructor(private consultasService: ConsultasService, private fb: FormBuilder,
 
     }
   )
+  console.log('Año seleccionado:', this.selectedYear);
+  console.log('Condado seleccionado:', this.selectedCounty);
+}
 
+onbutomColumClick(){
+  const county: CountyNatalitySearchRequest = {
+    year: this.selectedYear,
+    county_of_Residence: this.selectedCounty
+  };
+  this.consultasService.searchByYearAndResidence(county).subscribe(
+    response =>{
+      this.countySearchResponse = response;
+      this.mostrarGrafico = true;
+      console.log(response);
+       // Envía los datos al servicio para que otros componentes puedan recibirlos
+       this.sharedDataService.setDataColumnas(this.countySearchResponse);
+    },error =>{
+      this.toastr.error('Error: ' + JSON.stringify(error));
+      console.error('Error en la solicitud:', error);
+
+    }
+  )
   console.log('Año seleccionado:', this.selectedYear);
   console.log('Condado seleccionado:', this.selectedCounty);
 }
@@ -126,6 +149,28 @@ validarYEnviar() {
     } else {
       alert('El usuario no es válido');
     }
+}
+
+clickButonGraficoColumnas(){
+  this.countyNatalityData = [];
+  if(this.selectedOption){
+    switch(this.selectedOption){
+      case 'NDC':
+        this.consultasService.getCountyNatality().subscribe(data => {
+          this.countyNatalityData = data;
+          this.mostrarGraficoColumnas = true;
+          console.log('Datos de clickButonGraficoColumnas():', data);
+          this.sharedDataService.setDataGraficoColumnas(this.countyNatalityData);
+        }, error => {
+          this.toastr.error(error);
+          console.error('Error en la consulta de Natalidad del Condado:', error);
+        });
+      break;
+      default:
+
+      break;
+    }
+  }
 }
 
 onButtonClick() {
@@ -195,10 +240,13 @@ noDataCondition(): boolean {
 }
 
 guardarConsulta() {
+  // Marca todos los campos como tocados para activar las validaciones y mostrar mensajes de error
+  this.consultaForm.markAllAsTouched();
+
   if (this.consultaForm.valid) {
     const nuevaConsulta: Consulta = {
-      nameConsult: this.consultaForm.value.nameConsult,
       nameUser: this.consultaForm.value.nameUser,
+      nameConsult: this.consultaForm.value.nameConsult,
       comment: this.consultaForm.value.comment,
       countyNatalityBaseList: this.getDataForConsulta(), // Método para obtener datos de la consulta
     };
@@ -207,10 +255,19 @@ guardarConsulta() {
       (response) => {
         console.log('Consulta guardada con éxito', response);
         this.toastr.success(response.message);
+        this.consultaForm.reset();
       },
       (error) => {
         console.error('Error al guardar la consulta', error);
-        this.toastr.error('Error al guardar consulta');
+        if (error === 'Este nombre de consulta para este usuario ya esta creada ') {
+          // Manejar el error específico de conflicto (código 409)
+          this.toastr.error(error);
+          this.consultaForm.reset();
+        } else {
+          // Otros errores
+          this.toastr.error('Error al guardar la consulta');
+          this.consultaForm.reset();
+        }
       }
     );
   }
@@ -309,97 +366,96 @@ onButtonGraficoClick() {
 
 series: { name: string; data: (number | null)[] }[] = [];
 updateChartData() {
-
   if (this.selectedOption) {
     try {
       let categories: string[] = [];
-      categories = [];
+
+      let data: any[] = [];
+
       switch (this.selectedOption) {
         case 'NDC':
-          if (this.countyNatalityData && this.countyNatalityData.length > 0) {
-            categories = [];
-            categories = Object.keys(this.countyNatalityData[0]);
-            // Lógica específica para la opción 'NDC'
-          }
+          data = this.countyNatalityData;
           break;
 
         case 'PRN':
-          if (this.countyNatalityResidenceAndBirthsData && this.countyNatalityResidenceAndBirthsData.length > 0) {
-            categories = [];
-            categories = Object.keys(this.countyNatalityResidenceAndBirthsData[0]);
-            // Lógica específica para la opción 'PRN'
-
-
-          }
+          data = this.countyNatalityResidenceAndBirthsData;
           break;
+
         case 'NCPCA':
-          if (this.countyNatalityByAbnormalConditionsData && this.countyNatalityByAbnormalConditionsData.length > 0) {
-            categories = [];
-            categories = Object.keys(this.countyNatalityByAbnormalConditionsData[0]);
-            // Lógica específica para la opción 'PRN'
-          }
-        break;
+          data = this.countyNatalityByAbnormalConditionsData;
+          break;
+
         case 'CAE':
-          if (this.abnormalConditionsFiltersData && this.abnormalConditionsFiltersData.length > 0) {
-            categories = [];
-            categories = Object.keys(this.abnormalConditionsFiltersData[0]);
-            // Lógica específica para la opción 'PRN'
-          }
-        break;
+          data = this.abnormalConditionsFiltersData;
+          break;
+
         default:
           break;
       }
 
-      // Mapear los datos a un formato adecuado para el gráfico
-      this.series = categories.map(category => {
-        return {
-          name: category,
-          data: this.getDataForCategory(category)
-        };
-      });
+      if (data && data.length > 0) {
+        categories = Object.keys(data[0]);
 
-      console.log("updateChartData()", categories);
-      console.log("updateChartData()", this.series);
-      this.sharedDataService.updateChartData(this.series, categories);
+        // Mapear los datos a un formato adecuado para el gráfico
+        this.series = categories.map(category => {
+          return {
+            name: category,
+            data: this.getDataForCategory(category, data)
+          };
+        });
+
+        console.log("updateChartData()", categories);
+        console.log("updateChartData()", this.series);
+        this.sharedDataService.updateChartData(this.series, categories);
+      }
     } catch (error) {
       console.error('Error al procesar los datos:', error);
     }
   }
 }
 
-getDataForCategory(category: string): (number | null)[] {
+// getDataForCategory(category: string): (number | null)[] {
+//   // Implementa la lógica para obtener los datos específicos de la categoría según la opción seleccionada
+
+//   switch (this.selectedOption) {
+//     case 'NDC':
+//       return this.countyNatalityData.map(item => {
+//         const value = isNaN(parseFloat(item[category])) ? null : parseFloat(item[category]);
+//         return value;
+//       });
+
+//     case 'PRN':
+//       // Agrega la lógica para la opción 'PRN'
+//       return this.countyNatalityResidenceAndBirthsData.map(item => {
+//         const value = isNaN(parseFloat(item[category])) ? null : parseFloat(item[category]);
+//         return value;
+//       });
+
+//     // Agrega más casos según sea necesario para otras opciones
+//     case 'NCPCA':
+//       return this.countyNatalityByAbnormalConditionsData.map(item => {
+//         const value = isNaN(parseFloat(item[category])) ? null : parseFloat(item[category]);
+//         return value;
+//       });
+//       case 'CAE':
+//         return this.abnormalConditionsFiltersData.map(item => {
+//           const value = isNaN(parseFloat(item[category])) ? null : parseFloat(item[category]);
+//           return value;
+//         });
+
+//     default:
+//       return [];
+//   }
+// }
+
+getDataForCategory(category: string, data: any[]): (number | null)[] {
   // Implementa la lógica para obtener los datos específicos de la categoría según la opción seleccionada
-
-  switch (this.selectedOption) {
-    case 'NDC':
-      return this.countyNatalityData.map(item => {
-        const value = isNaN(parseFloat(item[category])) ? null : parseFloat(item[category]);
-        return value;
-      });
-
-    case 'PRN':
-      // Agrega la lógica para la opción 'PRN'
-      return this.countyNatalityResidenceAndBirthsData.map(item => {
-        const value = isNaN(parseFloat(item[category])) ? null : parseFloat(item[category]);
-        return value;
-      });
-
-    // Agrega más casos según sea necesario para otras opciones
-    case 'NCPCA':
-      return this.countyNatalityByAbnormalConditionsData.map(item => {
-        const value = isNaN(parseFloat(item[category])) ? null : parseFloat(item[category]);
-        return value;
-      });
-      case 'CAE':
-        return this.abnormalConditionsFiltersData.map(item => {
-          const value = isNaN(parseFloat(item[category])) ? null : parseFloat(item[category]);
-          return value;
-        });
-
-    default:
-      return [];
-  }
+  return data.map(item => {
+    const value = isNaN(parseFloat(item[category])) ? null : parseFloat(item[category]);
+    return value;
+  });
 }
+
 
 
 abrirGrafico() {
@@ -408,6 +464,10 @@ abrirGrafico() {
 
 cerrarGrafico() {
   this.mostrarGrafico = false;
+}
+
+cerrarGraficoColumna(){
+  this.mostrarGraficoColumnas = false;
 }
 
 

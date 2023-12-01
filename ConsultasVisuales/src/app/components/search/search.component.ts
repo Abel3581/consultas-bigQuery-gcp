@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ConsultaDetalleResponse } from 'src/app/model/consulta-detalle-response';
@@ -18,9 +18,9 @@ export class SearchComponent implements OnInit{
     private formBuilder: FormBuilder, private toastr: ToastrService ){
 
     this.comentarioForm = this.formBuilder.group({
-      nameUser: '',
+      nameUser: ['', [Validators.required, Validators.email]],
       //nameConsult: '',
-      comment: '',
+      comment: ['', Validators.required],
     });
   }
 
@@ -48,24 +48,36 @@ showColumn(columnName: string): boolean {
 }
 
 enviarComentario() {
-  const id = this.consultaId; // Asegúrate de obtener el ID correcto
-  const comentario = {
-    nameUser: this.comentarioForm.value.nameUser,
-    comment: this.comentarioForm.value.comment
-  };
+  console.log("Se apreto el boton enviar comentario")
+  this.comentarioForm.markAllAsTouched();
+  if(this.consultaId && this.comentarioForm.valid){
+    const id = this.consultaId; // Asegúrate de obtener el ID correcto
+    console.log("El id ingresado es: " + id);
+    const comentario = {
+      nameUser: this.comentarioForm.value.nameUser,
+      comment: this.comentarioForm.value.comment
+    };
 
-  this.consultService.createComment(id, comentario).subscribe(
-    response => {
-      console.log('Comentario creado exitosamente', response);
-      this.toastr.success("Comentario guardado")
-      // Puedes realizar acciones adicionales después de crear el comentario, si es necesario
-    },
-    error => {
-      console.error('Error al crear el comentario', error);
-      this.toastr.error('Error al crear comentario',error);
-      // Puedes manejar el error según tus necesidades
-    }
-  );
+    this.consultService.createComment(id, comentario).subscribe(
+
+      response => {
+        console.log('Comentario creado exitosamente', response);
+        this.toastr.success(response.message);
+        this.comentarioForm.reset();
+      },
+      error => {
+
+        if(error.status === 404){
+          this.toastr.error("El usuario y comentario son obligatoros");
+          this.comentarioForm.reset();
+        }
+        console.error('Error al crear el comentario con id:' + id , error);
+        this.toastr.error('Error al crear comentario',error);
+        this.comentarioForm.reset();
+      }
+    );
+  }
+
 }
 
 

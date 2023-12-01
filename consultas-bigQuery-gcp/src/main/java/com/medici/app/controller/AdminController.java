@@ -21,7 +21,7 @@ public class AdminController {
         String username = request.getUserAdmin();
 
         if (adminService.adminExistsByUsername(username)) {
-            return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse(HttpStatus.OK, "Logueo exitoso"));
+            return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse(HttpStatus.OK, "Ingresando a la app"));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponse(HttpStatus.UNAUTHORIZED, "Credenciales incorrectas"));
         }

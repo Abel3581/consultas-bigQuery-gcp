@@ -8,12 +8,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
 import { ConsultasService } from './service/consultas.service';
 import { SharedDataServiceService } from './service/shared-data-service.service';
+import { NavbarComponent } from './shareds/navbar/navbar.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { SharedDataServiceService } from './service/shared-data-service.service'
      ToastNoAnimationModule,
 
   ],
+  exports:[],
 
 
   providers:[ConsultasService, SharedDataServiceService],

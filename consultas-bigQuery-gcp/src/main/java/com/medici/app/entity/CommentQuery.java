@@ -15,7 +15,6 @@ public class CommentQuery {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
     private Long id;
     private String nameUser;
     private String comment;

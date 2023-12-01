@@ -1,9 +1,11 @@
 <div class="  w-full h-auto flex flex-col justify-normal items-center p-8">
   <div  class=" relative  bg-[#d8b4fe] w-11/12 h-60  rounded-lg  flex flex-row justify-normal">
       <div class=" w-3/5 flex justify-center" >
-          <h1 class="text-3xl p-20 font-bold text-gray-700">Queries</h1>
+          <h1 class="text-3xl p-20 font-bold text-gray-700">Comentarios</h1>
+
       </div>
-      <div class="  w-2/5 flex justify-end">
+
+      <div class="  w-2/5 flex justify-center">
           <img
           class=" w-40 h-32 md:w-72 md:h-60 "
           src="./../../../assets/img/buscar.png"
@@ -114,15 +116,24 @@
 
   <div class="w-full h-3/5 max-w-md bg-white border border-gray-200 rounded-lg shadow drop-shadow-lg ">
     <div class="flex items-center justify-center h-auto">
-      <form  [formGroup]="comentarioForm" class="mt-10 w-3/4  " >
+      <form  [formGroup]="comentarioForm" (ngSubmit)="enviarComentario()" class="mt-10 w-3/4  " >
         <div class="bg-white  text-gray-900 text-sm rounded-lg  block p-2.5">
           <!-- Agrega campos para el nombre de usuario, nombre de consulta y comentario -->
           <input type="text" formControlName="nameUser" placeholder="Nombre de Usuario" class="w-full mb-2.5 p-2 border rounded-lg" />
-          <input type="text"  placeholder="Nombre de Consulta" class="w-full mb-2.5 p-2 border rounded-lg" />
+          <div *ngIf="comentarioForm.get('nameUser')?.hasError('required') && comentarioForm.get('nameUser')?.touched" class="text-red-500 text-xs mb-1 ml-1">
+            El usuario es requerido
+          </div>
+          <div *ngIf="comentarioForm.get('nameUser')!.hasError('email') && comentarioForm.get('nameUser')!.touched" class="text-red-500 text-xs mb-1 ml-1">
+            Ingrese un correo electrónico válido
+          </div>
+          <!--<input type="text"  placeholder="Nombre de Consulta" class="w-full mb-2.5 p-2 border rounded-lg" />-->
           <textarea formControlName="comment" placeholder="Comentario" class="w-full mb-2.5 p-2 border rounded-lg"></textarea>
+          <div class="text-red-500 text-xs mb-1 ml-1" *ngIf="comentarioForm.get('comment')?.hasError('required') && comentarioForm.get('comment')?.touched">
+            El comentario es requerido
+          </div>
         </div>
         <div class="flex flex-row mt-4 space-x-1">
-          <button  (click)="enviarComentario()" class="focus:outline-none font-bold text-white bg-[#a855f7] hover:bg-[#d9f99d] focus:ring-4 focus:bg-[#d9f99d] rounded-lg text-sm px-5 w-full h-10">
+          <button type="submit" class="focus:outline-none font-bold text-white bg-[#a855f7] hover:bg-[#d9f99d] focus:ring-4 focus:bg-[#d9f99d] rounded-lg text-sm px-5 w-full h-10">
             Guardar Comentario
           </button>
 

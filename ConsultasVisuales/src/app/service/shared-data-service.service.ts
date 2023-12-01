@@ -1,11 +1,26 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CountyNatalitySearchResponse } from '../model/county-natality-search-response';
+import { CountyNatalityResponse } from '../model/county-natality-response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedDataServiceService {
+  //Datos para compartir a graficoColumnas
+  private dataGraficoColumnaSearch = new BehaviorSubject<CountyNatalitySearchResponse[]>([]);
+  dataGraColumnasSearch$ = this.dataGraficoColumnaSearch.asObservable();
+  setDataColumnas(data: CountyNatalitySearchResponse[]) {
+    console.log("Datos del servicio sharedDataService => setDataGraColumnas =  ",this.dataGraColumnasSearch$);
+    this.dataGraficoColumnaSearch.next(data);
+  }
+  //Datos para compartir a graficoColumnas
+  private dataGraficoColumnas = new BehaviorSubject<CountyNatalityResponse[]>([]);
+  dataGraColumnas$ = this.dataGraficoColumnas.asObservable();
+  setDataGraficoColumnas(data: CountyNatalityResponse[]){
+    console.log("Datos del servicio sharedDataService => setDataGraficoColumnas =  ",this.dataGraColumnas$);
+    this.dataGraficoColumnas.next(data);
+  }
 
   //Datos para compartir a graficoCircular
   private dataGraficoCircular = new BehaviorSubject<CountyNatalitySearchResponse[]>([]);

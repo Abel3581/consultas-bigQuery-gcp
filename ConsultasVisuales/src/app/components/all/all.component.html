@@ -1,3 +1,5 @@
+
+
 <div class="  w-full h-auto flex flex-col justify-normal items-center p-8">
   <div  class=" relative  bg-[#fecaca] w-11/12 h-60  rounded-lg  flex flex-row justify-normal">
       <div class=" w-3/5 flex justify-center" >
@@ -12,102 +14,103 @@
       </div>
   </div>
 
-<div class=" flex flex-row justify-center bg-white border border-gray-200  shadow absolute mt-44 w-1/2 h-32   rounded-lg pt-8">
-  <div class="">
+  <div class=" flex flex-row justify-center bg-white border border-gray-200  shadow absolute mt-44 w-1/2 h-32   rounded-lg pt-8">
+    <div class="">
 
-      <button type="button" (click)="loadConsults()"  class="focus:outline-none font-bold text-gray-700 bg-[#fecaca] hover:bg-[#fca5a5] focus:ring-4 focus:bg-[#fecaca]  rounded-lg text-sm px-5 w-40 h-10 ">Todos</button>
+        <button type="button" (click)="loadConsults()"  class="focus:outline-none font-bold text-gray-700 bg-[#fecaca] hover:bg-[#fca5a5] focus:ring-4 focus:bg-[#fecaca]  rounded-lg text-sm px-5 w-40 h-10 ">Todos</button>
+    </div>
   </div>
-</div>
 
-<div class=" w-11/12 h-72  mt-20 flex justify-center items-center relative overflow-x-auto sm:rounded-lg">
-  <table class="w-full text-sm text-left rtl:text-right text-gray-700">
-      <thead class="text-xs text-gray-700 uppercase bg-[#fecaca] ">
-          <tr>
-              <th scope="col" class="px-6 py-3">
-                  ID
-              </th>
+  <div class=" w-11/12 h-72  mt-20 flex justify-center items-center relative overflow-x-auto sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-700">
+        <thead class="text-xs text-gray-700 uppercase bg-[#fecaca] ">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    ID
+                </th>
 
-              <th scope="col" class="px-6 py-3">
-                  Comment
-              </th>
-              <th scope="col" class="px-6 py-3">
-                  Name Consult
-              </th>
-              <th scope="col" class="px-6 py-3">
-                  Name User
-              </th>
-              <th scope="col" class="px-6 py-3">
-                Ver tabla
-              </th>
+                <th scope="col" class="px-6 py-3">
+                    Comment
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Name Consult
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Name User
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Ver tabla
+                </th>
 
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let consult of queriesResonses" class="bg-[#fee2e2] border-b border-[#fee2e2]">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap ">
+                    {{consult.id}}
+                </th>
+                <td class="px-6 py-4">
+                    {{consult.comment}}
+                </td>
+                <td class="px-6 py-4">
+                    {{consult.nameConsult}}
+                </td>
+                <td class="px-6 py-4">
+                  {{consult.nameUser}}
+                </td>
+                <td class="px-6 py-4">
+                <button (click)="verTabla(consult.id)"  class="text-white bg-[#f87171] focus:outline-none focus:ring-4  font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 ">Ver tabla</button>
+
+                </td>
+
+            </tr>
+            <!-- <tr class="bg-[#fecaca] border-b border-[#fecaca]">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap ">
+                    Microsoft Surface Pro
+                </th>
+                <td class="px-6 py-4">
+                    White
+                </td>
+                <td class="px-6 py-4">
+                    Laptop PC
+                </td>
+                <td class="px-6 py-4">
+                <button type="button" class="text-white bg-[#f87171] focus:outline-none focus:ring-4  font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 ">Ver tabla</button>
+                </td>
+
+            </tr>
+            <tr class="bg-[#fee2e2] border-b border-[#fee2e2]">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap ">
+                    Magic Mouse 2
+                </th>
+                <td class="px-6 py-4">
+                    Black
+                </td>
+                <td class="px-6 py-4">
+                    Accessories
+                </td>
+                <td class="px-6 py-4">
+                    <button type="button" class="text-white bg-[#f87171] focus:outline-none focus:ring-4  font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 ">Ver tabla</button>
+
+                </td>
+
+            </tr> -->
+
+
+        </tbody>
+        <ng-container *ngIf="queriesResonses.length === 0">
+          <tr class=" " >
+              <td colspan="5" class=" py-4 text-center font-semibold">No hay datos disponibles</td>
           </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let consult of queriesResonses" class="bg-[#fee2e2] border-b border-[#fee2e2]">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap ">
-                  {{consult.id}}
-              </th>
-              <td class="px-6 py-4">
-                  {{consult.comment}}
-              </td>
-              <td class="px-6 py-4">
-                  {{consult.nameConsult}}
-              </td>
-              <td class="px-6 py-4">
-                {{consult.nameUser}}
-              </td>
-              <td class="px-6 py-4">
-              <button (click)="verTabla(consult.id)"  class="text-white bg-[#f87171] focus:outline-none focus:ring-4  font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 ">Ver tabla</button>
-
-              </td>
-
-          </tr>
-          <!-- <tr class="bg-[#fecaca] border-b border-[#fecaca]">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap ">
-                  Microsoft Surface Pro
-              </th>
-              <td class="px-6 py-4">
-                  White
-              </td>
-              <td class="px-6 py-4">
-                  Laptop PC
-              </td>
-              <td class="px-6 py-4">
-              <button type="button" class="text-white bg-[#f87171] focus:outline-none focus:ring-4  font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 ">Ver tabla</button>
-              </td>
-
-          </tr>
-          <tr class="bg-[#fee2e2] border-b border-[#fee2e2]">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap ">
-                  Magic Mouse 2
-              </th>
-              <td class="px-6 py-4">
-                  Black
-              </td>
-              <td class="px-6 py-4">
-                  Accessories
-              </td>
-              <td class="px-6 py-4">
-                  <button type="button" class="text-white bg-[#f87171] focus:outline-none focus:ring-4  font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 ">Ver tabla</button>
-
-              </td>
-
-          </tr> -->
-
-
-      </tbody>
-      <ng-container *ngIf="queriesResonses.length === 0">
-        <tr class=" " >
-            <td colspan="5" class=" py-4 text-center font-semibold">No hay datos disponibles</td>
-        </tr>
-      </ng-container>
-  </table>
-</div>
-<div class="w-full flex justify-around mb-36">
-  <div class="flex items-center justify-center h-auto">
-    <button [routerLink]="['/natalidad']" class="focus:outline-none font-bold text-gray-700 bg-[#fecaca] hover:bg-[#f87171] focus:ring-4 focus:bg-[#d9f99d] rounded-lg text-sm px-5 w-full h-10">
-        Buscador
-    </button>
+        </ng-container>
+    </table>
+  </div>
+  <div class="w-full flex justify-around mb-36">
+    <div class="flex items-center justify-center h-auto">
+      <button [routerLink]="['/natalidad']" class="focus:outline-none font-bold text-gray-700 bg-[#fecaca] hover:bg-[#f87171] focus:ring-4 focus:bg-[#d9f99d] rounded-lg text-sm px-5 w-full h-10">
+          Buscador
+      </button>
+    </div>
   </div>
 
 </div>

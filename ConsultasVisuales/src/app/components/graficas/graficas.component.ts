@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SharedDataServiceService } from 'src/app/service/shared-data-service.service';
 import {
@@ -26,7 +26,7 @@ export type ChartOptions = {
   templateUrl: './graficas.component.html',
   styleUrls: ['./graficas.component.css']
 })
-export class GraficasComponent implements  OnChanges, OnDestroy{
+export class GraficasComponent implements  OnChanges, OnDestroy, OnInit{
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
   // Suscripciones
@@ -51,8 +51,10 @@ export class GraficasComponent implements  OnChanges, OnDestroy{
         categories: []
       }
     };
+  }
 
-    // Suscríbete a los cambios en el servicio
+  ngOnInit(): void {
+     // Suscríbete a los cambios en el servicio
     this.sharedDataService.chartData$.subscribe(data => {
       if (this.chartOptions.series) {
         this.chartOptions.series = data;
@@ -64,7 +66,6 @@ export class GraficasComponent implements  OnChanges, OnDestroy{
         this.chartOptions.xaxis.categories = categories;
       }
     });
-
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -55,7 +55,14 @@ export class ConsultasService {
     if (error.error instanceof ErrorEvent) {
       // Errores del lado del cliente
       console.error('Error del lado del cliente:', error.error.message);
-    } else {
+    }
+    if(error.status === 401){
+      return throwError(error.error.message);
+    }
+    if(error.status === 409){
+      return throwError(error.error.message);
+    }
+    else {
       // Errores del lado del servidor
       console.error('Error del lado del servidor:', error.status, error.error);
     }

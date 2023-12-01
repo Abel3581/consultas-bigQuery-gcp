@@ -1,7 +1,8 @@
+<app-navbar></app-navbar>
 <div class="  w-full h-screen flex flex-col justify-normal items-center p-8">
   <div  class=" relative  bg-[#bef264] w-11/12 h-60  rounded-lg  flex flex-row justify-normal">
-      <div class=" w-3/5 flex justify-center" >
-          <h1 class="text-3xl p-20 font-bold text-gray-700">Birth Rate of U.S. Counties</h1>
+      <div class=" w-5/6 flex justify-center" >
+          <h1 class="text-3xl p-20 font-bold text-gray-700">Tasa de natalidad de los condados de EE.UU.</h1>
       </div>
       <div class="  w-2/5 flex justify-end">
           <img
@@ -12,35 +13,68 @@
       </div>
   </div>
 
-
   <div class=" flex flex-row justify-center bg-white border border-gray-200  shadow absolute mt-44 w-1/2 h-32   rounded-lg pt-8">
     <select id="states" [(ngModel)]="selectedOption"  class="w-3/5 h-10 bg-white border border-slate-200 text-gray-900 text-sm rounded-lg   border-s-2 focus:ring-blue-500 focus:border-blue-500 block  p-2.5 ">
-        <option value="VAC">Choose a state</option>
+        <option value="VAC" selected="Choose a state">Choose a state</option>
         <option value="NDC">Natalidad del condado</option>
         <option value="PRN">Condado de residencia y Nacimientos</option>
         <option value="NCPCA">Natalidad del condado por condiciones anormales</option>
         <option value="CAE">Condado de residencia, condiciones anormalesCheckedDesc y edad de la madre</option>
     </select>
     <div class="">
-        <button type="button"(click)="onButtonClick()" class="ml-2 focus:outline-none font-bold text-gray-700 bg-[#bef264] hover:bg-[#d9f99d] focus:ring-4 focus:bg-[#d9f99d]  rounded-lg text-sm px-5 w-40 h-10 ">Ejecutar</button>
+        <button type="button"(click)="onButtonClick()" class="ml-2 focus:outline-none font-bold text-gray-700 bg-[#bef264] hover:bg-[#d9f99d] focus:ring-4 focus:bg-[#d9f99d]  rounded-lg text-sm px-5 w-40 h-10 ">Consultar</button>
     </div>
+
+     <!-- Mostrar grafico y modal -->
+     <div *ngIf="mostrarGraficoColumnas" class="fixed inset-0 overflow-y-auto z-50 ">
+
+      <div class=" flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <!-- Background overlay -->
+        <div class="fixed inset-0 transition-opacity">
+          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+
+        <!-- This element is to trick the browser into centering the modal contents. -->
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>&#8203;
+
+        <!-- Modal panel -->
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle  sm:max-w-4xl sm:w-full " role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+          <!-- Contenido del modal -->
+          <h1 class="text-center mt-10">Natalidad por año y condado de los EEUU</h1>
+          <app-distributed-columns></app-distributed-columns>
+
+          <button (click)="cerrarGraficoColumna()" class="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700 focus:outline-none">
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div *ngIf="!mostrarGraficoColumnas">
+      <button class="btn btn-primary" (click)="mostrarGraficoColumnas = true">Consultar</button>
+    </div> -->
+
   </div>
   <div class="flex justify-center">
     <div class="mt-20 flex flex-row justify-center bg-white border border-gray-200 shadow absolute w-1/2 h-20  rounded-lg pt-4">
       <div class="flex flex-row">
-        <label for="year" class="block text-md font-bold text-gray-700">Año: </label>
-        <select id="year" class="ml-2  w-32 h-10 block text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs" [(ngModel)]="selectedYear">
-          <option class="" *ngFor="let year of years" [value]="year">{{ year }}</option>
+        <div class="flex items-baseline ">
+          <label for="year" class="block text-md font-bold text-gray-700 ">Año: </label>
+        </div>
+        <select id="year" class="ml-2  w-32 h-10 block text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs p-2.5" [(ngModel)]="selectedYear">
+          <option class="" *ngFor="let year of years" [value]="year" selected="2018-01-01">{{ year }}</option>
         </select>
 
         <label for="county_of_Residence" class="ml-2 block text-md font-bold text-gray-700">Condado: </label>
-        <select id="county_of_Residence" class="ml-2 w-40 h-10 block text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs" [(ngModel)]="selectedCounty">
-          <option *ngFor="let county of county_of_Residence" [value]="county">{{ county }}</option>
+        <select id="county_of_Residence" class="ml-2 w-40 h-10 block text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs p-2.5" [(ngModel)]="selectedCounty">
+          <option *ngFor="let county of county_of_Residence" [value]="county" selected="Calhoun County, AL">{{ county }}</option>
         </select>
       </div>
 
       <div class="ml-2">
-        <button type="button" (click)="onButomCircular()" class="focus:outline-none font-bold text-gray-700 bg-[#bef264] hover:bg-[#d9f99d] focus:ring-4 focus:bg-[#d9f99d]  rounded-lg text-sm px-5 w-40 h-10">Consultar</button>
+        <button type="button" (click)="onbutomColumClick()" class="focus:outline-none font-bold text-gray-700 bg-[#bef264] hover:bg-[#d9f99d] focus:ring-4 focus:bg-[#d9f99d]  rounded-lg text-sm px-5 w-40 h-10">Consultar</button>
       </div>
     </div>
 
@@ -57,11 +91,16 @@
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>&#8203;
 
         <!-- Modal panel -->
-        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle  sm:max-w-4xl sm:w-full " role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+        <div class="inline-block align-bottom  bg-white rounded-lg text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle  sm:max-w-5xl sm:w-full " role="dialog" aria-modal="true" aria-labelledby="modal-headline">
           <!-- Contenido del modal -->
-          <h1 class="text-center mt-10">Natalidad por año y condado de los EEUU</h1>
-          <app-grafico-circular></app-grafico-circular>
-
+          <h1 class="text-center mt-10">
+            <span class="font-bold">Año:</span>
+             "{{selectedYear}}"&nbsp;&nbsp;
+             <span class="font-bold">Condado:</span>
+             "{{selectedCounty}}"</h1>
+          <h2></h2>
+          <!-- <app-grafico-circular></app-grafico-circular> -->
+          <app-distributed-columns></app-distributed-columns>
           <button (click)="cerrarGrafico()" class="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700 focus:outline-none">
             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -78,21 +117,8 @@
     </div>
 
   </div>
-
-  <!-- <div class=" flex flex-row justify-center bg-white border border-gray-200  shadow absolute  w-1/2 h-20 mt-80  rounded-lg pt-4">
-    <div class=" flex flex-row ">
-    <label for="small-input" class="block text-md font-bold text-gray-700">Usuario: </label>
-
-    <input [(ngModel)]="userAdmin"  id="small-input" class=" ml-2 w-72 h-10 block  text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs ">
-
-    </div>
-    <div class="">
-        <button type="button" (click)="validarYEnviar()" class="focus:outline-none font-bold text-gray-700 bg-red-500 hover:bg-red-300 focus:ring-4 focus:bg-red-300  rounded-lg text-sm px-5 w-40 h-10 ">Apagar</button>
-    </div>
-  </div> -->
-
-
-  <div class="relative  mt-44 w-11/12 h-72 overflow-x-auto shadow-md sm:rounded-lg ">
+<div class="h-screen w-full">
+  <div class="relative  mt-44  h-72 overflow-x-auto shadow-md sm:rounded-lg ">
     <table class="w-full  text-sm text-left rtl:text-right text-gray-700">
         <thead class="text-xs text-gray-700 uppercase bg-[#a3e635] border-b border-bg-[#bef264]">
           <ng-container *ngIf="selectedOption === 'VAC' || selectedOption === ''">
@@ -379,6 +405,8 @@
     </table>
 
   </div>
+</div>
+
 
 
 </div>
@@ -386,14 +414,26 @@
 <div class="container mx-auto mb-40">
   <div class=" w-full h-screen  flex justify-center">
 
-    <div class="w-full h-3/5  mt-16 max-w-md bg-white border border-gray-200 rounded-lg shadow drop-shadow-lg ">
+    <div class="w-full h-3/5  mt-44 max-w-md bg-white border border-gray-200 rounded-lg shadow drop-shadow-lg ">
       <div class="flex items-center justify-center h-auto">
         <form [formGroup]="consultaForm" (ngSubmit)="guardarConsulta()" class="mt-10 w-3/4  ">
           <div class="bg-white  text-gray-900 text-sm rounded-lg  block p-2.5">
             <!-- Agrega campos para el nombre de usuario, nombre de consulta y comentario -->
-            <input type="text" formControlName="nameUser" placeholder="Nombre de Usuario" class="w-full mb-2.5 p-2 border rounded-lg" />
-            <input type="text" formControlName="nameConsult" placeholder="Nombre de Consulta" class="w-full mb-2.5 p-2 border rounded-lg" />
-            <textarea formControlName="comment" placeholder="Comentario" class="w-full mb-2.5 p-2 border rounded-lg"></textarea>
+            <!-- Campo nameUser con mensaje de error -->
+            <input type="text" formControlName="nameUser" placeholder="Nombre de Usuario" class="w-full mb-1.5 p-2 border rounded-lg" />
+            <div *ngIf="consultaForm.get('nameUser')!.hasError('required') && consultaForm.get('nameUser')!.touched"
+            class="text-red-500 text-xs mb-1.5 ml-1">El nombre de usuario es requerido</div>
+            <div *ngIf="consultaForm.get('nameUser')!.hasError('email') && consultaForm.get('nameUser')!.touched"
+            class="text-red-500 text-xs mb-1.5 ml-1">Ingrese un correo electrónico válido</div>
+             <!-- Campo nameConsult con mensaje de error -->
+             <input type="text" formControlName="nameConsult" placeholder="Nombre de Consulta" class="w-full mb-1.5 p-2 border rounded-lg" />
+             <div *ngIf="consultaForm.get('nameConsult')!.hasError('required') && consultaForm.get('nameConsult')!.touched"
+             class="text-red-500 text-xs mb-1.5 ml-1">El nombre de consulta es requerido</div>
+               <!-- Campo comment con mensaje de error -->
+             <textarea formControlName="comment" placeholder="Comentario" class="w-full mb-1.5 p-2 border rounded-lg"></textarea>
+            <div *ngIf="consultaForm.get('comment')!.hasError('required') && consultaForm.get('comment')!.touched"
+             class="text-red-500 text-xs mb-1.5 ml-1">El comentario es requerido</div>
+
           </div>
           <div class="flex flex-row mt-4 space-x-1">
             <button type="submit" class="focus:outline-none font-bold text-gray-700 bg-[#bef264] hover:bg-[#d9f99d] focus:ring-4 focus:bg-[#d9f99d] rounded-lg text-sm px-5 w-full h-10">
@@ -401,10 +441,7 @@
             </button>
           </div>
         </form>
-
         </div>
-
-
     </div>
   </div>
 
@@ -415,7 +452,7 @@
 
   <div class="w-full flex justify-around mb-36">
     <div class="flex items-center justify-center h-auto">
-      <button (click)="onButtonGraficoClick()"  class="focus:outline-none font-bold text-gray-700 bg-[#bef264] hover:bg-[#d9f99d] focus:ring-4 focus:bg-[#d9f99d] rounded-lg text-sm px-5 w-full h-10">
+      <button (click)="clickButonGraficoColumnas()"  class="focus:outline-none font-bold text-gray-700 bg-[#bef264] hover:bg-[#d9f99d] focus:ring-4 focus:bg-[#d9f99d] rounded-lg text-sm px-5 w-full h-10">
           Graficar
       </button>
     </div>

@@ -1,5 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { timeout } from 'rxjs';
@@ -12,28 +13,40 @@ import { ConsultasService } from 'src/app/service/consultas.service';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
-
-  userAdmin: AdminRequest = { userAdmin: '' };
+  adminForm: FormGroup;
+  //userAdmin: AdminRequest = { userAdmin: '' };
   constructor(private consultService:ConsultasService, private toastr: ToastrService,
-    private router: Router){}
+    private router: Router, private fb: FormBuilder){
+      this.adminForm = fb.group({
+        userAdmin:['', [Validators.required, Validators.email]]
+      })
+    }
 
   enviarSolicitud() {
 
-    this.consultService.loginAdmin(this.userAdmin).subscribe(
-      (response) => {
-        console.log('Éxito:', response);
-        this.toastr.success(response.message);
-        // Esperar 3 segundos antes de redireccionar
-      setTimeout(() => {
-        this.router.navigate(['/natalidad']);
-      }, 3000);
-      },
-      (error) => {
-        console.error('Error:', error);
-        this.toastr.error(error);
-        // Manejar el error, por ejemplo, mostrar un mensaje de error
-      }
-    );
+    this.adminForm.markAsTouched();
+
+    if(this.adminForm.valid){
+      const userAdmin: AdminRequest = {
+        userAdmin: this.adminForm.value.userAdmin
+      };
+      this.consultService.loginAdmin(userAdmin).subscribe(
+        (response) => {
+          console.log('Éxito:', response);
+          this.toastr.success(response.message);
+          // Esperar 1 segundos antes de redireccionar
+        setTimeout(() => {
+          this.router.navigate(['/natalidad']);
+        }, 1000);
+        },
+        (error) => {
+          console.error('Error:', error);
+          this.toastr.error(error);
+
+        }
+      );
+    }
+
   }
 
 }

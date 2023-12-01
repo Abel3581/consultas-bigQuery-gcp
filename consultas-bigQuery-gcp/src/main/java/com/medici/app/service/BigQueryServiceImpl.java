@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.*;
 
 @Log
@@ -17,7 +18,7 @@ import java.util.*;
 public class BigQueryServiceImpl implements BigQueryService {
     //county_natality, county_natality_by_abnormal_conditions, county_natality_by_congenital_abnormalities
 
-    private String  GET_COUNTY_NATALITY = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 10;";
+    private String  GET_COUNTY_NATALITY = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 100;";
     private String GET_COUNTY_NATALITY_RESIDENCE_AND_BIRTHS = "SELECT County_of_Residence, Births FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 10";
     private String BD_BIGQUERY_NAME = "bigquery-public-data.sdoh_cdc_wonder_natality.county_natality";
     private String GET_ABNORMAL_CONDITIONS = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_abnormal_conditions` LIMIT 10";

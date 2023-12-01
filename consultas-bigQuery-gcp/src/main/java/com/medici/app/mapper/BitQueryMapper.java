@@ -5,6 +5,9 @@ import com.google.cloud.bigquery.TableResult;
 import com.medici.app.dto.*;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.HashMap;
+
 @Component
 public class BitQueryMapper {
 
@@ -76,10 +79,10 @@ public class BitQueryMapper {
                 .Nacimientos(row.get("Births").getStringValue())
                 .Edad_Promedio_de_la_Madre(row.get("Ave_Age_of_Mother").getStringValue())
                 .IMC_Promedio_Previo_al_Embarazo(row.get("Ave_Pre_pregnancy_BMI").getStringValue())
-
+                //.Codigo_FIPS_Del_Condado(row.get("County_of_Residence_FIPS").getStringValue())
                 .Edad_OE_Promedio_Gestacional_Semanas(row.get("Ave_OE_Gestational_Age_Wks").getStringValue())
                 .Número_Promedio_de_Semanas_Prenatales(row.get("Ave_Number_of_Prenatal_Wks").getStringValue())
-
+                .Peso_Promedio_de_Nacimiento_gramos(row.get("Ave_Birth_Weight_gms").getStringValue())
                 .Edad_LMP_Promedio_Gestacional_Semanas(row.get("Ave_LMP_Gestational_Age_Wks").getStringValue())
                 .build();
     }
@@ -91,5 +94,9 @@ public class BitQueryMapper {
             // Si no se puede convertir, devuelve 0 o maneja el error de alguna manera
             return 0;
         }
+    }
+
+    public HashMap<String, Integer> mapToRowCountyNatalityResponse(FieldValueList row) {
+        return null;
     }
 }

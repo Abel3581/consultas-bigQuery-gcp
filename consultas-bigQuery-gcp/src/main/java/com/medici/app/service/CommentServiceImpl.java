@@ -26,11 +26,17 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     @Override
     public void createComment(Long idConsult, CommentRequest request) {
+        if (idConsult == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID de consulta no puede ser nulo");
+        }
         if(request.getNameUser().equals("") && request.getComment().equals("") || request.getNameUser().equals("")||
         request.getComment().equals("")){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"El usuario y comentario son obligatoros");
         }
         CountyNatalityBase countyNatalityBase = consultService.findById(idConsult);
+        if (countyNatalityBase == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Consulta no encontrada con ID: " + idConsult);
+        }
         CommentQuery commentQuery = commentMapper.mapToCommentRequest(request);
         List<CommentQuery> commentQueryList = countyNatalityBase.getCommentQueries();
         commentQueryList.add(commentQuery);

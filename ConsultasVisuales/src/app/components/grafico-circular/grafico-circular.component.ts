@@ -68,21 +68,6 @@ export class GraficoCircularComponent implements OnInit {
     // Actualiza las opciones del gráfico cuando cambian los datos
     console.log("Data graficoCircular: ", data);
   // Selecciona las propiedades que deseas utilizar
-  // this.chartOptions.series = [
-  //   parseFloat(data[0]['número_Promedio_de_Semanas_Prenatales']),
-  //   parseFloat(data[0]['edad_OE_Promedio_Gestacional_Semanas']),
-  //   parseFloat(data[0]['edad_LMP_Promedio_Gestacional_Semanas']),
-  //   parseFloat(data[0]['edad_LMP_Promedio_Gestacional_Semanas'])
-  //   // Agrega más propiedades numéricas según sea necesario
-  // ];
-
-  // this.chartOptions.labels = [
-  //   // 'Número Promedio de Semanas Prenatales',
-  //   // 'Edad OE Promedio Gestacional Semanas',
-  //   // 'Edad LMP Promedio Gestacional Semanas',
-
-  //   // Agrega más categorías según sea necesario
-  // ];
     const attributeNames = Object.keys(data[0]);
 
     // Mapea los valores y atributos dinámicamente

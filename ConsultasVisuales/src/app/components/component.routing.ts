@@ -6,6 +6,7 @@ import{AdminComponent} from './admin/admin.component'
 import { SearchComponent } from './search/search.component';
 import { AllComponent } from './all/all.component';
 import { GraficoCircularComponent } from './grafico-circular/grafico-circular.component';
+import { DistributedColumnsComponent } from './distributed-columns/distributed-columns.component';
 
 
 
@@ -41,6 +42,9 @@ const routes: Routes = [
     },
     {
       path: 'circular', component: GraficoCircularComponent
+    },
+    {
+      path: 'columnas', component: DistributedColumnsComponent
     },
     {
       path: '',
