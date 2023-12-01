@@ -16,7 +16,7 @@ import { SharedDataServiceService } from '../service/shared-data-service.service
 import { GraficoCircularComponent } from './grafico-circular/grafico-circular.component';
 import { DistributedColumnsComponent } from './distributed-columns/distributed-columns.component';
 import { AppModule } from '../app.module';
-import { NavbarComponent } from '../shareds/navbar/navbar.component';
+import { NavbarComponent } from '../shared/nav-bar/navbar.component';
 
 
 

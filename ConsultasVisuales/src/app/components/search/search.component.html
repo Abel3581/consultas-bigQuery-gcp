@@ -1,13 +1,14 @@
+<app-navbar></app-navbar>
 <div class="  w-full h-auto flex flex-col justify-normal items-center p-8">
   <div  class=" relative  bg-[#d8b4fe] w-11/12 h-60  rounded-lg  flex flex-row justify-normal">
       <div class=" w-3/5 flex justify-center" >
-          <h1 class="text-3xl p-20 font-bold text-gray-700">Comentarios</h1>
+          <h1 class="text-3xl p-20 font-bold text-gray-700">Agregar comentario</h1>
 
       </div>
 
       <div class="  w-2/5 flex justify-center">
           <img
-          class=" w-40 h-32 md:w-72 md:h-60 "
+          class="w-40 h-32 md:w-72 md:h-60 "
           src="./../../../assets/img/buscar.png"
           alt=""
         />
@@ -17,7 +18,7 @@
 
 </div>
 <div class="  w-full h-screen flex flex-col justify-normal items-center p-8">
-  <div class="relative  mt-32 w-11/12 h-72 overflow-x-auto shadow-md sm:rounded-lg ">
+  <div class="relative  mt-32 w-11/12 h-72 overflow-x-auto shadow-2xl sm:rounded-lg ">
   <table class="w-full  text-sm text-left rtl:text-right text-gray-700">
     <thead class="border-b text-xs text-gray-700 uppercase bg-[#c084fc]">
       <th scope="col" class="px-6 py-4 " *ngIf="showColumn('id')">
@@ -25,40 +26,40 @@
       </th>
       <th scope="col" class="px-6 py-3" *ngIf="showColumn('year')">
         Year
-    </th>
-    <th scope="col" class="px-6 py-3" *ngIf="showColumn('county_of_Residence')">
-        County_of_Residence
-    </th>
-    <th scope="col" class="px-6 py-3" *ngIf="showColumn('county_of_Residence_FIPS')">
-        County_of_Residence_FIPS
-    </th>
-    <th scope="col" class="px-6 py-3" *ngIf="showColumn('births')">
-       Births
-    </th>
-    <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Age_of_Mother')">
-       Ave_Age_of_Mother
-    </th>
-    <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_OE_Gestational_Age_Wks')">
-      Ave_OE_Gestational_Age
-    </th>
-    <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_LMP_Gestational_Age_Wks')">
-      Ave_LMP_Gestational_Age
-    </th>
-    <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Birth_Weight_gms')">
-      Ave_Birth_Weight_gms
-    </th>
-    <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Pre_pregnancy_BMI')">
-      Ave_Pre_pregnancy_BMI
-    </th>
-    <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Number_of_Prenatal_Wks')">
-      Ave_Number_of_Prenatal_Wks
-    </th>
-    <th scope="col" class="px-6 py-3" *ngIf="showColumn('abnormalConditionsCheckedDesc')">
-      Abnormal_Conditions
-    </th>
-    <th scope="col" class="px-6 py-3" *ngIf="showColumn('abnormalConditionsCheckedDesc')">
-      Abnormal_ConditionsChecked_YN
-    </th>
+      </th>
+      <th scope="col" class="px-6 py-3" *ngIf="showColumn('county_of_Residence')">
+          County_of_Residence
+      </th>
+      <th scope="col" class="px-6 py-3" *ngIf="showColumn('county_of_Residence_FIPS')">
+          County_of_Residence_FIPS
+      </th>
+      <th scope="col" class="px-6 py-3" *ngIf="showColumn('births')">
+        Births
+      </th>
+      <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Age_of_Mother')">
+        Ave_Age_of_Mother
+      </th>
+      <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_OE_Gestational_Age_Wks')">
+        Ave_OE_Gestational_Age
+      </th>
+      <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_LMP_Gestational_Age_Wks')">
+        Ave_LMP_Gestational_Age
+      </th>
+      <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Birth_Weight_gms')">
+        Ave_Birth_Weight_gms
+      </th>
+      <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Pre_pregnancy_BMI')">
+        Ave_Pre_pregnancy_BMI
+      </th>
+      <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Number_of_Prenatal_Wks')">
+        Ave_Number_of_Prenatal_Wks
+      </th>
+      <th scope="col" class="px-6 py-3" *ngIf="showColumn('abnormalConditionsCheckedDesc')">
+        Abnormal_Conditions
+      </th>
+      <th scope="col" class="px-6 py-3" *ngIf="showColumn('abnormalConditionsCheckedDesc')">
+        Abnormal_ConditionsChecked_YN
+      </th>
     </thead>
     <tbody>
       <tr *ngFor="let detalle of consultaDetalle" class="bg-[#d8b4fe] border-b border-[#d8b4fe] ">

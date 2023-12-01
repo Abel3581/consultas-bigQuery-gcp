@@ -1,11 +1,12 @@
 
+<app-navbar></app-navbar>
 
 <div class="  w-full h-auto flex flex-col justify-normal items-center p-8">
   <div  class=" relative  bg-[#fecaca] w-11/12 h-60  rounded-lg  flex flex-row justify-normal">
       <div class=" w-3/5 flex justify-center" >
-          <h1 class="text-3xl p-20 font-bold text-gray-700">Search All</h1>
+          <h1 class="text-3xl p-20 font-bold text-gray-700">Consultas guardadas</h1>
       </div>
-      <div class="  w-2/5 flex justify-end">
+      <div class="  w-2/5 flex justify-center">
           <img
           class=" w-40 h-32 md:w-72 md:h-60 "
           src="./../../../assets/img/todos.png"
@@ -17,11 +18,11 @@
   <div class=" flex flex-row justify-center bg-white border border-gray-200  shadow absolute mt-44 w-1/2 h-32   rounded-lg pt-8">
     <div class="">
 
-        <button type="button" (click)="loadConsults()"  class="focus:outline-none font-bold text-gray-700 bg-[#fecaca] hover:bg-[#fca5a5] focus:ring-4 focus:bg-[#fecaca]  rounded-lg text-sm px-5 w-40 h-10 ">Todos</button>
+        <button type="button" (click)="loadConsults()"  class="focus:outline-none font-bold text-gray-700 bg-[#fecaca] hover:bg-[#fca5a5] focus:ring-4 focus:bg-[#fecaca]  rounded-lg text-sm px-5 w-40 h-10 ">Ver consultas</button>
     </div>
   </div>
 
-  <div class=" w-11/12 h-72  mt-20 flex justify-center items-center relative overflow-x-auto sm:rounded-lg">
+  <div class=" w-11/12 h-72 mb-20  mt-20 flex justify-center items-center relative overflow-x-auto sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-700">
         <thead class="text-xs text-gray-700 uppercase bg-[#fecaca] ">
             <tr>
@@ -58,8 +59,8 @@
                 <td class="px-6 py-4">
                   {{consult.nameUser}}
                 </td>
-                <td class="px-6 py-4">
-                <button (click)="verTabla(consult.id)"  class="text-white bg-[#f87171] focus:outline-none focus:ring-4  font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 ">Ver tabla</button>
+                <td class="px-6 py-1">
+                  <button (click)="verTabla(consult.id)"  class="text-white bg-[#f87171] focus:outline-none focus:ring-4  font-medium rounded-full text-sm px-4 py-1.5 text-center mb-2 ">Ver tabla</button>
 
                 </td>
 
@@ -105,13 +106,7 @@
         </ng-container>
     </table>
   </div>
-  <div class="w-full flex justify-around mb-36">
-    <div class="flex items-center justify-center h-auto">
-      <button [routerLink]="['/natalidad']" class="focus:outline-none font-bold text-gray-700 bg-[#fecaca] hover:bg-[#f87171] focus:ring-4 focus:bg-[#d9f99d] rounded-lg text-sm px-5 w-full h-10">
-          Buscador
-      </button>
-    </div>
-  </div>
+
 
 </div>
 

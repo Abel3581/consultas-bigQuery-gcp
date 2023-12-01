@@ -8,13 +8,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
 import { ConsultasService } from './service/consultas.service';
 import { SharedDataServiceService } from './service/shared-data-service.service';
-import { NavbarComponent } from './shareds/navbar/navbar.component';
+import { FooterComponent } from './shared/footer/footer.component';
+
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    FooterComponent,
+
 
   ],
   imports: [

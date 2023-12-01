@@ -2,12 +2,12 @@
 <div class="  w-full h-screen flex flex-col justify-normal items-center p-8">
     <div  class=" relative  bg-[#64c7f2] w-11/12 h-60  rounded-lg  flex flex-row justify-normal">
         <div class=" w-3/5 flex justify-center" >
-            <h1 class="text-3xl p-20 font-bold text-gray-700">Consultas a BigQuery </h1>
+            <h1 class="text-3xl p-20 font-bold text-gray-700">Natalidad EE.UU </h1>
 
         </div>
-        <div class="  w-2/5 flex justify-end">
+        <div class="  w-2/5 flex justify-center">
             <img
-            class=" w-48 h-32 md:w-full md:h-72 "
+            class=" w-40 h-32 md:w-72 md:h-60  "
             src="./../../../assets/img/home-removebg-preview.png"
             alt=""
           />
@@ -21,11 +21,14 @@
 
             <div class="col-span-4">
               <!-- <label for="small-input" class="block mb-2 text-md font-bold text-gray-700">Usuario: </label> -->
-              <div *ngIf="adminForm.get('userAdmin')!.hasError('required') && adminForm.get('userAdmin')!.touched" class="text-red-500 text-xs mb-1 ml-1">El admin es requerido</div>
-              <div *ngIf="adminForm.get('userAdmin')!.hasError('email') && adminForm.get('userAdmin')!.touched" class="text-red-500 text-xs mb-1 ml-1">Ingrese un correo electrónico válido</div>
+
               <input formControlName="userAdmin" placeholder="Ingresar password" id="small-input" class="w-full h-10 p-2 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs">
-              <!-- <div *ngIf="adminForm.get('userAdmin')!.hasError('required') && adminForm.get('userAdmin')!.touched" class="text-red-500 text-xs mb-1.5 ml-1">El admin es requerido</div>
-              <div *ngIf="adminForm.get('userAdmin')!.hasError('email') && adminForm.get('userAdmin')!.touched" class="text-red-500 text-xs mb-1.5 ml-1">Ingrese un correo electrónico válido</div> -->
+              <div *ngIf="adminForm.get('userAdmin')?.hasError('required') && adminForm.get('userAdmin')?.touched" class="text-red-500 text-xs mb-1 ml-1">El admin es requerido</div>
+              <div *ngIf="adminForm.get('userAdmin')?.hasError('email') && adminForm.get('userAdmin')?.touched" class="text-red-500 text-xs mb-1 ml-1">Ingrese un correo electrónico válido</div>
+              <!-- <div *ngIf="adminForm.invalid && adminForm.touched" class="text-red-500 text-xs mb-1 ml-1">
+                Formulario inválido
+              </div> -->
+
             </div>
 
             <div class="col-span-2 flex items-center">

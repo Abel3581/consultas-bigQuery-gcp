@@ -1,10 +1,8 @@
 package com.medici.app.mapper;
 
 
-import com.medici.app.dto.ConsultRequest;
-import com.medici.app.dto.CountyNatalityBaseRequest;
-import com.medici.app.dto.CountyNatalityBaseResponse;
-import com.medici.app.dto.SavedQueriesResponse;
+import com.medici.app.dto.*;
+import com.medici.app.entity.CommentQuery;
 import com.medici.app.entity.CountyNatality;
 import com.medici.app.entity.CountyNatalityBase;
 import org.springframework.stereotype.Component;
@@ -70,6 +68,9 @@ public class ConsultMapper {
     }
 
     private CountyNatalityBaseResponse maptoCountyListBaseResponse(CountyNatality request) {
+        List<CommentQuery> commentQueries = request.getCountyNatalityBase().getCommentQueries();
+
+
         return CountyNatalityBaseResponse.builder()
                 .id(request.getId())
                 .abnormalConditionsCheckedDesc(request.getAbnormalConditionsCheckedDesc())
@@ -84,6 +85,17 @@ public class ConsultMapper {
                 .ave_Number_of_Prenatal_Wks(request.getAve_Number_of_Prenatal_Wks())
                 .ave_OE_Gestational_Age_Wks(request.getAve_OE_Gestational_Age_Wks())
                 .ave_Pre_pregnancy_BMI(request.getAve_Pre_pregnancy_BMI())
+                .commentResponseList(commentQueries.stream().map(this::mapToCommentQuery).collect(Collectors.toList()))
                 .build();
     }
+
+    private CommentResponse mapToCommentQuery(CommentQuery commentQuery) {
+        return CommentResponse.builder()
+                .id(commentQuery.getId())
+                .comment(commentQuery.getComment())
+                .nameUser(commentQuery.getNameUser())
+                .build();
+    }
+
+
 }

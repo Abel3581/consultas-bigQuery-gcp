@@ -1,5 +1,6 @@
 package com.medici.app.entity;
 
+import com.medici.app.dto.CommentResponse;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,5 +22,7 @@ public class CommentQuery {
     @ManyToOne
     @JoinColumn(name = "county_natality_base_id")
     private CountyNatalityBase countyNatalityBase;
+
+
 
 }

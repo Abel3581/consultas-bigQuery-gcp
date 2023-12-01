@@ -4,6 +4,7 @@ import com.medici.app.dto.ConsultRequest;
 import com.medici.app.dto.CountyNatalityBaseResponse;
 import com.medici.app.dto.CountyNatalityResponse;
 import com.medici.app.dto.SavedQueriesResponse;
+import com.medici.app.entity.CommentQuery;
 import com.medici.app.entity.CountyNatality;
 import com.medici.app.entity.CountyNatalityBase;
 import com.medici.app.mapper.ConsultMapper;
@@ -75,7 +76,6 @@ public class ConsultServiceImpl implements ConsultService {
         }
         List<CountyNatality> countyNatalities = countyNatalityBase.get().getCountyNatalities();
         List<CountyNatalityBaseResponse> responses = consultMapper.maptoCountyList(countyNatalities);
-
         return responses;
     }
 }

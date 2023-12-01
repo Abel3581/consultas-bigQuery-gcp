@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -24,4 +26,5 @@ public class CountyNatalityBaseResponse {
     private String ave_Number_of_Prenatal_Wks;
     private String abnormalConditionsCheckedDesc;
     private String abnormalConditionsCheckedYN;
+    private List<CommentResponse> commentResponseList;
 }
