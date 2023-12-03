@@ -14,11 +14,23 @@
         />
       </div>
   </div>
+  <div class=" flex flex-row justify-center items-center bg-white border border-gray-200  shadow absolute mt-44 w-1/2 h-32   rounded-lg ">
+    <div class="flex flex-shrink-0 ">
+      <img class="h-8 w-auto mr-2" src="./../../../assets/img/comments.png" alt="Your Company">
+    </div>
+    <div class="">
+      <p>Cantidad de mensajes: <span class="text-red-500 text-lg">{{contadorMessage}}</span></p>
 
+    </div>
+  </div>
+  <div class="text-purple-400 text-center mt-36">
+    <h2><span class="font-bold">Nombre Consulta:</span> {{nameConsult}}</h2>
+  </div>
 
 </div>
+<!-- Tabla -->
 <div class="  w-full h-screen flex flex-col justify-normal items-center p-8">
-  <div class="relative  mt-32 w-11/12 h-72 overflow-x-auto shadow-2xl sm:rounded-lg ">
+  <div class="relative  mt-16 w-11/12 h-96 overflow-x-auto shadow-2xl sm:rounded-lg ">
   <table class="w-full  text-sm text-left rtl:text-right text-gray-700">
     <thead class="border-b text-xs text-gray-700 uppercase bg-[#c084fc]">
       <th scope="col" class="px-6 py-4 " *ngIf="showColumn('id')">
@@ -57,9 +69,12 @@
       <th scope="col" class="px-6 py-3" *ngIf="showColumn('abnormalConditionsCheckedDesc')">
         Abnormal_Conditions
       </th>
-      <th scope="col" class="px-6 py-3" *ngIf="showColumn('abnormalConditionsCheckedDesc')">
+      <th scope="col" class="px-6 py-3" *ngIf="showColumn('abnormalConditionsCheckedYN')">
         Abnormal_ConditionsChecked_YN
       </th>
+     <th >
+      Graficar
+     </th>
     </thead>
     <tbody>
       <tr *ngFor="let detalle of consultaDetalle" class="bg-[#d8b4fe] border-b border-[#d8b4fe] ">
@@ -102,18 +117,45 @@
         <td *ngIf="showColumn('abnormalConditionsCheckedYN')" class="px-6 py-4">
           {{detalle.abnormalConditionsCheckedYN}}
         </td>
+        <td class="px-6 py-4">
+          <button (click)="graficar(detalle.id)" class="text-white bg-[#be28c9] hover:bg-orange-300 focus:outline-none focus:ring-4  font-sans rounded-full text-xs px-4 py-1.5 text-center ">Graficar</button>
+        </td>
+      </tr>
     </tbody>
     <ng-container *ngIf="consultaDetalle.length === 0">
-      <tr class=" " >
-          <td colspan="13" class=" py-4 text-center font-semibold">No hay datos disponibles</td>
+      <tr class="" >
+          <td colspan="13" class=" py-4 text-center font-bold">No hay datos disponibles</td>
       </tr>
     </ng-container>
   </table>
   </div>
 </div>
 
+<!-- List Comments -->
+<div class="md:container md:mx-auto px-60 mb-16 ">
+  <h2 class="pb-10 text-center">Lista de comentarios de usuarios</h2>
+  <ul role="list" class="divide-y divide-gray-100">
+    <li *ngFor="let comentario of commentResponseList" class="flex justify-between gap-x-6 py-5">
+      <div class="flex min-w-0 gap-x-4">
+        <img class="h-12 w-12 flex-none rounded-sm bg-gray-50" src="./../../../assets/img/comment.png" alt="">
+        <div class="min-w-0 flex-auto">
+          <p class="text-sm font-semibold leading-6 text-gray-900">{{ comentario.nameUser }}</p>
+          <p class="mt-1 ml-5 truncate text-xs leading-5 text-gray-500">{{ comentario.comment }}</p>
+        </div>
+      </div>
+      <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+        <p class="text-sm leading-6 text-gray-900">Fecha</p>
+        <p class="mt-1 text-xs leading-5 text-gray-500"><time datetime="2023-01-23T13:23Z">{{ comentario.creationDate | date:'medium' }}</time></p>
+      </div>
 
-<div class="   w-full h-screen  flex justify-center">
+    </li>
+
+
+  </ul>
+
+</div>
+<!-- Formulario comentario -->
+<div class=" mb-10   w-full h-screen  flex justify-center">
 
   <div class="w-full h-3/5 max-w-md bg-white border border-gray-200 rounded-lg shadow drop-shadow-lg ">
     <div class="flex items-center justify-center h-auto">
@@ -145,18 +187,8 @@
   </div>
 </div>
 
-<div class="w-full flex justify-around mb-36">
-  <div class="flex items-center justify-center h-auto">
-    <button [routerLink]="['/natalidad']" class="focus:outline-none font-bold text-gray-700 bg-[#d8b4fe] hover:bg-[#d9f99d] focus:ring-4 focus:bg-[#d9f99d] rounded-lg text-sm px-5 w-full h-10">
-        Buscador
-    </button>
-  </div>
-  <div>
-    <button [routerLink]="['/todos']" routerLinkActive="router-link-active"  class="focus:outline-none font-bold text-gray-700 bg-[#d8b4fe] hover:bg-[#d9f99d] focus:ring-4 focus:bg-[#d9f99d] rounded-lg text-sm px-5 w-full h-10">
-      Ver consultas
-  </button>
-  </div>
-</div>
+
+
 
 
 

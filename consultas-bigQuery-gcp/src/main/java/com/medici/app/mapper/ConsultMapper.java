@@ -94,6 +94,7 @@ public class ConsultMapper {
                 .id(commentQuery.getId())
                 .comment(commentQuery.getComment())
                 .nameUser(commentQuery.getNameUser())
+                .creationDate(commentQuery.getCreationDate())
                 .build();
     }
 

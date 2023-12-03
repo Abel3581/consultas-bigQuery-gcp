@@ -2,15 +2,12 @@ package com.medici.app.service;
 
 import com.medici.app.dto.ConsultRequest;
 import com.medici.app.dto.CountyNatalityBaseResponse;
-import com.medici.app.dto.CountyNatalityResponse;
 import com.medici.app.dto.SavedQueriesResponse;
-import com.medici.app.entity.CommentQuery;
 import com.medici.app.entity.CountyNatality;
 import com.medici.app.entity.CountyNatalityBase;
 import com.medici.app.mapper.ConsultMapper;
 import com.medici.app.repository.ConsultRepository;
 import com.medici.app.service.injectdependency.ConsultService;
-import com.medici.app.service.injectdependency.CountyNatalityService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;

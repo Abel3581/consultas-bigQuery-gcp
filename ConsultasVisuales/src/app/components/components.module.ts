@@ -37,14 +37,12 @@ import { NavbarComponent } from '../shared/nav-bar/navbar.component';
     CommonModule,
     NgApexchartsModule,
     ComponentRoutingModule,
-    NgApexchartsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     ToastNoAnimationModule,
-    NgApexchartsModule,
     ToastrModule.forRoot({
-      timeOut: 2000, // Duración predeterminada del toast en milisegundos
+      timeOut: 1000, // Duración predeterminada del toast en milisegundos
       positionClass: 'toast-top-right', // Posición del toast
 
     }),

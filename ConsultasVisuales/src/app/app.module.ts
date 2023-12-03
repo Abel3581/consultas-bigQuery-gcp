@@ -13,10 +13,12 @@ import { FooterComponent } from './shared/footer/footer.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
+
 
 
   ],
@@ -27,7 +29,7 @@ import { FooterComponent } from './shared/footer/footer.component';
     ComponentsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      // timeOut: 3000, // Duración predeterminada del toast en milisegundos
+       timeOut: 2000, // Duración predeterminada del toast en milisegundos
       // positionClass: 'toast-top-right', // Posición del toast
       // preventDuplicates: false, // Evitar duplicados
     }),

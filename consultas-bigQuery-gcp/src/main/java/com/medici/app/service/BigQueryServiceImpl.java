@@ -18,12 +18,14 @@ import java.util.*;
 public class BigQueryServiceImpl implements BigQueryService {
     //county_natality, county_natality_by_abnormal_conditions, county_natality_by_congenital_abnormalities
 
-    private String  GET_COUNTY_NATALITY = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 100;";
-    private String GET_COUNTY_NATALITY_RESIDENCE_AND_BIRTHS = "SELECT County_of_Residence, Births FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 10";
-    private String BD_BIGQUERY_NAME = "bigquery-public-data.sdoh_cdc_wonder_natality.county_natality";
-    private String GET_ABNORMAL_CONDITIONS = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_abnormal_conditions` LIMIT 10";
-    private String GET_ABNORMAL_CONDITIONS_FILTERS = "SELECT County_of_Residence, Births, Abnormal_Conditions_Checked_Desc, Ave_Age_of_Mother FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_abnormal_conditions` LIMIT 10";
-    private static String GET_COUNTY_NATALITY_SEARCH_BY_YEAR_AND_RESIDENCE = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` WHERE Year = DATE '2018-01-01'AND County_of_Residence = 'Calhoun County, AL'LIMIT 10";
+    private String  GET_COUNTY_NATALITY = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 20;";
+    private String GET_COUNTY_NATALITY_RESIDENCE_AND_BIRTHS = "SELECT County_of_Residence, Births FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 20";
+
+    // private String BD_BIGQUERY_NAME = "bigquery-public-data.sdoh_cdc_wonder_natality.county_natality";
+    private String GET_ABNORMAL_CONDITIONS = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_abnormal_conditions` LIMIT 20";
+    private String GET_ABNORMAL_CONDITIONS_FILTERS = "SELECT County_of_Residence, Births, Abnormal_Conditions_Checked_Desc, Ave_Age_of_Mother FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_abnormal_conditions` LIMIT 20";
+
+    //private static String GET_COUNTY_NATALITY_SEARCH_BY_YEAR_AND_RESIDENCE = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` WHERE Year = DATE '2018-01-01'AND County_of_Residence = 'Calhoun County, AL'LIMIT 20";
 
     private final BigQuery bigquery;
 

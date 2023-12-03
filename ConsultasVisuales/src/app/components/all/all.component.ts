@@ -35,9 +35,14 @@ export class AllComponent implements OnInit{
     )
   }
 
-  verTabla(consultaId: number): void {
-    console.log('Ver Tabla - Consulta ID:', consultaId);
-    this.router.navigate(['/consultas/buscar', consultaId]);
+  verTabla(consultaId: number, nameConsult: string): void {
+    console.log('Ver Tabla - Consulta ID:', consultaId, + " Nombre consulta" + nameConsult);
+    this.router.navigate(['/consultas/buscar'],{
+      queryParams: {
+        id: consultaId,
+        nameConsult: nameConsult
+      }
+    });
 
   }
 

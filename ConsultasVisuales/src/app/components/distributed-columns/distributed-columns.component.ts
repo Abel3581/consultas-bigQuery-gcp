@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   ApexNonAxisChartSeries,
   ApexResponsive,
@@ -15,8 +15,6 @@ export type ChartOptions = {
 };
 
 import { SharedDataServiceService } from 'src/app/service/shared-data-service.service';
-
-
 
 
 @Component({

@@ -1,6 +1,5 @@
-import { Component, Input, NgModule, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ApexOptions } from 'ng-apexcharts';
 import { ToastrService } from 'ngx-toastr';
 import { AbnormalConditionsFilters } from 'src/app/model/abnormal-conditions-filters';
 import { AbnormalConditionsResponse } from 'src/app/model/abnormal-conditions-response';
@@ -9,11 +8,10 @@ import { CountyNatalityFilterResidenceAndBirths } from 'src/app/model/county-nat
 import { CountyNatalityResponse } from 'src/app/model/county-natality-response';
 import { ConsultasService } from 'src/app/service/consultas.service'
 import { SharedDataServiceService } from 'src/app/service/shared-data-service.service';
-import { GraficasComponent } from '../graficas/graficas.component';
 import { Router } from '@angular/router';
 import { CountyNatalitySearchResponse } from 'src/app/model/county-natality-search-response';
 import { CountyNatalitySearchRequest } from 'src/app/model/county-natality-search-request';
-import { min } from 'rxjs';
+
 
 
 @Component({
@@ -241,36 +239,43 @@ noDataCondition(): boolean {
 
 guardarConsulta() {
   // Marca todos los campos como tocados para activar las validaciones y mostrar mensajes de error
-  this.consultaForm.markAllAsTouched();
+  if(this.getDataForConsulta().length === 0){
+    this.toastr.error("Debes realizar una consulta para poder guardar la misma")
+    this.consultaForm.reset();
+  }else{
+    if (this.consultaForm.valid) {
+      const nuevaConsulta: Consulta = {
+        nameUser: this.consultaForm.value.nameUser,
+        nameConsult: this.consultaForm.value.nameConsult,
+        comment: this.consultaForm.value.comment,
+        countyNatalityBaseList: this.getDataForConsulta(), // Método para obtener datos de la consulta
+      };
 
-  if (this.consultaForm.valid) {
-    const nuevaConsulta: Consulta = {
-      nameUser: this.consultaForm.value.nameUser,
-      nameConsult: this.consultaForm.value.nameConsult,
-      comment: this.consultaForm.value.comment,
-      countyNatalityBaseList: this.getDataForConsulta(), // Método para obtener datos de la consulta
-    };
-
-    this.consultasService.saveConsulta(nuevaConsulta).subscribe(
-      (response) => {
-        console.log('Consulta guardada con éxito', response);
-        this.toastr.success(response.message);
-        this.consultaForm.reset();
-      },
-      (error) => {
-        console.error('Error al guardar la consulta', error);
-        if (error === 'Este nombre de consulta para este usuario ya esta creada ') {
-          // Manejar el error específico de conflicto (código 409)
-          this.toastr.error(error);
+      this.consultasService.saveConsulta(nuevaConsulta).subscribe(
+        (response) => {
+          console.log('Consulta guardada con éxito', response);
+          this.toastr.success(response.message);
           this.consultaForm.reset();
-        } else {
-          // Otros errores
-          this.toastr.error('Error al guardar la consulta');
-          this.consultaForm.reset();
+        },
+        (error) => {
+          console.error('Error al guardar la consulta', error);
+          if (error === 'Este nombre de consulta para este usuario ya esta creada ') {
+            // Manejar el error específico de conflicto (código 409)
+            this.toastr.error(error);
+            this.consultaForm.reset();
+          } else {
+            // Otros errores
+            this.toastr.error('Error al guardar la consulta');
+            this.consultaForm.reset();
+          }
         }
-      }
-    );
+      );
+    }else{
+      this.consultaForm.markAllAsTouched();
+    }
   }
+
+
 }
 
 // Método para obtener los datos específicos de la consulta según la opción seleccionada

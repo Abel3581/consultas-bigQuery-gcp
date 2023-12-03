@@ -4,6 +4,7 @@ import com.medici.app.dto.CommentResponse;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Builder
@@ -19,6 +20,8 @@ public class CommentQuery {
     private Long id;
     private String nameUser;
     private String comment;
+    @Column(name = "creation_date")
+    private LocalDateTime creationDate;
     @ManyToOne
     @JoinColumn(name = "county_natality_base_id")
     private CountyNatalityBase countyNatalityBase;

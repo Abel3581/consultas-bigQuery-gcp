@@ -1,6 +1,8 @@
+import { CommentResponse } from "./comment-response";
+
 export interface ConsultaDetalleResponse {
 
-  id:string;
+  id:number;
   year: string;
   county_of_Residence: string;
   county_of_Residence_FIPS: string;
@@ -13,5 +15,6 @@ export interface ConsultaDetalleResponse {
   ave_Number_of_Prenatal_Wks: string;
   abnormalConditionsCheckedDesc: string;
   abnormalConditionsCheckedYN: string;
-  [key: string]: string; // Índice de tipo de cadena para propiedades adicionales
+  commentResponseList: CommentResponse[];
+  [key: string]: any; // Índice de tipo de cadena para propiedades adicionales
 }
