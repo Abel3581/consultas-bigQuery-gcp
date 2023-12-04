@@ -6,6 +6,7 @@ import {
   ChartComponent
 } from "ng-apexcharts";
 
+
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -22,7 +23,8 @@ import { SharedDataServiceService } from 'src/app/service/shared-data-service.se
   templateUrl: './distributed-columns.component.html',
   styleUrls: ['./distributed-columns.component.css']
 })
-export class DistributedColumnsComponent implements OnInit{
+export class DistributedColumnsComponent implements OnInit {
+
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions!: any;
 
@@ -63,8 +65,12 @@ export class DistributedColumnsComponent implements OnInit{
     this.chartOptions.series = attributeNames.map(attribute => parseFloat(data[0][attribute]));
     this.chartOptions.labels = attributeNames;
 
-    })
+    });
+
+
   }
+
+
 
 }
 

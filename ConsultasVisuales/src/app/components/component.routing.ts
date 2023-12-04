@@ -7,6 +7,7 @@ import { SearchComponent } from './search/search.component';
 import { AllComponent } from './all/all.component';
 import { GraficoCircularComponent } from './grafico-circular/grafico-circular.component';
 import { DistributedColumnsComponent } from './distributed-columns/distributed-columns.component';
+import { GraficoSearchIdComponent } from './grafico-search-id/grafico-search-id.component';
 
 
 
@@ -45,6 +46,9 @@ const routes: Routes = [
     },
     {
       path: 'columnas', component: DistributedColumnsComponent
+    },
+    {
+      path: 'search-id', component: GraficoSearchIdComponent
     },
     {
       path: '',

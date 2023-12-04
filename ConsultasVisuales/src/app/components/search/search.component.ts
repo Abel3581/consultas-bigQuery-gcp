@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommentResponse } from 'src/app/model/comment-response';
 import { ConsultaDetalleResponse } from 'src/app/model/consulta-detalle-response';
+import { CountyNatalityResponse } from 'src/app/model/county-natality-response';
+import { CountySearchIdResponse } from 'src/app/model/county-search-id-response';
 import { ConsultasService } from 'src/app/service/consultas.service';
+import { CountyNatalityServiceService } from 'src/app/service/county-natality-service.service';
+import { SharedDataCountyService } from 'src/app/service/shared-data-county.service';
 
 @Component({
   selector: 'app-search',
@@ -18,10 +22,13 @@ export class SearchComponent implements OnInit{
   consultaDetalle: ConsultaDetalleResponse[] = [];
   commentResponseList!: CommentResponse[];
   contadorMessage!: number;
+  countyNatalitySearchIdResponse: CountySearchIdResponse[] = [];
+  mostrarGrafico: boolean = false;
 
 
   constructor(private route: ActivatedRoute, private consultService:ConsultasService,
-    private formBuilder: FormBuilder, private toastr: ToastrService ){
+    private formBuilder: FormBuilder, private toastr: ToastrService, private countyService:CountyNatalityServiceService,
+    private sharedService: SharedDataCountyService, private router: Router ){
 
     this.comentarioForm = this.formBuilder.group({
       nameUser: ['', [Validators.required, Validators.email]],
@@ -41,9 +48,22 @@ export class SearchComponent implements OnInit{
 
   graficar(id: number){
     console.log(id);
+    this.countyService.getByIdCountyNatality(id).subscribe(
+      response =>{
+        // Agregar un valor a la lista usando el operador de propagación
+        this.countyNatalitySearchIdResponse = response;
+        this.mostrarGrafico = true;
+        console.log("Response de graficar en search-component", this.countyNatalitySearchIdResponse);
+        this.sharedService.setDataSearchId(this.countyNatalitySearchIdResponse);
+        //this.router.navigate(['/consultas/search-id']);
+      },error => {
+        console.log(error);
+
+      }
+    )
   }
 
-  loadConsultaDetalle(): void {
+loadConsultaDetalle(): void {
     this.consultService.getConsultaDetails(this.consultaId).subscribe(
       (data) => {
         this.consultaDetalle = data;
@@ -58,7 +78,7 @@ export class SearchComponent implements OnInit{
         console.error('Error fetching consulta details', error);
       }
     );
-  }
+}
 
 
 showColumn(columnName: string): boolean {
@@ -98,6 +118,11 @@ enviarComentario() {
   }
 
 }
+
+cerrarGrafico() {
+  this.mostrarGrafico = false;
+}
+
 
 
 }

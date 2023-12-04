@@ -9,7 +9,7 @@ import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
 import { ConsultasService } from './service/consultas.service';
 import { SharedDataServiceService } from './service/shared-data-service.service';
 import { FooterComponent } from './shared/footer/footer.component';
-
+import { CountyNatalityServiceService } from './service/county-natality-service.service';
 
 
 
@@ -39,7 +39,7 @@ import { FooterComponent } from './shared/footer/footer.component';
   exports:[],
 
 
-  providers:[ConsultasService, SharedDataServiceService],
+  providers:[ConsultasService, SharedDataServiceService, CountyNatalityServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

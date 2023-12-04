@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CountyNatalityResponse {
 
+    protected Long id;
     protected String year;
     protected String County_of_Residence;
     protected String County_of_Residence_FIPS;
@@ -21,6 +22,8 @@ public class CountyNatalityResponse {
     protected String Ave_Birth_Weight_gms;
     protected String Ave_Pre_pregnancy_BMI;
     protected String Ave_Number_of_Prenatal_Wks;
+    protected String abnormalConditionsCheckedDesc;
+    protected String abnormalConditionsCheckedYN;
 
 
 }

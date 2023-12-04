@@ -36,6 +36,7 @@ public class ConsultController {
 
     @GetMapping("/{id}")
     public ResponseEntity<List<CountyNatalityBaseResponse>> getByIdConsultTable(@PathVariable Long id){
+
         List<CountyNatalityBaseResponse> responses = consultService.getByIdConsultTable(id);
         return ResponseEntity.status(HttpStatus.OK).body(responses);
 

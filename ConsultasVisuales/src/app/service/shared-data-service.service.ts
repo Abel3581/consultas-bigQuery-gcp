@@ -7,6 +7,11 @@ import { CountyNatalityResponse } from '../model/county-natality-response';
   providedIn: 'root'
 })
 export class SharedDataServiceService {
+
+
+  constructor() { }
+
+
   //Datos para compartir a graficoColumnas
   private dataGraficoColumnaSearch = new BehaviorSubject<CountyNatalitySearchResponse[]>([]);
   dataGraColumnasSearch$ = this.dataGraficoColumnaSearch.asObservable();
@@ -41,7 +46,6 @@ export class SharedDataServiceService {
     this.chartCategoriesSubject.next(categories);
   }
 
-  constructor() { }
 
 
 }
