@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {  Component, OnInit, ViewChild } from '@angular/core';
 import {
   ApexNonAxisChartSeries,
   ApexResponsive,
@@ -25,7 +25,7 @@ export class GraficoSearchIdComponent implements OnInit {
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions!: any;
   county: CountySearchIdResponse[] = [];
-  constructor(private sharedService: SharedDataCountyService, private cdr: ChangeDetectorRef,){
+  constructor(private sharedService: SharedDataCountyService){
     this.chartOptions = {
       series: [],
       chart: {
@@ -49,48 +49,40 @@ export class GraficoSearchIdComponent implements OnInit {
     };
   }
 
+
   ngOnInit(): void {
     console.log("Entrando a ngOnInit de grafico-search-id");
+
     this.sharedService.dataSearchIdBehavior$.subscribe(data => {
       console.log("Datos de setDataSearchId (después de emitir): ", data);
 
-      this.updateChartData(data);
+      if (data && data.length > 0) {
+        // Selecciona las propiedades que deseas utilizar
+        const attributeNames = Object.keys(data[0]);
+
+        // Mapea los valores y atributos dinámicamente para las series
+        this.chartOptions.series = attributeNames.map(attribute => {
+          const value = data[0][attribute];
+
+          // Utiliza parseFloat para convertir el valor a número
+          return parseFloat(value) || 0;
+        });
+
+        // Mapea los atributos para los labels
+        this.chartOptions.labels = attributeNames.map(attribute => {
+          // Aquí puedes aplicar cualquier lógica de formateo que desees para los labels
+          return attribute;
+        });
+      }
     });
   }
 
-  private updateChartData(data: CountySearchIdResponse[]): void {
-    // Realiza las operaciones necesarias con los datos
-    this.county = data;
 
-   // Filtra las propiedades que deseas utilizar y que no son nulas
-  const attributes = Object.keys(data[0]);
-  const nonNullAttributes = attributes.filter(attribute => data[0][attribute] !== null);
-
-  // Mapea los valores y atributos dinámicamente
-  this.chartOptions.series = nonNullAttributes.map(attribute => parseFloat(data[0][attribute]));
-
-  // Filtra solo los nombres de propiedades que no tienen valores nulos
-  const nonNullAttributeNames = nonNullAttributes.filter(attribute => data[0][attribute] !== null);
-  this.chartOptions.labels = nonNullAttributeNames;
-
-  // Llama a detectChanges para que Angular actualice la vista
-  console.log(this.chartOptions.series);
-  console.log(this.chartOptions.labels);
-  this.cdr.detectChanges();
-  }
-
-
-  // ngOnInit(): void {
-  //   // console.log("Entrando a ngOnInit de grafico-search-id");
-  //   // this.sharedService.dataSearchIdBehavior$.subscribe(countyNatalityResponse => {
-  //   //   console.log("Datos de setDataearchId (después de emitir): ", countyNatalityResponse);
-  //   //   this.county = countyNatalityResponse;
-  //   //   console.log(this.county);
-
-  //   //     // const attributeNames = Object.keys(data[0]);
-  //   //     // console.log("Nombres de atributos: ", attributeNames);
-
-  //   // });
-  // }
 
 }
+
+
+
+
+
+

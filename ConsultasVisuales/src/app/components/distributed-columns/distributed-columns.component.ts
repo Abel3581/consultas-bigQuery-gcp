@@ -53,21 +53,19 @@ export class DistributedColumnsComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
-    // Suscríbete a los datos del servicio y actualiza chartOptions cuando los datos estén disponibles
+   ngOnInit(): void {
+    console.log("Entrando a ngOnInit de grafico-search-id");
     this.sharedService.dataGraColumnasSearch$.subscribe(data => {
-      console.log("Datos de grafico-columnas: ", data);
+      console.log("Datos de setDataSearchId (después de emitir): ", data);
 
-    // Selecciona las propiedades que deseas utilizar
+      // Selecciona las propiedades que deseas utilizar
     const attributeNames = Object.keys(data[0]);
 
     // Mapea los valores y atributos dinámicamente
     this.chartOptions.series = attributeNames.map(attribute => parseFloat(data[0][attribute]));
     this.chartOptions.labels = attributeNames;
-
     });
-
-
+    console.log("Chart Options:", this.chartOptions);
   }
 
 
