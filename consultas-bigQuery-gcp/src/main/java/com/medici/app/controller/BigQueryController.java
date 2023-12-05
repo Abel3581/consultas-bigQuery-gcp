@@ -1,7 +1,9 @@
 package com.medici.app.controller;
 
 import com.medici.app.dto.*;
+import com.medici.app.dto.response.CountyNatalityFilter;
 import com.medici.app.service.BigQueryServiceImpl;
+import com.medici.app.service.injectdependency.BigQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import java.util.List;
 public class BigQueryController {
 
     private final BigQueryServiceImpl bigQueryServiceInterface;
+    private final BigQueryService bigQueryService;
 
 
     @GetMapping
@@ -56,6 +59,14 @@ public class BigQueryController {
         List<CountyNatalitySearchResponse> response = bigQueryServiceInterface.searchByYearAndResidence(request);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @GetMapping("/year/births")
+    public ResponseEntity<CountyNatalityFilter> getAllByYearAndBirths(){
+        CountyNatalityFilter response = bigQueryService.getAllByYearAndBirths();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+
 
 
 

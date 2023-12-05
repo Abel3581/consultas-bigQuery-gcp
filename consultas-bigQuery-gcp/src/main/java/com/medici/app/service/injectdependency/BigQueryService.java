@@ -2,6 +2,7 @@ package com.medici.app.service.injectdependency;
 
 
 import com.medici.app.dto.*;
+import com.medici.app.dto.response.CountyNatalityFilter;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,5 @@ public interface BigQueryService {
     List<CountyNatalitySearchResponse> searchByYearAndResidence(CountyNatalitySearchRequest request) throws Exception;
 
 
-
-
+    CountyNatalityFilter getAllByYearAndBirths();
 }

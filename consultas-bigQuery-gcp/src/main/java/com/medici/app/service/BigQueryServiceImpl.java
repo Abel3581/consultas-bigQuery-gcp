@@ -3,6 +3,7 @@ package com.medici.app.service;
 
 import com.google.cloud.bigquery.*;
 import com.medici.app.dto.*;
+import com.medici.app.dto.response.CountyNatalityFilter;
 import com.medici.app.mapper.BitQueryMapper;
 import com.medici.app.service.injectdependency.BigQueryService;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +21,9 @@ public class BigQueryServiceImpl implements BigQueryService {
 
     private String  GET_COUNTY_NATALITY = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 20;";
     private String GET_COUNTY_NATALITY_RESIDENCE_AND_BIRTHS = "SELECT County_of_Residence, Births FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 20";
-
-    // private String BD_BIGQUERY_NAME = "bigquery-public-data.sdoh_cdc_wonder_natality.county_natality";
     private String GET_ABNORMAL_CONDITIONS = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_abnormal_conditions` LIMIT 20";
     private String GET_ABNORMAL_CONDITIONS_FILTERS = "SELECT County_of_Residence, Births, Abnormal_Conditions_Checked_Desc, Ave_Age_of_Mother FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_abnormal_conditions` LIMIT 20";
-
-    //private static String GET_COUNTY_NATALITY_SEARCH_BY_YEAR_AND_RESIDENCE = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` WHERE Year = DATE '2018-01-01'AND County_of_Residence = 'Calhoun County, AL'LIMIT 20";
+    private String GET_BY_YEAR_AND_BIRTHS = "SELECT Year, Births FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 1878";
 
     private final BigQuery bigquery;
 
@@ -196,6 +194,11 @@ public class BigQueryServiceImpl implements BigQueryService {
             }
         return responses;
 
+    }
+
+    @Override
+    public CountyNatalityFilter getAllByYearAndBirths() {
+        return null;
     }
 
 
