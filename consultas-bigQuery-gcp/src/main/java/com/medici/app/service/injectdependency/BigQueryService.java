@@ -20,5 +20,5 @@ public interface BigQueryService {
     List<CountyNatalitySearchResponse> searchByYearAndResidence(CountyNatalitySearchRequest request) throws Exception;
 
 
-    CountyNatalityFilter getAllByYearAndBirths();
+    CountyNatalityFilter getAllByYearAndBirths() throws Exception;
 }

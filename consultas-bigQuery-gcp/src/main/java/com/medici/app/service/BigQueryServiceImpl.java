@@ -2,28 +2,29 @@ package com.medici.app.service;
 
 
 import com.google.cloud.bigquery.*;
+import com.medici.app.config.BigQueryUrlConstants;
 import com.medici.app.dto.*;
 import com.medici.app.dto.response.CountyNatalityFilter;
 import com.medici.app.mapper.BitQueryMapper;
 import com.medici.app.service.injectdependency.BigQueryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.*;
 
-@Log
+
+@Log4j2
 @Service
 @RequiredArgsConstructor
 public class BigQueryServiceImpl implements BigQueryService {
-    //county_natality, county_natality_by_abnormal_conditions, county_natality_by_congenital_abnormalities
 
     private String  GET_COUNTY_NATALITY = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 20;";
     private String GET_COUNTY_NATALITY_RESIDENCE_AND_BIRTHS = "SELECT County_of_Residence, Births FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 20";
     private String GET_ABNORMAL_CONDITIONS = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_abnormal_conditions` LIMIT 20";
     private String GET_ABNORMAL_CONDITIONS_FILTERS = "SELECT County_of_Residence, Births, Abnormal_Conditions_Checked_Desc, Ave_Age_of_Mother FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_abnormal_conditions` LIMIT 20";
-    private String GET_BY_YEAR_AND_BIRTHS = "SELECT Year, Births FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 1878";
 
     private final BigQuery bigquery;
 
@@ -197,8 +198,47 @@ public class BigQueryServiceImpl implements BigQueryService {
     }
 
     @Override
-    public CountyNatalityFilter getAllByYearAndBirths() {
-        return null;
+    public CountyNatalityFilter getAllByYearAndBirths() throws Exception {
+        QueryJobConfiguration queryJobConfiguration = QueryJobConfiguration.newBuilder(BigQueryUrlConstants.GET_BY_YEAR_AND_BIRTHS).build();
+        Job job = bigquery.create((JobInfo.newBuilder(queryJobConfiguration).build()));
+        job = job.waitFor();
+        if(job == null){
+            throw new Exception("Job no longer exixts");
+        }
+        if(job.getStatus().getError() != null){
+            throw new Exception(job.getStatus().getError().toString());
+        }
+        TableResult result = job.getQueryResults();
+        Integer births2018 = 0;
+        Integer births2017 = 0;
+        Integer births2016 = 0;
+
+        CountyNatalityFilter response = new CountyNatalityFilter();
+        response.setYear20180101("2018-01-01");
+        response.setYear20170101("2017-01-01");
+        response.setYear20160101("2016-01-01");
+
+        if (result != null) {
+            for (FieldValueList row : result.iterateAll()) {
+                log.info("Row" + row.toString());
+                if (row.get("Year").getStringValue().equals("2018-01-01")) {
+                    births2018 += Integer.parseInt(row.get("Births").getStringValue());
+                }
+                if (row.get("Year").getStringValue().equals("2017-01-01")) {
+                    births2017 += Integer.parseInt(row.get("Births").getStringValue());
+                }
+                if (row.get("Year").getStringValue().equals("2016-01-01")) {
+                    births2016 += Integer.parseInt(row.get("Births").getStringValue());
+                }
+            }
+        } else {
+            log.error("No hay resultados en la consulta de BigQuery.");
+        }
+        response.setBirths2018(births2018);
+        response.setBirths2017(births2017);
+        response.setBirths2016(births2016);
+
+        return response;
     }
 
 

@@ -61,7 +61,7 @@ public class BigQueryController {
     }
 
     @GetMapping("/year/births")
-    public ResponseEntity<CountyNatalityFilter> getAllByYearAndBirths(){
+    public ResponseEntity<CountyNatalityFilter> getAllByYearAndBirths() throws Exception {
         CountyNatalityFilter response = bigQueryService.getAllByYearAndBirths();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
