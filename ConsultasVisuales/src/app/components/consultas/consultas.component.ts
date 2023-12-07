@@ -11,6 +11,8 @@ import { SharedDataServiceService } from 'src/app/service/shared-data-service.se
 import { Router } from '@angular/router';
 import { CountyNatalitySearchResponse } from 'src/app/model/county-natality-search-response';
 import { CountyNatalitySearchRequest } from 'src/app/model/county-natality-search-request';
+import { CountyNatalityFilter } from 'src/app/model/county-natality-filter';
+import { SharedDataCountyService } from 'src/app/service/shared-data-county.service';
 
 
 
@@ -69,20 +71,22 @@ export class ConsultasComponent implements OnInit{
   countyNatalityByAbnormalConditionsData: AbnormalConditionsResponse[] = [];
   abnormalConditionsFiltersData: AbnormalConditionsFilters[] = [];
   countySearchResponse:CountyNatalitySearchResponse[] = [];
+   countyNatalityFilter!:CountyNatalityFilter;
 
   selectedOption: string = 'VAC'; // Esta propiedad almacena el valor seleccionado
 
 constructor(private consultasService: ConsultasService, private fb: FormBuilder,
     private toastr: ToastrService, private sharedDataService: SharedDataServiceService,
-    private router: Router){
+    private router: Router, private sharedService: SharedDataCountyService){
     this.consultaForm = this.fb.group({
       nameUser: ['', [Validators.required, Validators.email]],
       nameConsult: ['', [Validators.required]],
       comment: ['',[Validators.required]],
     });
 }
- // Función para manejar el clic en el botón
-  onButomCircular() {
+
+// Función para manejar el clic en el botón
+onButomCircular() {
   const county: CountyNatalitySearchRequest = {
     year: this.selectedYear,
     county_of_Residence: this.selectedCounty
@@ -419,40 +423,6 @@ updateChartData() {
   }
 }
 
-// getDataForCategory(category: string): (number | null)[] {
-//   // Implementa la lógica para obtener los datos específicos de la categoría según la opción seleccionada
-
-//   switch (this.selectedOption) {
-//     case 'NDC':
-//       return this.countyNatalityData.map(item => {
-//         const value = isNaN(parseFloat(item[category])) ? null : parseFloat(item[category]);
-//         return value;
-//       });
-
-//     case 'PRN':
-//       // Agrega la lógica para la opción 'PRN'
-//       return this.countyNatalityResidenceAndBirthsData.map(item => {
-//         const value = isNaN(parseFloat(item[category])) ? null : parseFloat(item[category]);
-//         return value;
-//       });
-
-//     // Agrega más casos según sea necesario para otras opciones
-//     case 'NCPCA':
-//       return this.countyNatalityByAbnormalConditionsData.map(item => {
-//         const value = isNaN(parseFloat(item[category])) ? null : parseFloat(item[category]);
-//         return value;
-//       });
-//       case 'CAE':
-//         return this.abnormalConditionsFiltersData.map(item => {
-//           const value = isNaN(parseFloat(item[category])) ? null : parseFloat(item[category]);
-//           return value;
-//         });
-
-//     default:
-//       return [];
-//   }
-// }
-
 getDataForCategory(category: string, data: any[]): (number | null)[] {
   // Implementa la lógica para obtener los datos específicos de la categoría según la opción seleccionada
   return data.map(item => {
@@ -473,6 +443,36 @@ cerrarGrafico() {
 
 cerrarGraficoColumna(){
   this.mostrarGraficoColumnas = false;
+}
+
+mostrarGraficoRectangular(){
+  console.log("Se apreto el boton mostrarGraficoRectangular()");
+  if(this.selectedOption){
+    switch(this.selectedOption){
+      case 'NDC':
+        if(this.countyNatalityData.length > 0){
+          this.consultasService.getAllByYearAndBirths().subscribe(
+            response =>{
+              console.log(response);
+              this.countyNatalityFilter = response;
+              console.log(this.countyNatalityFilter);
+              this.sharedService.setDataCountyFilter(this.countyNatalityFilter);
+              this.router.navigate(['/consultas/nacimientos']);
+            },error => {
+              console.log(error);
+              this.toastr.error(error);
+            }
+          )
+        }else{
+          this.toastr.info("Debes realizar una busqueda para graficar");
+        }
+
+      break;
+      default:
+
+      break;
+    }
+  }
 }
 
 

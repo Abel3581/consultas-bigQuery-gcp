@@ -18,6 +18,7 @@ import { DistributedColumnsComponent } from './distributed-columns/distributed-c
 import { NavbarComponent } from '../shared/nav-bar/navbar.component';
 import { GraficoSearchIdComponent } from './grafico-search-id/grafico-search-id.component';
 import { CountyNatalityServiceService } from '../service/county-natality-service.service';
+import { NacimientosPorAnoComponentComponent } from './nacimientos-por-ano-component/nacimientos-por-ano-component.component';
 
 
 
@@ -33,7 +34,8 @@ import { CountyNatalityServiceService } from '../service/county-natality-service
     GraficoCircularComponent,
     DistributedColumnsComponent,
     NavbarComponent,
-    GraficoSearchIdComponent
+    GraficoSearchIdComponent,
+    NacimientosPorAnoComponentComponent
 
   ],
   imports: [

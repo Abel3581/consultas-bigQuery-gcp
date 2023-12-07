@@ -14,6 +14,7 @@ import { CommentRequest } from '../model/comment-request';
 import { AdminRequest } from '../model/admin-request';
 import { CountyNatalitySearchRequest } from '../model/county-natality-search-request';
 import { CountyNatalitySearchResponse } from '../model/county-natality-search-response';
+import { CountyNatalityFilter } from '../model/county-natality-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -109,5 +110,8 @@ export class ConsultasService {
     );
   }
 
+  getAllByYearAndBirths(): Observable<CountyNatalityFilter>{
+    return this.http.get<CountyNatalityFilter>(`${this.urlApi}/year/births`);
+  }
 
 }

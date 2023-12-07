@@ -8,6 +8,7 @@ import { AllComponent } from './all/all.component';
 import { GraficoCircularComponent } from './grafico-circular/grafico-circular.component';
 import { DistributedColumnsComponent } from './distributed-columns/distributed-columns.component';
 import { GraficoSearchIdComponent } from './grafico-search-id/grafico-search-id.component';
+import { NacimientosPorAnoComponentComponent } from './nacimientos-por-ano-component/nacimientos-por-ano-component.component';
 
 
 
@@ -49,6 +50,9 @@ const routes: Routes = [
     },
     {
       path: 'search-id', component: GraficoSearchIdComponent
+    },
+    {
+      path: 'nacimientos', component: NacimientosPorAnoComponentComponent
     },
     {
       path: '',

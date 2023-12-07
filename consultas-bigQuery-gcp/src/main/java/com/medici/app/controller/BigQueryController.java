@@ -1,7 +1,8 @@
 package com.medici.app.controller;
 
 import com.medici.app.dto.*;
-import com.medici.app.dto.response.CountyNatalityFilter;
+import com.medici.app.dto.response.AbnormalFiltersResponse;
+import com.medici.app.dto.response.CountyNatalityFilterResponse;
 import com.medici.app.service.BigQueryServiceImpl;
 import com.medici.app.service.injectdependency.BigQueryService;
 import lombok.RequiredArgsConstructor;
@@ -9,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -61,10 +60,18 @@ public class BigQueryController {
     }
 
     @GetMapping("/year/births")
-    public ResponseEntity<CountyNatalityFilter> getAllByYearAndBirths() throws Exception {
-        CountyNatalityFilter response = bigQueryService.getAllByYearAndBirths();
+    public ResponseEntity<CountyNatalityFilterResponse> getAllByYearAndBirths() throws Exception {
+        CountyNatalityFilterResponse response = bigQueryService.getAllByYearAndBirths();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @GetMapping("/abnormal")
+    public ResponseEntity<AbnormalFiltersResponse> getAllAbnormalNoCheckedUnknown(){
+        AbnormalFiltersResponse response = bigQueryService.getAllAbnormalNoCheckedUnknown();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+
 
 
 

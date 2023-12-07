@@ -38,18 +38,59 @@ public class BitQueryMapper {
 
     public AbnormalConditionsResponse mapToRowAbnormalConditions(FieldValueList row) {
         AbnormalConditionsResponse response = new AbnormalConditionsResponse();
-        response.setAbnormalConditionsCheckedYN(row.get("Abnormal_Conditions_Checked_YN").getStringValue());
-        response.setAbnormalConditionsCheckedDesc(row.get("Abnormal_Conditions_Checked_Desc").getStringValue());
+
+        if(row.get("Abnormal_Conditions_Checked_YN") != null && !row.get("Abnormal_Conditions_Checked_YN").isNull()){
+            response.setAbnormalConditionsCheckedYN(row.get("Abnormal_Conditions_Checked_YN").getStringValue());
+        }else {
+            response.setAbnormalConditionsCheckedYN("-");
+        }
+        if(row.get("Abnormal_Conditions_Checked_Desc") != null && !row.get("Abnormal_Conditions_Checked_Desc").isNull()){
+            response.setAbnormalConditionsCheckedDesc(row.get("Abnormal_Conditions_Checked_Desc").getStringValue());
+        }else{
+            response.setAbnormalConditionsCheckedDesc("-");
+        }
         response.setYear(row.get("Year").getStringValue());
         response.setBirths(row.get("Births").getStringValue());
-        response.setAve_Age_of_Mother(row.get("Ave_Age_of_Mother").getStringValue());
-        response.setAve_Birth_Weight_gms(row.get("Ave_Birth_Weight_gms").getStringValue());
-        response.setAve_LMP_Gestational_Age_Wks(row.get("Ave_LMP_Gestational_Age_Wks").getStringValue());
-        response.setAve_Number_of_Prenatal_Wks(row.get("Ave_Number_of_Prenatal_Wks").getStringValue());
-        response.setAve_OE_Gestational_Age_Wks(row.get("Ave_OE_Gestational_Age_Wks").getStringValue());
-        response.setAve_Pre_pregnancy_BMI(row.get("Ave_Pre_pregnancy_BMI").getStringValue());
-        response.setCounty_of_Residence(row.get("County_of_Residence").getStringValue());
-        response.setCounty_of_Residence_FIPS(row.get("County_of_Residence_FIPS").getStringValue());
+        if(row.get("Ave_Age_of_Mother") != null && !row.get("Ave_Age_of_Mother").isNull()){
+            response.setAve_Age_of_Mother(row.get("Ave_Age_of_Mother").getStringValue());
+        }else {
+            response.setAve_Age_of_Mother("-");
+        }
+        if(row.get("Ave_Birth_Weight_gms") != null && !row.get("Ave_Birth_Weight_gms").isNull()){
+            response.setAve_Birth_Weight_gms(row.get("Ave_Birth_Weight_gms").getStringValue());
+        }else {
+            response.setAve_Birth_Weight_gms("-");
+        }
+        if(row.get("Ave_LMP_Gestational_Age_Wks") != null && !row.get("Ave_LMP_Gestational_Age_Wks").isNull()){
+            response.setAve_LMP_Gestational_Age_Wks(row.get("Ave_LMP_Gestational_Age_Wks").getStringValue());
+        }else {
+            response.setAve_LMP_Gestational_Age_Wks("-");
+        }
+        if(row.get("Ave_Number_of_Prenatal_Wks") != null && !row.get("Ave_Number_of_Prenatal_Wks").isNull()){
+            response.setAve_Number_of_Prenatal_Wks(row.get("Ave_Number_of_Prenatal_Wks").getStringValue());
+        }else {
+            response.setAve_Number_of_Prenatal_Wks("-");
+        }
+        if(row.get("Ave_OE_Gestational_Age_Wks") != null && !row.get("Ave_OE_Gestational_Age_Wks").isNull()){
+            response.setAve_OE_Gestational_Age_Wks(row.get("Ave_OE_Gestational_Age_Wks").getStringValue());
+        }else {
+            response.setAve_OE_Gestational_Age_Wks("-");
+        }
+        if (row.get("Ave_Pre_pregnancy_BMI") != null && !row.get("Ave_Pre_pregnancy_BMI").isNull() ){
+            response.setAve_Pre_pregnancy_BMI(row.get("Ave_Pre_pregnancy_BMI").getStringValue());
+        }else {
+            response.setAve_Pre_pregnancy_BMI("-"); // O asigna un valor predeterminado según tu lógica
+        }
+        if (row.get("County_of_Residence") != null && !row.get("County_of_Residence").isNull()){
+            response.setCounty_of_Residence(row.get("County_of_Residence").getStringValue());
+        }else {
+            response.setCounty_of_Residence("-");
+        }
+        if (row.get("County_of_Residence_FIPS") != null && !row.get("County_of_Residence_FIPS").isNull()){
+            response.setCounty_of_Residence_FIPS(row.get("County_of_Residence_FIPS").getStringValue());
+        }else {
+            response.setCounty_of_Residence_FIPS("-");
+        }
 
         return response;
 

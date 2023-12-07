@@ -2,9 +2,9 @@ package com.medici.app.service.injectdependency;
 
 
 import com.medici.app.dto.*;
-import com.medici.app.dto.response.CountyNatalityFilter;
+import com.medici.app.dto.response.AbnormalFiltersResponse;
+import com.medici.app.dto.response.CountyNatalityFilterResponse;
 
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -20,5 +20,7 @@ public interface BigQueryService {
     List<CountyNatalitySearchResponse> searchByYearAndResidence(CountyNatalitySearchRequest request) throws Exception;
 
 
-    CountyNatalityFilter getAllByYearAndBirths() throws Exception;
+    CountyNatalityFilterResponse getAllByYearAndBirths() throws Exception;
+
+    AbnormalFiltersResponse getAllAbnormalNoCheckedUnknown();
 }

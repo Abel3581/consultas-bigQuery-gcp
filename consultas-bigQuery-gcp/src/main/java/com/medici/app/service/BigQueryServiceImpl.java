@@ -4,15 +4,14 @@ package com.medici.app.service;
 import com.google.cloud.bigquery.*;
 import com.medici.app.config.BigQueryUrlConstants;
 import com.medici.app.dto.*;
-import com.medici.app.dto.response.CountyNatalityFilter;
+import com.medici.app.dto.response.AbnormalFiltersResponse;
+import com.medici.app.dto.response.CountyNatalityFilterResponse;
 import com.medici.app.mapper.BitQueryMapper;
 import com.medici.app.service.injectdependency.BigQueryService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.*;
 
 
@@ -23,7 +22,7 @@ public class BigQueryServiceImpl implements BigQueryService {
 
     private String  GET_COUNTY_NATALITY = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 20;";
     private String GET_COUNTY_NATALITY_RESIDENCE_AND_BIRTHS = "SELECT County_of_Residence, Births FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` LIMIT 20";
-    private String GET_ABNORMAL_CONDITIONS = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_abnormal_conditions` LIMIT 20";
+    private String GET_ABNORMAL_CONDITIONS = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_abnormal_conditions` LIMIT 3961";
     private String GET_ABNORMAL_CONDITIONS_FILTERS = "SELECT County_of_Residence, Births, Abnormal_Conditions_Checked_Desc, Ave_Age_of_Mother FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_abnormal_conditions` LIMIT 20";
 
     private final BigQuery bigquery;
@@ -198,7 +197,7 @@ public class BigQueryServiceImpl implements BigQueryService {
     }
 
     @Override
-    public CountyNatalityFilter getAllByYearAndBirths() throws Exception {
+    public CountyNatalityFilterResponse getAllByYearAndBirths() throws Exception {
         QueryJobConfiguration queryJobConfiguration = QueryJobConfiguration.newBuilder(BigQueryUrlConstants.GET_BY_YEAR_AND_BIRTHS).build();
         Job job = bigquery.create((JobInfo.newBuilder(queryJobConfiguration).build()));
         job = job.waitFor();
@@ -213,7 +212,7 @@ public class BigQueryServiceImpl implements BigQueryService {
         Integer births2017 = 0;
         Integer births2016 = 0;
 
-        CountyNatalityFilter response = new CountyNatalityFilter();
+        CountyNatalityFilterResponse response = new CountyNatalityFilterResponse();
         response.setYear20180101("2018-01-01");
         response.setYear20170101("2017-01-01");
         response.setYear20160101("2016-01-01");
@@ -222,6 +221,7 @@ public class BigQueryServiceImpl implements BigQueryService {
             for (FieldValueList row : result.iterateAll()) {
                 log.info("Row" + row.toString());
                 if (row.get("Year").getStringValue().equals("2018-01-01")) {
+
                     births2018 += Integer.parseInt(row.get("Births").getStringValue());
                 }
                 if (row.get("Year").getStringValue().equals("2017-01-01")) {
@@ -239,6 +239,11 @@ public class BigQueryServiceImpl implements BigQueryService {
         response.setBirths2016(births2016);
 
         return response;
+    }
+
+    @Override
+    public AbnormalFiltersResponse getAllAbnormalNoCheckedUnknown() {
+        return null;
     }
 
 
