@@ -11,7 +11,6 @@ import { ConsultasService } from '../service/consultas.service';
 import { SearchComponent } from './search/search.component';
 import { AllComponent } from './all/all.component';
 import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedDataServiceService } from '../service/shared-data-service.service';
 import { GraficoCircularComponent } from './grafico-circular/grafico-circular.component';
 import { DistributedColumnsComponent } from './distributed-columns/distributed-columns.component';
@@ -19,6 +18,7 @@ import { NavbarComponent } from '../shared/nav-bar/navbar.component';
 import { GraficoSearchIdComponent } from './grafico-search-id/grafico-search-id.component';
 import { CountyNatalityServiceService } from '../service/county-natality-service.service';
 import { NacimientosPorAnoComponentComponent } from './nacimientos-por-ano-component/nacimientos-por-ano-component.component';
+import { AbnormalFiltersComponent } from './abnormal-filters/abnormal-filters.component';
 
 
 
@@ -35,7 +35,8 @@ import { NacimientosPorAnoComponentComponent } from './nacimientos-por-ano-compo
     DistributedColumnsComponent,
     NavbarComponent,
     GraficoSearchIdComponent,
-    NacimientosPorAnoComponentComponent
+    NacimientosPorAnoComponentComponent,
+    AbnormalFiltersComponent
 
   ],
   imports: [

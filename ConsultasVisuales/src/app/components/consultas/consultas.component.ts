@@ -13,6 +13,7 @@ import { CountyNatalitySearchResponse } from 'src/app/model/county-natality-sear
 import { CountyNatalitySearchRequest } from 'src/app/model/county-natality-search-request';
 import { CountyNatalityFilter } from 'src/app/model/county-natality-filter';
 import { SharedDataCountyService } from 'src/app/service/shared-data-county.service';
+import { AbnormalFiltersResponse } from 'src/app/model/abnormal-filters-response';
 
 
 
@@ -71,7 +72,8 @@ export class ConsultasComponent implements OnInit{
   countyNatalityByAbnormalConditionsData: AbnormalConditionsResponse[] = [];
   abnormalConditionsFiltersData: AbnormalConditionsFilters[] = [];
   countySearchResponse:CountyNatalitySearchResponse[] = [];
-   countyNatalityFilter!:CountyNatalityFilter;
+  countyNatalityFilter!:CountyNatalityFilter;
+  abnormalFilterResponse!:AbnormalFiltersResponse;
 
   selectedOption: string = 'VAC'; // Esta propiedad almacena el valor seleccionado
 
@@ -431,8 +433,6 @@ getDataForCategory(category: string, data: any[]): (number | null)[] {
   });
 }
 
-
-
 abrirGrafico() {
   this.mostrarGrafico = true;
 }
@@ -468,8 +468,25 @@ mostrarGraficoRectangular(){
         }
 
       break;
-      default:
+      case 'NCPCA':
+        if(this.countyNatalityByAbnormalConditionsData.length > 0){
+          this.consultasService.getAllAbnormalNoCheckedUnknown().subscribe(
+            response => {
+              console.log(response);
+              console.log("longitud = ", this.countyNatalityByAbnormalConditionsData.length);
+              this.abnormalFilterResponse = response;
+              ///this.sharedDataService.setDataAbnormalFilters(this.abnormalFilterResponse);
+              this.sharedService.setDataAbnormalFilters(this.abnormalFilterResponse);
+              this.router.navigate(['/consultas/abnormal']);
+            },error => {
+              console.log(error);
+              this.toastr.error(error);
+            }
+          )
+        }
+      break;
 
+      default:
       break;
     }
   }

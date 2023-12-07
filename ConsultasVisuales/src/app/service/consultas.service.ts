@@ -15,6 +15,7 @@ import { AdminRequest } from '../model/admin-request';
 import { CountyNatalitySearchRequest } from '../model/county-natality-search-request';
 import { CountyNatalitySearchResponse } from '../model/county-natality-search-response';
 import { CountyNatalityFilter } from '../model/county-natality-filter';
+import { AbnormalFiltersResponse } from '../model/abnormal-filters-response';
 
 @Injectable({
   providedIn: 'root'
@@ -114,4 +115,7 @@ export class ConsultasService {
     return this.http.get<CountyNatalityFilter>(`${this.urlApi}/year/births`);
   }
 
+  getAllAbnormalNoCheckedUnknown(): Observable<AbnormalFiltersResponse>{
+    return this.http.get<AbnormalFiltersResponse>(`${this.urlApi}/abnormal`);
+  }
 }

@@ -9,6 +9,7 @@ import { GraficoCircularComponent } from './grafico-circular/grafico-circular.co
 import { DistributedColumnsComponent } from './distributed-columns/distributed-columns.component';
 import { GraficoSearchIdComponent } from './grafico-search-id/grafico-search-id.component';
 import { NacimientosPorAnoComponentComponent } from './nacimientos-por-ano-component/nacimientos-por-ano-component.component';
+import { AbnormalFiltersComponent } from './abnormal-filters/abnormal-filters.component';
 
 
 
@@ -53,6 +54,9 @@ const routes: Routes = [
     },
     {
       path: 'nacimientos', component: NacimientosPorAnoComponentComponent
+    },
+    {
+      path: 'abnormal', component: AbnormalFiltersComponent
     },
     {
       path: '',

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CountyNatalitySearchResponse } from '../model/county-natality-search-response';
 import { CountyNatalityResponse } from '../model/county-natality-response';
+import { AbnormalFiltersResponse } from '../model/abnormal-filters-response';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,17 @@ export class SharedDataServiceService {
 
 
   constructor() { }
-
+  // Datos grafico abnormalFilters
+  private dataAbnormalFilters = new BehaviorSubject<AbnormalFiltersResponse | null>(null);
+  dataAbnormalAsObservable$ = this.dataAbnormalFilters.asObservable();
+  setDataAbnormalFilters(data: AbnormalFiltersResponse) {
+    console.log("Datos de setDataAbnormalFilters (antes de emitir): ", data);
+    if (data) {
+      this.dataAbnormalFilters.next(data);
+    } else {
+      console.error("Intento de emitir datos nulos desde setDataAbnormalFilters.");
+    }
+  }
 
   //Datos para compartir a graficoColumnas
   private dataGraficoColumnaSearch = new BehaviorSubject<CountyNatalitySearchResponse[]>([]);
