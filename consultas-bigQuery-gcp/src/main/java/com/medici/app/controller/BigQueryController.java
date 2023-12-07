@@ -66,7 +66,7 @@ public class BigQueryController {
     }
 
     @GetMapping("/abnormal")
-    public ResponseEntity<AbnormalFiltersResponse> getAllAbnormalNoCheckedUnknown(){
+    public ResponseEntity<AbnormalFiltersResponse> getAllAbnormalNoCheckedUnknown() throws Exception {
         AbnormalFiltersResponse response = bigQueryService.getAllAbnormalNoCheckedUnknown();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

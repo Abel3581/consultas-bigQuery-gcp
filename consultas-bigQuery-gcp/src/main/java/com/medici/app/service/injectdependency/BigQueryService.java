@@ -22,5 +22,5 @@ public interface BigQueryService {
 
     CountyNatalityFilterResponse getAllByYearAndBirths() throws Exception;
 
-    AbnormalFiltersResponse getAllAbnormalNoCheckedUnknown();
+    AbnormalFiltersResponse getAllAbnormalNoCheckedUnknown() throws Exception;
 }

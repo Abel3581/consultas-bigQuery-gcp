@@ -242,8 +242,41 @@ public class BigQueryServiceImpl implements BigQueryService {
     }
 
     @Override
-    public AbnormalFiltersResponse getAllAbnormalNoCheckedUnknown() {
-        return null;
+    public AbnormalFiltersResponse getAllAbnormalNoCheckedUnknown() throws Exception {
+        QueryJobConfiguration queryJobConfiguration = QueryJobConfiguration.newBuilder(BigQueryUrlConstants.GET_ABNORMAL_CONDITIONS).build();
+        Job job = bigquery.create((JobInfo.newBuilder(queryJobConfiguration).build()));
+        job = job.waitFor();
+        if(job == null){
+            throw new Exception("Job no longer exixts");
+        }
+        if(job.getStatus().getError() != null){
+            throw new Exception(job.getStatus().getError().toString());
+        }
+        TableResult result = job.getQueryResults();
+        Integer noneChecked = 0;
+        Integer atLeastOneChecked = 0;
+        Integer unknownOrNotStated = 0;
+        AbnormalFiltersResponse response = new AbnormalFiltersResponse();
+        if(result != null){
+            for(FieldValueList row: result.iterateAll()){
+                log.info(row.toString());
+                if (row.get("Abnormal_Conditions_Checked_Desc").getStringValue().equals("None checked")) {
+                    noneChecked += Integer.parseInt(row.get("Abnormal_Conditions_Checked_YN").getStringValue());
+                }
+                if (row.get("Abnormal_Conditions_Checked_Desc").getStringValue().equals("At least one checked")) {
+                    atLeastOneChecked += Integer.parseInt(row.get("Abnormal_Conditions_Checked_YN").getStringValue());
+                }
+                if (row.get("Abnormal_Conditions_Checked_Desc").getStringValue().equals("Unknown or Not Stated")) {
+                    unknownOrNotStated += Integer.parseInt(row.get("Abnormal_Conditions_Checked_YN").getStringValue());
+                }
+            }
+        }else {
+            log.error("No hay resultados en la consulta de BigQuery.");
+        }
+        response.setNoneChecked(noneChecked);
+        response.setAtLeastOneChecked(atLeastOneChecked);
+        response.setUnknownOrNotStated(unknownOrNotStated);
+        return response;
     }
 
 
