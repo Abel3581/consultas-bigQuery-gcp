@@ -20,6 +20,7 @@
       <option value="CAE">Condado de residencia, condiciones anormalesCheckedDesc y edad de la madre</option>
       <option value="NPACPC">Nacimientos por anomalías congénitas por condado</option>
       <option value="NPRDP">Natalidad por raza del padre a nivel de condado</option>
+      <option value="NPMMC">Natalidad por morbilidad materna a nivel de condado</option>
     </select>
     <div class="">
       <button type="button" (click)="onButtonClick()"
@@ -356,6 +357,47 @@
             </th>
             <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
               fathers Single Race Code
+            </th>
+          </ng-container>
+          <ng-container *ngIf="selectedOption === 'NPMMC'">
+            <th scope="col" class="px-6 py-4 bg-[#bef264]">
+              Year
+            </th>
+            <th scope="col" class="px-6 py-4">
+              Births
+            </th>
+            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              County of Residence
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Age of Mother
+            </th>
+            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Pre pregnancy BMI
+            </th>
+            <th scope="col" class="px-6  py-4  text-gray-700 whitespace-nowrap">
+              Birth Weight gms
+            </th>
+            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap ">
+              Number of prenatal wks
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Oe gestational age wks
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Pre pregnancy bmi
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Birth Weight gms
+            </th>
+            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              County of residence fips
+            </th>
+            <th scope="col" class="px-6  py-4  text-gray-700 whitespace-nowrap">
+              Maternal Morbidity Desc
+            </th>
+            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Maternal Morbidity YN
             </th>
           </ng-container>
         </thead>

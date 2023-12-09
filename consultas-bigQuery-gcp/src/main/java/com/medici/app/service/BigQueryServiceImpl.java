@@ -9,6 +9,7 @@ import com.medici.app.mapper.BitQueryMapper;
 import com.medici.app.service.injectdependency.BigQueryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -406,6 +407,64 @@ public class BigQueryServiceImpl implements BigQueryService {
         response.setMoreThanOneRace(moreThanOneRace);
         response.setBlackOrAfricanAmerican(blackOrAfricanAmerican);
         response.setNativeHawaiianOrOtherPacificIslander(nativeHawaiianOrOtherPacificIslander);
+        response.setUnknownOrNotStated(unknownOrNotStated);
+        return response;
+    }
+
+    @Override
+    public List<MaternalMorbidityResponse> getAllMaternalMorbidity() throws Exception {
+        QueryJobConfiguration queryJobConfiguration = QueryJobConfiguration.newBuilder(BigQueryUrlConstants.GET_BY_MATERNAL_MORBIDITY).build();
+        Job job = bigquery.create(JobInfo.newBuilder(queryJobConfiguration).build());
+        job = job.waitFor();
+        if(job == null){
+            throw new Exception("Job no longer exixts");
+        }
+        if(job.getStatus().getError() != null){
+            throw new Exception(job.getStatus().getError().toString());
+        }
+        TableResult result = job.getQueryResults();
+        List<MaternalMorbidityResponse> responses = new ArrayList<>();
+        for (FieldValueList row: result.iterateAll()){
+            responses.add(bitQueryMapper.mapToMaternalMorbidityResponse(row));
+        }
+        log.info("Tamaño response = " + responses.size());
+        return responses;
+    }
+
+    @Override
+    public MaternalMorbidityFilters getMaternalMorbidityFilters() throws Exception {
+        QueryJobConfiguration queryJobConfiguration = QueryJobConfiguration.newBuilder(BigQueryUrlConstants.GET_BY_MATERNAL_MORBIDITY).build();
+        Job job = bigquery.create(JobInfo.newBuilder(queryJobConfiguration).build());
+        job = job.waitFor();
+        if(job == null){
+            throw new Exception("Job no longer exixts");
+        }
+        if(job.getStatus().getError() != null){
+            throw new Exception(job.getStatus().getError().toString());
+        }
+        TableResult result = job.getQueryResults();
+        Integer noneChecked = 0;
+        Integer atLeastOneChecked = 0;
+        Integer unknownOrNotStated = 0;
+        MaternalMorbidityFilters response = new MaternalMorbidityFilters();
+        if(result != null){
+            for(FieldValueList row: result.iterateAll()){
+                log.info(row.toString());
+                if (row.get("Maternal_Morbidity_Desc").getStringValue().equals("None checked")) {
+                    noneChecked += Integer.parseInt(row.get("Maternal_Morbidity_YN").getStringValue());
+                }
+                if (row.get("Maternal_Morbidity_Desc").getStringValue().equals("At least one checked")) {
+                    atLeastOneChecked += Integer.parseInt(row.get("Maternal_Morbidity_YN").getStringValue());
+                }
+                if (row.get("Maternal_Morbidity_Desc").getStringValue().equals("Unknown or Not Stated")) {
+                    unknownOrNotStated += Integer.parseInt(row.get("Maternal_Morbidity_YN").getStringValue());
+                }
+            }
+        }else {
+            log.error("No hay resultados en la consulta de BigQuery.");
+        }
+        response.setAtLeastOneChecked(atLeastOneChecked);
+        response.setNoneChecked(noneChecked);
         response.setUnknownOrNotStated(unknownOrNotStated);
         return response;
     }

@@ -8,6 +8,7 @@ import java.util.List;
 
 
 public interface BigQueryService {
+
     List<CountyNatalityResponse> getConsultTable() throws Exception;
 
     List<CountyNatalityFilterResidenceAndBirths> getCountyNatalityResidenceAndBirths() throws Exception;
@@ -17,7 +18,6 @@ public interface BigQueryService {
     List<AbnormalConditionsFilters> bnormalConditionsFilters() throws Exception;
 
     List<CountyNatalitySearchResponse> searchByYearAndResidence(CountyNatalitySearchRequest request) throws Exception;
-
 
     CountyNatalityFilterResponse getAllByYearAndBirths() throws Exception;
 
@@ -30,4 +30,8 @@ public interface BigQueryService {
     List<CountyByFatherRaceResponse> getAllByFatherRace() throws Exception;
 
     FatherRaceFiltersResponse getFatherRaceFilters() throws Exception;
+
+    List<MaternalMorbidityResponse> getAllMaternalMorbidity() throws Exception;
+
+    MaternalMorbidityFilters getMaternalMorbidityFilters() throws Exception;
 }

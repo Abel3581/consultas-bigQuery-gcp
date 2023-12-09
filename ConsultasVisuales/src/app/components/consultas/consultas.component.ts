@@ -535,7 +535,6 @@ mostrarGraficoRectangular(){
         }
       break;
       case 'NPRDP':
-        // console.log("Datos de getAllCongenitalFilters(): ", data);
         if(this.fatherRaceResponse.length > 0){
           this.consultasService.getFatherRaceFilters().subscribe(
             data => {
