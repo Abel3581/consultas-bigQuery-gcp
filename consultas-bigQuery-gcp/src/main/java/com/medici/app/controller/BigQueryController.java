@@ -106,6 +106,18 @@ public class BigQueryController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("/mother/race")
+    public ResponseEntity<List<MotherRaceResponse>> getAllMotherRace() throws Exception {
+        List<MotherRaceResponse> responses = bigQueryService.getAllMotherRace();
+        return ResponseEntity.status(HttpStatus.OK).body(responses);
+    }
+
+    @GetMapping("/mother/filters")
+    public ResponseEntity<MotherRaceFiltersResponse> getMotherRaceFilters() throws Exception {
+        MotherRaceFiltersResponse response = bigQueryService.getMotherRaceFilters();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 
 
 

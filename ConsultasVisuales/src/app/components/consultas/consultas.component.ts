@@ -18,6 +18,8 @@ import { CongenitalResponse } from 'src/app/model/congenital-response';
 import { CongenitalFilters } from 'src/app/model/congenital-filters';
 import { FatherRaceResponse } from 'src/app/model/father-race-response';
 import { FatherRaceFilters } from 'src/app/model/father-race-filters';
+import { MaternalMorbidityResponse } from 'src/app/model/maternal/maternal-morbidity-response';
+import { MaternalMorbidityFilters } from 'src/app/model/maternal/maternal-morbidity-filters';
 
 
 
@@ -82,6 +84,8 @@ export class ConsultasComponent implements OnInit{
   congenitalFilters!: CongenitalFilters;
   fatherRaceResponse: FatherRaceResponse[] = [];
   fatherRaceFilters!: FatherRaceFilters;
+  maternalMorbidityResponse: MaternalMorbidityResponse[] = [];
+  maternalMorbidityFilters!: MaternalMorbidityFilters;
 
   selectedOption: string = 'VAC'; // Esta propiedad almacena el valor seleccionado
 
@@ -193,6 +197,7 @@ onButtonClick() {
     this.abnormalConditionsFiltersData = [];
     this.congenitalResponse = [];
     this.fatherRaceResponse = [];
+    this.maternalMorbidityResponse = [];
 
     if (this.selectedOption) {
       switch (this.selectedOption) {
@@ -254,6 +259,17 @@ onButtonClick() {
               console.log(error);
             }
           )
+        break;
+        case 'NPMMC':
+            this.consultasService.getAllMaternalMorbidity().subscribe(
+              data => {
+                console.log("Datos de getAllMaternalMorbidity(): ", data);
+                this.maternalMorbidityResponse = data;
+                console.log("SIZE = ", this.maternalMorbidityResponse.length);
+              },error => {
+                console.log(error);
+              }
+            )
         break;
         default:
 
@@ -541,6 +557,22 @@ mostrarGraficoRectangular(){
               this.fatherRaceFilters = data;
               this.sharedService.setdataFatherRaceFilters(this.fatherRaceFilters);
               this.router.navigate(['/consultas/father']);
+            },error => {
+              this.toastr.error(error);
+              console.log(error);
+            }
+          )
+        }else{
+          this.toastr.info("Debes realizar una busqueda para graficar");
+        }
+      break;
+      case 'NPMMC':
+        if(this.maternalMorbidityResponse.length > 0){
+          this.consultasService.getMaternalMorbidityFilters().subscribe(
+            data => {
+              this.maternalMorbidityFilters = data;
+              this.sharedService.setDataMaternalFilters(this.maternalMorbidityFilters);
+              this.router.navigate(['/consultas/maternal']);
             },error => {
               this.toastr.error(error);
               console.log(error);

@@ -6,6 +6,7 @@ import com.medici.app.dto.*;
 import com.medici.app.dto.response.CongenitalAbnormalitiesResponse;
 import com.medici.app.dto.response.CountyByFatherRaceResponse;
 import com.medici.app.dto.response.MaternalMorbidityResponse;
+import com.medici.app.dto.response.MotherRaceResponse;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -300,5 +301,29 @@ public class BitQueryMapper {
             response.setCounty_of_Residence_FIPS("-");
         }
         return response;
+    }
+
+    public MotherRaceResponse mapToMotherRaceResponse(FieldValueList row) {
+        MotherRaceResponse response = new MotherRaceResponse();
+        response.setMothersSingleRace(getSafeStringValue(row, "Mothers_Single_Race"));
+        response.setMothersSingleRaceCode(getSafeStringValue(row, "Mothers_Single_Race_Code"));
+        response.setYear(getSafeStringValue(row, "Year"));
+        response.setBirths(getSafeStringValue(row, "Births"));
+        response.setAve_Age_of_Mother(getSafeStringValue(row, "Ave_Age_of_Mother"));
+        response.setAve_Birth_Weight_gms(getSafeStringValue(row, "Ave_Birth_Weight_gms"));
+        response.setAve_LMP_Gestational_Age_Wks(getSafeStringValue(row, "Ave_LMP_Gestational_Age_Wks"));
+        response.setAve_Number_of_Prenatal_Wks(getSafeStringValue(row, "Ave_Number_of_Prenatal_Wks"));
+        response.setAve_OE_Gestational_Age_Wks(getSafeStringValue(row, "Ave_OE_Gestational_Age_Wks"));
+        response.setAve_Pre_pregnancy_BMI(getSafeStringValue(row, "Ave_Pre_pregnancy_BMI"));
+        response.setCounty_of_Residence(getSafeStringValue(row, "County_of_Residence"));
+        response.setCounty_of_Residence_FIPS(getSafeStringValue(row, "County_of_Residence_FIPS"));
+
+        return response;
+    }
+
+    private String getSafeStringValue(FieldValueList row, String fieldName) {
+        return row.get(fieldName) != null && !row.get(fieldName).isNull()
+                ? row.get(fieldName).getStringValue()
+                : "-";
     }
 }

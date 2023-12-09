@@ -10,8 +10,8 @@ export interface MaternalMorbidityResponse {
   ave_Birth_Weight_gms: string;
   ave_Pre_pregnancy_BMI: string;
   ave_Number_of_Prenatal_Wks: string;
-  maternal_Morbidity_Desc: string;
-  maternal_Morbidity_YN: string;
+  maternalMorbidityDesc: string;
+  maternalMorbidityYN: string;
   [key: string]: any;
 
 }

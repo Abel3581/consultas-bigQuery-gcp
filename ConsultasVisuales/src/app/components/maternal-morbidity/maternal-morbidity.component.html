@@ -1,0 +1,23 @@
+<div class="container mx-auto my-auto max-w-3xl">
+  <div class="my-10">
+    <h1 class="text-center font-bold">Natalidad por morbilidad materna a nivel de condado</h1>
+    <h2 class="text-center">Año: 2018-01-01 | 2017-01-01 | 2016-01-01 </h2>
+    <p class="text-sm mt-3"><span class="font-bold">Morbilidad Materna:</span>  Se refiere a la presencia de enfermedades,
+      condiciones médicas o complicaciones de salud en mujeres durante el período
+      del embarazo, el parto o el puerperio (posparto). La morbilidad materna puede
+      incluir una variedad de problemas de salud que pueden surgir durante este periodo.</p>
+  </div>
+  <div style="text-align:center">
+    <apx-chart
+      [series]="chartOptions.series!"
+      [chart]="chartOptions.chart!"
+      [xaxis]="chartOptions.xaxis!"
+      [title]="chartOptions.title!"
+    ></apx-chart>
+  </div>
+  <div class="flex justify-center">
+    <button routerLink="/consultas/natalidad" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">
+      Volver
+    </button>
+  </div>
+</div>

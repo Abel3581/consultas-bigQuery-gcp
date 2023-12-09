@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 
 @Log4j2
@@ -466,6 +468,79 @@ public class BigQueryServiceImpl implements BigQueryService {
         response.setAtLeastOneChecked(atLeastOneChecked);
         response.setNoneChecked(noneChecked);
         response.setUnknownOrNotStated(unknownOrNotStated);
+        return response;
+    }
+
+    @Override
+    public List<MotherRaceResponse> getAllMotherRace() throws Exception {
+        QueryJobConfiguration queryJobConfiguration = QueryJobConfiguration.newBuilder(BigQueryUrlConstants.GET_BY_MOTHER_RACE).build();
+        Job job = bigquery.create(JobInfo.newBuilder(queryJobConfiguration).build());
+        job = job.waitFor();
+        if(job == null){
+            throw new Exception("Job no longer exixts");
+        }
+        if(job.getStatus().getError() != null){
+            throw new Exception(job.getStatus().getError().toString());
+        }
+        TableResult result = job.getQueryResults();
+        List<MotherRaceResponse> responses = StreamSupport.stream(result.iterateAll().spliterator(), false)
+                .map(bitQueryMapper::mapToMotherRaceResponse)
+                .collect(Collectors.toList());
+
+        log.info("Tamaño response = " + responses.size());
+        return responses;
+
+    }
+
+    @Override
+    public MotherRaceFiltersResponse getMotherRaceFilters() throws Exception {
+        QueryJobConfiguration queryJobConfiguration = QueryJobConfiguration.newBuilder(BigQueryUrlConstants.GET_BY_MOTHER_RACE).build();
+        Job job = bigquery.create(JobInfo.newBuilder(queryJobConfiguration).build());
+        job = job.waitFor();
+        if(job == null){
+            throw new Exception("Job no longer exixts");
+        }
+        if(job.getStatus().getError() != null){
+            throw new Exception(job.getStatus().getError().toString());
+        }
+        TableResult result = job.getQueryResults();
+        Integer white = 0;
+        Integer asian = 0;
+        Integer moreThanOneRace = 0;
+        Integer blackOrAfricanAmerican = 0;
+        Integer americanIndianOrAlaskaNative = 0;
+        Integer nativeHawaiianOrOtherPacificIslander = 0;
+        MotherRaceFiltersResponse response = new MotherRaceFiltersResponse();
+        if(result != null){
+            for (FieldValueList row: result.iterateAll()){
+                if (row.get("Mothers_Single_Race").getStringValue().equals("White")) {
+                    white += Integer.parseInt(row.get("Births").getStringValue());
+                }
+                if (row.get("Mothers_Single_Race").getStringValue().equals("Asian")) {
+                    asian += Integer.parseInt(row.get("Births").getStringValue());
+                }
+                if (row.get("Mothers_Single_Race").getStringValue().equals("More than one race")) {
+                    moreThanOneRace += Integer.parseInt(row.get("Births").getStringValue());
+                }
+                if (row.get("Mothers_Single_Race").getStringValue().equals("Black or African American")) {
+                    blackOrAfricanAmerican += Integer.parseInt(row.get("Births").getStringValue());
+                }
+                if (row.get("Mothers_Single_Race").getStringValue().equals("American Indian or Alaska Native")) {
+                    americanIndianOrAlaskaNative += Integer.parseInt(row.get("Births").getStringValue());
+                }
+                if (row.get("Mothers_Single_Race").getStringValue().equals("Native Hawaiian or Other Pacific Islander")) {
+                    nativeHawaiianOrOtherPacificIslander += Integer.parseInt(row.get("Births").getStringValue());
+                }
+            }
+        }else {
+            log.error("No hay resultados en la consulta de BigQuery.");
+        }
+        response.setAsian(asian);
+        response.setWhite(white);
+        response.setAmericanIndianOrAlaskaNative(americanIndianOrAlaskaNative);
+        response.setMoreThanOneRace(moreThanOneRace);
+        response.setBlackOrAfricanAmerican(blackOrAfricanAmerican);
+        response.setNativeHawaiianOrOtherPacificIslander(nativeHawaiianOrOtherPacificIslander);
         return response;
     }
 }

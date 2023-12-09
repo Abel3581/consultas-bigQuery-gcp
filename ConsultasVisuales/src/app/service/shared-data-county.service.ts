@@ -6,6 +6,7 @@ import { CountyNatalityFilter } from '../model/county-natality-filter';
 import { AbnormalFiltersResponse } from '../model/abnormal-filters-response';
 import { CongenitalFilters } from '../model/congenital-filters';
 import { FatherRaceFilters } from '../model/father-race-filters';
+import { MaternalMorbidityFilters } from '../model/maternal/maternal-morbidity-filters';
 
 
 @Injectable({
@@ -13,9 +14,7 @@ import { FatherRaceFilters } from '../model/father-race-filters';
 })
 export class SharedDataCountyService {
 
-
    constructor() { }
-
 
   private dataSearchId = new BehaviorSubject<CountySearchIdResponse[]>([]);
   dataSearchIdBehavior$ =  this.dataSearchId.asObservable();
@@ -55,6 +54,13 @@ export class SharedDataCountyService {
   setdataFatherRaceFilters(data: FatherRaceFilters) {
     console.log("Datos de setDataFatherRaceFilters (antes de emitir): ", data);
     this.dataFatherRaceFilters.next(data);
+  }
+  // Datos grafico Maternal
+  private dataMaternalFilters = new BehaviorSubject<MaternalMorbidityFilters | null>(null);
+  dataMaternalFiltersAsObservable$ = this.dataMaternalFilters.asObservable();
+  setDataMaternalFilters(data: MaternalMorbidityFilters) {
+    console.log("Datos de setDataMaternalFilters (antes de emitir): ", data);
+    this.dataMaternalFilters.next(data);
   }
 
 }

@@ -34,4 +34,8 @@ public interface BigQueryService {
     List<MaternalMorbidityResponse> getAllMaternalMorbidity() throws Exception;
 
     MaternalMorbidityFilters getMaternalMorbidityFilters() throws Exception;
+
+    List<MotherRaceResponse> getAllMotherRace() throws Exception;
+
+    MotherRaceFiltersResponse getMotherRaceFilters() throws Exception;
 }

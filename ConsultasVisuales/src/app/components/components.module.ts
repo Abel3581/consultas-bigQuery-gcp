@@ -21,6 +21,7 @@ import { NacimientosPorAnoComponentComponent } from './nacimientos-por-ano-compo
 import { AbnormalFiltersComponent } from './abnormal-filters/abnormal-filters.component';
 import { CongenitalAbnormaliesComponent } from './congenital-abnormalies/congenital-abnormalies.component';
 import { FatherRaceComponent } from './father-race/father-race.component';
+import { MaternalMorbidityComponent } from './maternal-morbidity/maternal-morbidity.component';
 
 
 
@@ -40,7 +41,8 @@ import { FatherRaceComponent } from './father-race/father-race.component';
     NacimientosPorAnoComponentComponent,
     AbnormalFiltersComponent,
     CongenitalAbnormaliesComponent,
-    FatherRaceComponent
+    FatherRaceComponent,
+    MaternalMorbidityComponent
 
   ],
   imports: [
