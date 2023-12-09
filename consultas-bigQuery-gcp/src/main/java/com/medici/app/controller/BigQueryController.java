@@ -89,7 +89,7 @@ public class BigQueryController {
     }
 
     @GetMapping("/father/race/filters")
-    public ResponseEntity<FatherRaceFiltersResponse> getFatherRaceFilters(){
+    public ResponseEntity<FatherRaceFiltersResponse> getFatherRaceFilters() throws Exception {
         FatherRaceFiltersResponse response = bigQueryService.getFatherRaceFilters();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

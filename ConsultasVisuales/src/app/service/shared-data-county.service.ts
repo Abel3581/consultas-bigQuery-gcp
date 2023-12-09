@@ -5,12 +5,15 @@ import { BehaviorSubject } from 'rxjs';
 import { CountyNatalityFilter } from '../model/county-natality-filter';
 import { AbnormalFiltersResponse } from '../model/abnormal-filters-response';
 import { CongenitalFilters } from '../model/congenital-filters';
+import { FatherRaceFilters } from '../model/father-race-filters';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedDataCountyService {
+
+
    constructor() { }
 
 
@@ -45,6 +48,13 @@ export class SharedDataCountyService {
   setDataCongenitalFilters(data: CongenitalFilters) {
     console.log("Datos de setDataCongenitalFilters (antes de emitir): ", data);
     this.dataAbnormalFilters.next(data);
+  }
+  // Datos grafico FatherRace
+  private dataFatherRaceFilters = new BehaviorSubject<FatherRaceFilters | null>(null);
+  dataFatherRaceFiltersAsObservable$ = this.dataFatherRaceFilters.asObservable();
+  setdataFatherRaceFilters(data: FatherRaceFilters) {
+    console.log("Datos de setDataFatherRaceFilters (antes de emitir): ", data);
+    this.dataFatherRaceFilters.next(data);
   }
 
 }

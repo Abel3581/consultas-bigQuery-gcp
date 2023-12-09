@@ -29,5 +29,5 @@ public interface BigQueryService {
 
     List<CountyByFatherRaceResponse> getAllByFatherRace() throws Exception;
 
-    FatherRaceFiltersResponse getFatherRaceFilters();
+    FatherRaceFiltersResponse getFatherRaceFilters() throws Exception;
 }

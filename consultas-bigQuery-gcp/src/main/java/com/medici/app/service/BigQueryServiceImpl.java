@@ -352,9 +352,61 @@ public class BigQueryServiceImpl implements BigQueryService {
         log.info("Tamaño response = " + responses.size());
         return responses;
     }
-    
+
     @Override
-    public FatherRaceFiltersResponse getFatherRaceFilters() {
-        return null;
+    public FatherRaceFiltersResponse getFatherRaceFilters() throws Exception {
+        QueryJobConfiguration queryJobConfiguration = QueryJobConfiguration.newBuilder(BigQueryUrlConstants.Get_BY_FATHER_RACE).build();
+        Job job = bigquery.create((JobInfo.newBuilder(queryJobConfiguration).build()));
+        job = job.waitFor();
+        if(job == null){
+            throw new Exception("Job no longer exixts");
+        }
+        if(job.getStatus().getError() != null){
+            throw new Exception(job.getStatus().getError().toString());
+        }
+        TableResult result = job.getQueryResults();
+        Integer white = 0;
+        Integer unknownOrNotStated = 0;
+        Integer asian = 0;
+        Integer moreThanOneRace = 0;
+        Integer blackOrAfricanAmerican = 0;
+        Integer americanIndianOrAlaskaNative = 0;
+        Integer nativeHawaiianOrOtherPacificIslander = 0;
+        FatherRaceFiltersResponse response = new FatherRaceFiltersResponse();
+        if(result != null){
+            for (FieldValueList row: result.iterateAll()){
+                if (row.get("Fathers_Single_Race").getStringValue().equals("White")) {
+                    white += Integer.parseInt(row.get("Births").getStringValue());
+                }
+                if (row.get("Fathers_Single_Race").getStringValue().equals("Unknown or Not Stated")) {
+                    unknownOrNotStated += Integer.parseInt(row.get("Births").getStringValue());
+                }
+                if (row.get("Fathers_Single_Race").getStringValue().equals("Asian")) {
+                    asian += Integer.parseInt(row.get("Births").getStringValue());
+                }
+                if (row.get("Fathers_Single_Race").getStringValue().equals("More than one race")) {
+                    moreThanOneRace += Integer.parseInt(row.get("Births").getStringValue());
+                }
+                if (row.get("Fathers_Single_Race").getStringValue().equals("Black or African American")) {
+                    blackOrAfricanAmerican += Integer.parseInt(row.get("Births").getStringValue());
+                }
+                if (row.get("Fathers_Single_Race").getStringValue().equals("American Indian or Alaska Native")) {
+                    americanIndianOrAlaskaNative += Integer.parseInt(row.get("Births").getStringValue());
+                }
+                if (row.get("Fathers_Single_Race").getStringValue().equals("Native Hawaiian or Other Pacific Islander")) {
+                    nativeHawaiianOrOtherPacificIslander += Integer.parseInt(row.get("Births").getStringValue());
+                }
+            }
+        }else {
+            log.error("No hay resultados en la consulta de BigQuery.");
+        }
+        response.setAsian(asian);
+        response.setWhite(white);
+        response.setAmericanIndianOrAlaskaNative(americanIndianOrAlaskaNative);
+        response.setMoreThanOneRace(moreThanOneRace);
+        response.setBlackOrAfricanAmerican(blackOrAfricanAmerican);
+        response.setNativeHawaiianOrOtherPacificIslander(nativeHawaiianOrOtherPacificIslander);
+        response.setUnknownOrNotStated(unknownOrNotStated);
+        return response;
     }
 }

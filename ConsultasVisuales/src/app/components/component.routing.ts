@@ -11,6 +11,7 @@ import { GraficoSearchIdComponent } from './grafico-search-id/grafico-search-id.
 import { NacimientosPorAnoComponentComponent } from './nacimientos-por-ano-component/nacimientos-por-ano-component.component';
 import { AbnormalFiltersComponent } from './abnormal-filters/abnormal-filters.component';
 import { CongenitalAbnormaliesComponent } from './congenital-abnormalies/congenital-abnormalies.component';
+import { FatherRaceComponent } from './father-race/father-race.component';
 
 
 
@@ -60,6 +61,7 @@ const routes: Routes = [
       path: 'abnormal', component: AbnormalFiltersComponent
     },
     { path: 'congenital', component: CongenitalAbnormaliesComponent},
+    { path: 'father', component: FatherRaceComponent},
     {
       path: '',
       redirectTo: '',

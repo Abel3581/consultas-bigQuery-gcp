@@ -17,6 +17,7 @@ import { AbnormalFiltersResponse } from 'src/app/model/abnormal-filters-response
 import { CongenitalResponse } from 'src/app/model/congenital-response';
 import { CongenitalFilters } from 'src/app/model/congenital-filters';
 import { FatherRaceResponse } from 'src/app/model/father-race-response';
+import { FatherRaceFilters } from 'src/app/model/father-race-filters';
 
 
 
@@ -80,6 +81,7 @@ export class ConsultasComponent implements OnInit{
   congenitalResponse: CongenitalResponse[] = [];
   congenitalFilters!: CongenitalFilters;
   fatherRaceResponse: FatherRaceResponse[] = [];
+  fatherRaceFilters!: FatherRaceFilters;
 
   selectedOption: string = 'VAC'; // Esta propiedad almacena el valor seleccionado
 
@@ -190,6 +192,7 @@ onButtonClick() {
     this.countyNatalityByAbnormalConditionsData = [];
     this.abnormalConditionsFiltersData = [];
     this.congenitalResponse = [];
+    this.fatherRaceResponse = [];
 
     if (this.selectedOption) {
       switch (this.selectedOption) {
@@ -534,7 +537,16 @@ mostrarGraficoRectangular(){
       case 'NPRDP':
         // console.log("Datos de getAllCongenitalFilters(): ", data);
         if(this.fatherRaceResponse.length > 0){
-          //TODO Terminar
+          this.consultasService.getFatherRaceFilters().subscribe(
+            data => {
+              this.fatherRaceFilters = data;
+              this.sharedService.setdataFatherRaceFilters(this.fatherRaceFilters);
+              this.router.navigate(['/consultas/father']);
+            },error => {
+              this.toastr.error(error);
+              console.log(error);
+            }
+          )
         }else{
           this.toastr.info("Debes realizar una busqueda para graficar");
         }

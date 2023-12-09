@@ -9,4 +9,5 @@ public class BigQueryUrlConstants {
     public static final String GET_BY_YEAR_AND_BIRTHS = "SELECT Year, Births FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` order by Year ASC";
     public static final String GET_BY_CONGENITAL_ABNORMALITIES = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_congenital_abnormalities` order by Year ASC";
     public static final String Get_BY_FATHER_RACE = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_father_race` order by Year ASC";
+    public static final String GET_BY_MATERNAL_MORBIDITY = "SELECT * FROM `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality_by_maternal_morbidity` order by Year ASC";
 }
