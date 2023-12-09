@@ -4,8 +4,7 @@ package com.medici.app.service;
 import com.google.cloud.bigquery.*;
 import com.medici.app.config.BigQueryUrlConstants;
 import com.medici.app.dto.*;
-import com.medici.app.dto.response.AbnormalFiltersResponse;
-import com.medici.app.dto.response.CountyNatalityFilterResponse;
+import com.medici.app.dto.response.*;
 import com.medici.app.mapper.BitQueryMapper;
 import com.medici.app.service.injectdependency.BigQueryService;
 import lombok.RequiredArgsConstructor;
@@ -66,7 +65,7 @@ public class BigQueryServiceImpl implements BigQueryService {
     @Override
     public List<CountyNatalityResponse> getConsultTable() throws Exception {
         List<CountyNatalityResponse> responses = new ArrayList<>();
-        String getCountyNatality = this.GET_COUNTY_NATALITY;
+        String getCountyNatality = BigQueryUrlConstants.GET_COUNTY_NATALITY;
 
         QueryJobConfiguration queryConfig = QueryJobConfiguration.newBuilder(getCountyNatality).build();
         Job queryJob = bigquery.create(JobInfo.newBuilder(queryConfig).build());
@@ -130,7 +129,7 @@ public class BigQueryServiceImpl implements BigQueryService {
     @Override
     public List<AbnormalConditionsResponse> getCountyNatalityByAbnormalConditions() throws Exception {
         List<AbnormalConditionsResponse> responses = new ArrayList<>();
-        String getAbnormalConditions = GET_ABNORMAL_CONDITIONS;
+        String getAbnormalConditions = BigQueryUrlConstants.GET_ABNORMAL_CONDITIONS;
         QueryJobConfiguration queryConfig = QueryJobConfiguration.newBuilder(getAbnormalConditions).build();
         Job queryJob = bigquery.create(JobInfo.newBuilder(queryConfig).build());
 
@@ -279,5 +278,83 @@ public class BigQueryServiceImpl implements BigQueryService {
         return response;
     }
 
+    @Override
+    public List<CongenitalAbnormalitiesResponse> getAllCongenitalAbnormalities() throws Exception {
+        QueryJobConfiguration queryJobConfiguration = QueryJobConfiguration.newBuilder(BigQueryUrlConstants.GET_BY_CONGENITAL_ABNORMALITIES).build();
+        Job job = bigquery.create(JobInfo.newBuilder(queryJobConfiguration).build());
+        if(job == null){
+            throw new Exception("Job no longer exixts");
+        }
+        if(job.getStatus().getError() != null){
+            throw new Exception(job.getStatus().getError().toString());
+        }
+        TableResult result = job.getQueryResults();
+        List<CongenitalAbnormalitiesResponse> responses = new ArrayList<>();
+        for (FieldValueList row: result.iterateAll()){
+            responses.add(bitQueryMapper.mapToCongenitalAbnormalitiesResponse(row));
+        }
+        return responses;
+    }
 
+    @Override
+    public CongenitalFiltersResponse getAllCongenitalFilters() throws Exception {
+        QueryJobConfiguration queryJobConfiguration = QueryJobConfiguration.newBuilder(BigQueryUrlConstants.GET_BY_CONGENITAL_ABNORMALITIES).build();
+        Job job = bigquery.create((JobInfo.newBuilder(queryJobConfiguration).build()));
+        job = job.waitFor();
+        if(job == null){
+            throw new Exception("Job no longer exixts");
+        }
+        if(job.getStatus().getError() != null){
+            throw new Exception(job.getStatus().getError().toString());
+        }
+        TableResult result = job.getQueryResults();
+        Integer noneChecked = 0;
+        Integer atLeastOneChecked = 0;
+        Integer unknownOrNotStated = 0;
+        CongenitalFiltersResponse response = new CongenitalFiltersResponse();
+        if(result != null){
+            for(FieldValueList row: result.iterateAll()){
+                log.info(row.toString());
+                if (row.get("Congenital_Abnormality_Checked_Desc").getStringValue().equals("None checked")) {
+                    noneChecked += Integer.parseInt(row.get("Congenital_Abnormality_Checked_YN").getStringValue());
+                }
+                if (row.get("Congenital_Abnormality_Checked_Desc").getStringValue().equals("At least one checked")) {
+                    atLeastOneChecked += Integer.parseInt(row.get("Congenital_Abnormality_Checked_YN").getStringValue());
+                }
+                if (row.get("Congenital_Abnormality_Checked_Desc").getStringValue().equals("Unknown or Not Stated")) {
+                    unknownOrNotStated += Integer.parseInt(row.get("Congenital_Abnormality_Checked_YN").getStringValue());
+                }
+            }
+        }else {
+            log.error("No hay resultados en la consulta de BigQuery.");
+        }
+        response.setNoneChecked(noneChecked);
+        response.setAtLeastOneChecked(atLeastOneChecked);
+        response.setUnknownOrNotStated(unknownOrNotStated);
+        return response;
+    }
+
+    @Override
+    public List<CountyByFatherRaceResponse> getAllByFatherRace() throws Exception {
+        QueryJobConfiguration queryJobConfiguration = QueryJobConfiguration.newBuilder(BigQueryUrlConstants.Get_BY_FATHER_RACE).build();
+        Job job = bigquery.create(JobInfo.newBuilder(queryJobConfiguration).build());
+        if(job == null){
+            throw new Exception("Job no longer exixts");
+        }
+        if(job.getStatus().getError() != null){
+            throw new Exception(job.getStatus().getError().toString());
+        }
+        TableResult result = job.getQueryResults();
+        List<CountyByFatherRaceResponse> responses = new ArrayList<>();
+        for(FieldValueList row: result.iterateAll()){
+            responses.add(bitQueryMapper.mapToCountyByFatherRaceResponse(row));
+        }
+        log.info("Tamaño response = " + responses.size());
+        return responses;
+    }
+    
+    @Override
+    public FatherRaceFiltersResponse getFatherRaceFilters() {
+        return null;
+    }
 }

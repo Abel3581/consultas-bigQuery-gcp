@@ -16,6 +16,9 @@ import { CountyNatalitySearchRequest } from '../model/county-natality-search-req
 import { CountyNatalitySearchResponse } from '../model/county-natality-search-response';
 import { CountyNatalityFilter } from '../model/county-natality-filter';
 import { AbnormalFiltersResponse } from '../model/abnormal-filters-response';
+import { CongenitalResponse } from '../model/congenital-response';
+import { CongenitalFilters } from '../model/congenital-filters';
+import { FatherRaceResponse } from '../model/father-race-response';
 
 @Injectable({
   providedIn: 'root'
@@ -118,4 +121,17 @@ export class ConsultasService {
   getAllAbnormalNoCheckedUnknown(): Observable<AbnormalFiltersResponse>{
     return this.http.get<AbnormalFiltersResponse>(`${this.urlApi}/abnormal`);
   }
+
+  getAllCongenitalAbnormalities(): Observable<CongenitalResponse[]>{
+    return this.http.get<CongenitalResponse[]>(`${this.urlApi}/congenital`);
+  }
+
+  getAllCongenitalFilters(): Observable<CongenitalFilters>{
+    return this.http.get<CongenitalFilters>(`${this.urlApi}/congenital/filters`);
+  }
+
+  getAllByFatherRace(): Observable<FatherRaceResponse[]>{
+    return this.http.get<FatherRaceResponse[]>(`${this.urlApi}/father/race`);
+  }
+
 }

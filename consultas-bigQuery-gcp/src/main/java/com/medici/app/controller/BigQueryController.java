@@ -1,8 +1,7 @@
 package com.medici.app.controller;
 
 import com.medici.app.dto.*;
-import com.medici.app.dto.response.AbnormalFiltersResponse;
-import com.medici.app.dto.response.CountyNatalityFilterResponse;
+import com.medici.app.dto.response.*;
 import com.medici.app.service.BigQueryServiceImpl;
 import com.medici.app.service.injectdependency.BigQueryService;
 import lombok.RequiredArgsConstructor;
@@ -68,6 +67,30 @@ public class BigQueryController {
     @GetMapping("/abnormal")
     public ResponseEntity<AbnormalFiltersResponse> getAllAbnormalNoCheckedUnknown() throws Exception {
         AbnormalFiltersResponse response = bigQueryService.getAllAbnormalNoCheckedUnknown();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/congenital")
+    public ResponseEntity<List<CongenitalAbnormalitiesResponse>> getAllCongenitalAbnormalities() throws Exception {
+        List<CongenitalAbnormalitiesResponse> responses = bigQueryService.getAllCongenitalAbnormalities();
+        return ResponseEntity.status(HttpStatus.OK).body(responses);
+    }
+
+    @GetMapping("/congenital/filters")
+    public ResponseEntity<CongenitalFiltersResponse> getAllCongenitalFilters() throws Exception {
+        CongenitalFiltersResponse response = bigQueryService.getAllCongenitalFilters();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/father/race")
+    public ResponseEntity<List<CountyByFatherRaceResponse>> getAllByFatherRace() throws Exception {
+        List<CountyByFatherRaceResponse> responses = bigQueryService.getAllByFatherRace();
+        return ResponseEntity.status(HttpStatus.OK).body(responses);
+    }
+
+    @GetMapping("/father/race/filters")
+    public ResponseEntity<FatherRaceFiltersResponse> getFatherRaceFilters(){
+        FatherRaceFiltersResponse response = bigQueryService.getFatherRaceFilters();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

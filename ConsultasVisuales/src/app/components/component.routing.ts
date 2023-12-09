@@ -10,6 +10,7 @@ import { DistributedColumnsComponent } from './distributed-columns/distributed-c
 import { GraficoSearchIdComponent } from './grafico-search-id/grafico-search-id.component';
 import { NacimientosPorAnoComponentComponent } from './nacimientos-por-ano-component/nacimientos-por-ano-component.component';
 import { AbnormalFiltersComponent } from './abnormal-filters/abnormal-filters.component';
+import { CongenitalAbnormaliesComponent } from './congenital-abnormalies/congenital-abnormalies.component';
 
 
 
@@ -58,6 +59,7 @@ const routes: Routes = [
     {
       path: 'abnormal', component: AbnormalFiltersComponent
     },
+    { path: 'congenital', component: CongenitalAbnormaliesComponent},
     {
       path: '',
       redirectTo: '',

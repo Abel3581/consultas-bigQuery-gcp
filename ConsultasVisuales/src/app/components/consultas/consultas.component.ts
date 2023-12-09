@@ -14,6 +14,9 @@ import { CountyNatalitySearchRequest } from 'src/app/model/county-natality-searc
 import { CountyNatalityFilter } from 'src/app/model/county-natality-filter';
 import { SharedDataCountyService } from 'src/app/service/shared-data-county.service';
 import { AbnormalFiltersResponse } from 'src/app/model/abnormal-filters-response';
+import { CongenitalResponse } from 'src/app/model/congenital-response';
+import { CongenitalFilters } from 'src/app/model/congenital-filters';
+import { FatherRaceResponse } from 'src/app/model/father-race-response';
 
 
 
@@ -74,6 +77,9 @@ export class ConsultasComponent implements OnInit{
   countySearchResponse:CountyNatalitySearchResponse[] = [];
   countyNatalityFilter!:CountyNatalityFilter;
   abnormalFilterResponse!:AbnormalFiltersResponse;
+  congenitalResponse: CongenitalResponse[] = [];
+  congenitalFilters!: CongenitalFilters;
+  fatherRaceResponse: FatherRaceResponse[] = [];
 
   selectedOption: string = 'VAC'; // Esta propiedad almacena el valor seleccionado
 
@@ -183,6 +189,7 @@ onButtonClick() {
     this.countyNatalityResidenceAndBirthsData = [];
     this.countyNatalityByAbnormalConditionsData = [];
     this.abnormalConditionsFiltersData = [];
+    this.congenitalResponse = [];
 
     if (this.selectedOption) {
       switch (this.selectedOption) {
@@ -224,7 +231,27 @@ onButtonClick() {
               console.error('Error en la consulta filtros anomalos:', error);
             }
           )
-          break;
+        break;
+        case 'NPACPC':
+            this.consultasService.getAllCongenitalAbnormalities().subscribe(
+              data =>{
+                console.log("Datos de getAllCongenitalAbnormalities(): ", data);
+                this.congenitalResponse = data;
+              },error => {
+                console.log(error);
+              }
+            )
+        break;
+        case 'NPRDP':
+          this.consultasService.getAllByFatherRace().subscribe(
+            data => {
+              console.log("Datos de getAllByFatherRace(): ", data);
+              this.fatherRaceResponse = data;
+            },error => {
+              console.log(error);
+            }
+          )
+        break;
         default:
 
           break;
@@ -483,6 +510,33 @@ mostrarGraficoRectangular(){
               this.toastr.error(error);
             }
           )
+        }else{
+          this.toastr.info("Debes realizar una busqueda para graficar");
+        }
+      break;
+      case 'NPACPC':
+        if(this.congenitalResponse.length > 0){
+          this.consultasService.getAllCongenitalFilters().subscribe(
+            data => {
+              console.log("Datos de getAllCongenitalFilters(): ", data);
+              this.congenitalFilters = data;
+              this.sharedService.setDataCongenitalFilters(this.congenitalFilters);
+              this.router.navigate(['/consultas/congenital']);
+            },error => {
+              console.log(error);
+              this.toastr.error(error);
+            }
+          )
+        }else{
+          this.toastr.info("Debes realizar una busqueda para graficar");
+        }
+      break;
+      case 'NPRDP':
+        // console.log("Datos de getAllCongenitalFilters(): ", data);
+        if(this.fatherRaceResponse.length > 0){
+          //TODO Terminar
+        }else{
+          this.toastr.info("Debes realizar una busqueda para graficar");
         }
       break;
 

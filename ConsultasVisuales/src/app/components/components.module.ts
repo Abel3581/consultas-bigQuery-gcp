@@ -19,6 +19,8 @@ import { GraficoSearchIdComponent } from './grafico-search-id/grafico-search-id.
 import { CountyNatalityServiceService } from '../service/county-natality-service.service';
 import { NacimientosPorAnoComponentComponent } from './nacimientos-por-ano-component/nacimientos-por-ano-component.component';
 import { AbnormalFiltersComponent } from './abnormal-filters/abnormal-filters.component';
+import { CongenitalAbnormaliesComponent } from './congenital-abnormalies/congenital-abnormalies.component';
+import { FatherRaceComponent } from './father-race/father-race.component';
 
 
 
@@ -36,7 +38,9 @@ import { AbnormalFiltersComponent } from './abnormal-filters/abnormal-filters.co
     NavbarComponent,
     GraficoSearchIdComponent,
     NacimientosPorAnoComponentComponent,
-    AbnormalFiltersComponent
+    AbnormalFiltersComponent,
+    CongenitalAbnormaliesComponent,
+    FatherRaceComponent
 
   ],
   imports: [

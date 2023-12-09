@@ -4,15 +4,15 @@ import { CountySearchIdResponse } from '../model/county-search-id-response';
 import { BehaviorSubject } from 'rxjs';
 import { CountyNatalityFilter } from '../model/county-natality-filter';
 import { AbnormalFiltersResponse } from '../model/abnormal-filters-response';
+import { CongenitalFilters } from '../model/congenital-filters';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedDataCountyService {
+   constructor() { }
 
-
-  constructor() { }
 
   private dataSearchId = new BehaviorSubject<CountySearchIdResponse[]>([]);
   dataSearchIdBehavior$ =  this.dataSearchId.asObservable();
@@ -39,4 +39,14 @@ export class SharedDataCountyService {
       console.error("Intento de emitir datos nulos desde setDataAbnormalFilters.");
     }
   }
+  // Datos grafico Congenital-abnormalities
+  private dataCongenitalFilters = new BehaviorSubject<CongenitalFilters | null>(null);
+  dataCongenitalAsObservable$ = this.dataAbnormalFilters.asObservable();
+  setDataCongenitalFilters(data: CongenitalFilters) {
+    console.log("Datos de setDataCongenitalFilters (antes de emitir): ", data);
+    this.dataAbnormalFilters.next(data);
+  }
+
 }
+
+

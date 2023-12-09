@@ -2,8 +2,7 @@ package com.medici.app.service.injectdependency;
 
 
 import com.medici.app.dto.*;
-import com.medici.app.dto.response.AbnormalFiltersResponse;
-import com.medici.app.dto.response.CountyNatalityFilterResponse;
+import com.medici.app.dto.response.*;
 
 import java.util.List;
 
@@ -23,4 +22,12 @@ public interface BigQueryService {
     CountyNatalityFilterResponse getAllByYearAndBirths() throws Exception;
 
     AbnormalFiltersResponse getAllAbnormalNoCheckedUnknown() throws Exception;
+
+    List<CongenitalAbnormalitiesResponse> getAllCongenitalAbnormalities() throws Exception;
+
+    CongenitalFiltersResponse getAllCongenitalFilters() throws Exception;
+
+    List<CountyByFatherRaceResponse> getAllByFatherRace() throws Exception;
+
+    FatherRaceFiltersResponse getFatherRaceFilters();
 }

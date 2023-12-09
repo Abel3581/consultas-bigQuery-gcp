@@ -3,6 +3,8 @@ package com.medici.app.mapper;
 import com.google.cloud.bigquery.FieldValueList;
 import com.google.cloud.bigquery.TableResult;
 import com.medici.app.dto.*;
+import com.medici.app.dto.response.CongenitalAbnormalitiesResponse;
+import com.medici.app.dto.response.CountyByFatherRaceResponse;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -128,16 +130,117 @@ public class BitQueryMapper {
                 .build();
     }
 
-    private int parseIntOrZero(String value) {
-        try {
-            return Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            // Si no se puede convertir, devuelve 0 o maneja el error de alguna manera
-            return 0;
+    public CongenitalAbnormalitiesResponse mapToCongenitalAbnormalitiesResponse(FieldValueList row) {
+        CongenitalAbnormalitiesResponse response = new CongenitalAbnormalitiesResponse();
+        if(row.get("Congenital_Abnormality_Checked_Desc") != null && !row.get("Congenital_Abnormality_Checked_Desc").isNull()){
+            response.setCongenitalAbnormalityCheckedYN(row.get("Congenital_Abnormality_Checked_Desc").getStringValue());
+        }else {
+            response.setAbnormalConditionsCheckedYN("-");
         }
+        if(row.get("Congenital_Abnormality_Checked_YN") != null && !row.get("Congenital_Abnormality_Checked_YN").isNull()){
+            response.setCongenitalAbnormalityCheckedDesc(row.get("Congenital_Abnormality_Checked_YN").getStringValue());
+        }else{
+            response.setAbnormalConditionsCheckedDesc("-");
+        }
+        response.setYear(row.get("Year").getStringValue());
+        response.setBirths(row.get("Births").getStringValue());
+        if(row.get("Ave_Age_of_Mother") != null && !row.get("Ave_Age_of_Mother").isNull()){
+            response.setAve_Age_of_Mother(row.get("Ave_Age_of_Mother").getStringValue());
+        }else {
+            response.setAve_Age_of_Mother("-");
+        }
+        if(row.get("Ave_Birth_Weight_gms") != null && !row.get("Ave_Birth_Weight_gms").isNull()){
+            response.setAve_Birth_Weight_gms(row.get("Ave_Birth_Weight_gms").getStringValue());
+        }else {
+            response.setAve_Birth_Weight_gms("-");
+        }
+        if(row.get("Ave_LMP_Gestational_Age_Wks") != null && !row.get("Ave_LMP_Gestational_Age_Wks").isNull()){
+            response.setAve_LMP_Gestational_Age_Wks(row.get("Ave_LMP_Gestational_Age_Wks").getStringValue());
+        }else {
+            response.setAve_LMP_Gestational_Age_Wks("-");
+        }
+        if(row.get("Ave_Number_of_Prenatal_Wks") != null && !row.get("Ave_Number_of_Prenatal_Wks").isNull()){
+            response.setAve_Number_of_Prenatal_Wks(row.get("Ave_Number_of_Prenatal_Wks").getStringValue());
+        }else {
+            response.setAve_Number_of_Prenatal_Wks("-");
+        }
+        if(row.get("Ave_OE_Gestational_Age_Wks") != null && !row.get("Ave_OE_Gestational_Age_Wks").isNull()){
+            response.setAve_OE_Gestational_Age_Wks(row.get("Ave_OE_Gestational_Age_Wks").getStringValue());
+        }else {
+            response.setAve_OE_Gestational_Age_Wks("-");
+        }
+        if (row.get("Ave_Pre_pregnancy_BMI") != null && !row.get("Ave_Pre_pregnancy_BMI").isNull() ){
+            response.setAve_Pre_pregnancy_BMI(row.get("Ave_Pre_pregnancy_BMI").getStringValue());
+        }else {
+            response.setAve_Pre_pregnancy_BMI("-"); // O asigna un valor predeterminado según tu lógica
+        }
+        if (row.get("County_of_Residence") != null && !row.get("County_of_Residence").isNull()){
+            response.setCounty_of_Residence(row.get("County_of_Residence").getStringValue());
+        }else {
+            response.setCounty_of_Residence("-");
+        }
+        if (row.get("County_of_Residence_FIPS") != null && !row.get("County_of_Residence_FIPS").isNull()){
+            response.setCounty_of_Residence_FIPS(row.get("County_of_Residence_FIPS").getStringValue());
+        }else {
+            response.setCounty_of_Residence_FIPS("-");
+        }
+        return response;
     }
 
-    public HashMap<String, Integer> mapToRowCountyNatalityResponse(FieldValueList row) {
-        return null;
+    public CountyByFatherRaceResponse mapToCountyByFatherRaceResponse(FieldValueList row) {
+        CountyByFatherRaceResponse response = new CountyByFatherRaceResponse();
+        if(row.get("Fathers_Single_Race") != null && !row.get("Fathers_Single_Race").isNull()){
+            response.setFathersSingleRace(row.get("Fathers_Single_Race").getStringValue());
+        }else {
+            response.setAbnormalConditionsCheckedYN("-");
+        }
+        if(row.get("Fathers_Single_Race_Code") != null && !row.get("Fathers_Single_Race_Code").isNull()){
+            response.setFathersSingleRaceCode(row.get("Fathers_Single_Race_Code").getStringValue());
+        }else{
+            response.setAbnormalConditionsCheckedDesc("-");
+        }
+        response.setYear(row.get("Year").getStringValue());
+        response.setBirths(row.get("Births").getStringValue());
+        if(row.get("Ave_Age_of_Mother") != null && !row.get("Ave_Age_of_Mother").isNull()){
+            response.setAve_Age_of_Mother(row.get("Ave_Age_of_Mother").getStringValue());
+        }else {
+            response.setAve_Age_of_Mother("-");
+        }
+        if(row.get("Ave_Birth_Weight_gms") != null && !row.get("Ave_Birth_Weight_gms").isNull()){
+            response.setAve_Birth_Weight_gms(row.get("Ave_Birth_Weight_gms").getStringValue());
+        }else {
+            response.setAve_Birth_Weight_gms("-");
+        }
+        if(row.get("Ave_LMP_Gestational_Age_Wks") != null && !row.get("Ave_LMP_Gestational_Age_Wks").isNull()){
+            response.setAve_LMP_Gestational_Age_Wks(row.get("Ave_LMP_Gestational_Age_Wks").getStringValue());
+        }else {
+            response.setAve_LMP_Gestational_Age_Wks("-");
+        }
+        if(row.get("Ave_Number_of_Prenatal_Wks") != null && !row.get("Ave_Number_of_Prenatal_Wks").isNull()){
+            response.setAve_Number_of_Prenatal_Wks(row.get("Ave_Number_of_Prenatal_Wks").getStringValue());
+        }else {
+            response.setAve_Number_of_Prenatal_Wks("-");
+        }
+        if(row.get("Ave_OE_Gestational_Age_Wks") != null && !row.get("Ave_OE_Gestational_Age_Wks").isNull()){
+            response.setAve_OE_Gestational_Age_Wks(row.get("Ave_OE_Gestational_Age_Wks").getStringValue());
+        }else {
+            response.setAve_OE_Gestational_Age_Wks("-");
+        }
+        if (row.get("Ave_Pre_pregnancy_BMI") != null && !row.get("Ave_Pre_pregnancy_BMI").isNull() ){
+            response.setAve_Pre_pregnancy_BMI(row.get("Ave_Pre_pregnancy_BMI").getStringValue());
+        }else {
+            response.setAve_Pre_pregnancy_BMI("-"); // O asigna un valor predeterminado según tu lógica
+        }
+        if (row.get("County_of_Residence") != null && !row.get("County_of_Residence").isNull()){
+            response.setCounty_of_Residence(row.get("County_of_Residence").getStringValue());
+        }else {
+            response.setCounty_of_Residence("-");
+        }
+        if (row.get("County_of_Residence_FIPS") != null && !row.get("County_of_Residence_FIPS").isNull()){
+            response.setCounty_of_Residence_FIPS(row.get("County_of_Residence_FIPS").getStringValue());
+        }else {
+            response.setCounty_of_Residence_FIPS("-");
+        }
+        return response;
     }
 }

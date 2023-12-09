@@ -5,15 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class CongenitalAbnormalitiesResponse extends CountyNatalityResponse {
+public class CountyByFatherRaceResponse extends CountyNatalityResponse {
 
-    private String congenitalAbnormalityCheckedDesc;
-    private String congenitalAbnormalityCheckedYN;
-
-
+    private String fathersSingleRace;
+    private String fathersSingleRaceCode;
 
 }
