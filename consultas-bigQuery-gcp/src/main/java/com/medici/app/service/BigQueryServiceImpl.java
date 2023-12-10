@@ -543,4 +543,71 @@ public class BigQueryServiceImpl implements BigQueryService {
         response.setNativeHawaiianOrOtherPacificIslander(nativeHawaiianOrOtherPacificIslander);
         return response;
     }
+
+    @Override
+    public List<PaymentResponse> getAllPayments() throws Exception {
+        QueryJobConfiguration queryJobConfiguration = QueryJobConfiguration.newBuilder(BigQueryUrlConstants.GET_BY_PAYMENT).build();
+        Job job = bigquery.create(JobInfo.newBuilder(queryJobConfiguration).build());
+        job = job.waitFor();
+        if(job == null){
+            throw new Exception("Job no longer exixts");
+        }
+        if(job.getStatus().getError() != null){
+            throw new Exception(job.getStatus().getError().toString());
+        }
+        TableResult result = job.getQueryResults();
+        List<PaymentResponse> responses = StreamSupport.stream(result.iterateAll().spliterator(), false)
+                .map(bitQueryMapper::mapToPaymentResponse)
+                .collect(Collectors.toList());
+
+        log.info("Tamaño response = " + responses.size());
+        return responses;
+    }
+
+    @Override
+    public PaymentFiltersResponse getPaymentFilters() throws Exception {
+        QueryJobConfiguration queryJobConfiguration = QueryJobConfiguration.newBuilder(BigQueryUrlConstants.GET_BY_PAYMENT).build();
+        Job job = bigquery.create(JobInfo.newBuilder(queryJobConfiguration).build());
+        job = job.waitFor();
+        if(job == null){
+            throw new Exception("Job no longer exixts");
+        }
+        if(job.getStatus().getError() != null){
+            throw new Exception(job.getStatus().getError().toString());
+        }
+        TableResult result = job.getQueryResults();
+        Integer other = 0;
+        Integer medicaid = 0;
+        Integer selfPay = 0;
+        Integer privateInsurance = 0;
+        Integer unknownOrNotStated = 0;
+        PaymentFiltersResponse response = new PaymentFiltersResponse();
+        if(result != null){
+            for (FieldValueList row: result.iterateAll()){
+                if (row.get("Source_of_Payment").getStringValue().equals("Other")) {
+                    other += Integer.parseInt(row.get("Source_of_Payment_Code").getStringValue());
+                }
+                if (row.get("Source_of_Payment").getStringValue().equals("Medicaid")) {
+                    medicaid += Integer.parseInt(row.get("Source_of_Payment_Code").getStringValue());
+                }
+                if (row.get("Source_of_Payment").getStringValue().equals("Self Pay")) {
+                    selfPay += Integer.parseInt(row.get("Source_of_Payment_Code").getStringValue());
+                }
+                if (row.get("Source_of_Payment").getStringValue().equals("Private Insurance")) {
+                    privateInsurance += Integer.parseInt(row.get("Source_of_Payment_Code").getStringValue());
+                }
+                if (row.get("Source_of_Payment").getStringValue().equals("Unknown or Not Stated")) {
+                    unknownOrNotStated += Integer.parseInt(row.get("Source_of_Payment_Code").getStringValue());
+                }
+            }
+        }else {
+            log.error("No hay resultados en la consulta de BigQuery.");
+        }
+        response.setMedicaid(medicaid);
+        response.setOther(other);
+        response.setPrivateInsurance(privateInsurance);
+        response.setUnknownOrNotStated(unknownOrNotStated);
+        response.setSelfPay(selfPay);
+        return response;
+    }
 }

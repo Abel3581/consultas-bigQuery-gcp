@@ -13,6 +13,7 @@ import { AbnormalFiltersComponent } from './abnormal-filters/abnormal-filters.co
 import { CongenitalAbnormaliesComponent } from './congenital-abnormalies/congenital-abnormalies.component';
 import { FatherRaceComponent } from './father-race/father-race.component';
 import { MaternalMorbidityComponent } from './maternal-morbidity/maternal-morbidity.component';
+import { MotherRaceComponent } from './mother-race/mother-race.component';
 
 
 
@@ -64,6 +65,7 @@ const routes: Routes = [
     { path: 'congenital', component: CongenitalAbnormaliesComponent},
     { path: 'father', component: FatherRaceComponent},
     { path: 'maternal', component: MaternalMorbidityComponent},
+    { path: 'mother', component: MotherRaceComponent},
     {
       path: '',
       redirectTo: '',

@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -115,6 +116,18 @@ public class BigQueryController {
     @GetMapping("/mother/filters")
     public ResponseEntity<MotherRaceFiltersResponse> getMotherRaceFilters() throws Exception {
         MotherRaceFiltersResponse response = bigQueryService.getMotherRaceFilters();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/payment")
+    public ResponseEntity<List<PaymentResponse>> getAllPayments() throws Exception {
+        List<PaymentResponse> responses = bigQueryService.getAllPayments();
+        return ResponseEntity.status(HttpStatus.OK).body(responses);
+    }
+
+    @GetMapping("/payment/filters")
+    public ResponseEntity<PaymentFiltersResponse> getPaymentFilters() throws Exception {
+        PaymentFiltersResponse response = bigQueryService.getPaymentFilters();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

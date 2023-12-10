@@ -22,6 +22,7 @@ import { AbnormalFiltersComponent } from './abnormal-filters/abnormal-filters.co
 import { CongenitalAbnormaliesComponent } from './congenital-abnormalies/congenital-abnormalies.component';
 import { FatherRaceComponent } from './father-race/father-race.component';
 import { MaternalMorbidityComponent } from './maternal-morbidity/maternal-morbidity.component';
+import { MotherRaceComponent } from './mother-race/mother-race.component';
 
 
 
@@ -42,7 +43,8 @@ import { MaternalMorbidityComponent } from './maternal-morbidity/maternal-morbid
     AbnormalFiltersComponent,
     CongenitalAbnormaliesComponent,
     FatherRaceComponent,
-    MaternalMorbidityComponent
+    MaternalMorbidityComponent,
+    MotherRaceComponent
 
   ],
   imports: [

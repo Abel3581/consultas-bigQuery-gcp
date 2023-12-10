@@ -22,6 +22,8 @@ import { FatherRaceResponse } from '../model/father-race-response';
 import { FatherRaceFilters } from '../model/father-race-filters';
 import { MaternalMorbidityResponse } from '../model/maternal/maternal-morbidity-response';
 import { MaternalMorbidityFilters } from '../model/maternal/maternal-morbidity-filters';
+import { MotherRaceResponse } from '../model/motherRace/mother-race-response';
+import { MotherRaceFilters } from '../model/motherRace/mother-race-filters';
 
 @Injectable({
   providedIn: 'root'
@@ -147,6 +149,14 @@ export class ConsultasService {
 
   getMaternalMorbidityFilters(): Observable<MaternalMorbidityFilters>{
     return this.http.get<MaternalMorbidityFilters>(`${this.urlApi}/maternal/filters`);
+  }
+
+  getAllMotherRace(): Observable<MotherRaceResponse[]>{
+    return this.http.get<MotherRaceResponse[]>(`${this.urlApi}/mother/race`);
+  }
+
+  getMotherRaceFilters(): Observable<MotherRaceFilters>{
+    return this.http.get<MotherRaceFilters>(`${this.urlApi}/mother/filters`)
   }
 
 }

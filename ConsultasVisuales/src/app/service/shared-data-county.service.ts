@@ -7,6 +7,7 @@ import { AbnormalFiltersResponse } from '../model/abnormal-filters-response';
 import { CongenitalFilters } from '../model/congenital-filters';
 import { FatherRaceFilters } from '../model/father-race-filters';
 import { MaternalMorbidityFilters } from '../model/maternal/maternal-morbidity-filters';
+import { MotherRaceFilters } from '../model/motherRace/mother-race-filters';
 
 
 @Injectable({
@@ -62,6 +63,14 @@ export class SharedDataCountyService {
     console.log("Datos de setDataMaternalFilters (antes de emitir): ", data);
     this.dataMaternalFilters.next(data);
   }
+  // Datos grafico motherRace
+  private dataMotherRaceFilters = new BehaviorSubject<MotherRaceFilters | null>(null);
+  dataMotherRaceFiltersAsObservable$ = this.dataMotherRaceFilters.asObservable();
+  setDataMotherRaceFilters(data: MotherRaceFilters) {
+    console.log("Datos de setDataMaternalFilters (antes de emitir): ", data);
+    this.dataMotherRaceFilters.next(data);
+  }
+
 
 }
 

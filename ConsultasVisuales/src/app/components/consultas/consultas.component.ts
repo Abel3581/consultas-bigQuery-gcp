@@ -20,6 +20,8 @@ import { FatherRaceResponse } from 'src/app/model/father-race-response';
 import { FatherRaceFilters } from 'src/app/model/father-race-filters';
 import { MaternalMorbidityResponse } from 'src/app/model/maternal/maternal-morbidity-response';
 import { MaternalMorbidityFilters } from 'src/app/model/maternal/maternal-morbidity-filters';
+import { MotherRaceResponse } from 'src/app/model/motherRace/mother-race-response';
+import { MotherRaceFilters } from 'src/app/model/motherRace/mother-race-filters';
 
 
 
@@ -30,6 +32,7 @@ import { MaternalMorbidityFilters } from 'src/app/model/maternal/maternal-morbid
 })
 export class ConsultasComponent implements OnInit{
 
+  tableSize: number = 0;
   mostrarGrafico: boolean = false;
   mostrarGraficoColumnas: boolean = false;
   // Opciones para el año
@@ -86,6 +89,8 @@ export class ConsultasComponent implements OnInit{
   fatherRaceFilters!: FatherRaceFilters;
   maternalMorbidityResponse: MaternalMorbidityResponse[] = [];
   maternalMorbidityFilters!: MaternalMorbidityFilters;
+  motherRaceResponse: MotherRaceResponse[] = [];
+  motherRaceFilters!: MotherRaceFilters;
 
   selectedOption: string = 'VAC'; // Esta propiedad almacena el valor seleccionado
 
@@ -156,6 +161,7 @@ ngOnInit() {
       console.log('Nuevas categorías de gráfico recibidas:', categories);
       // Lógica para actualizar el gráfico en respuesta a las nuevas categorías
     });
+    this.tableSize = 0;
 }
 
 validarYEnviar() {
@@ -198,13 +204,15 @@ onButtonClick() {
     this.congenitalResponse = [];
     this.fatherRaceResponse = [];
     this.maternalMorbidityResponse = [];
-
+    this.motherRaceResponse = [];
+    this.tableSize = 0;
     if (this.selectedOption) {
       switch (this.selectedOption) {
         case 'NDC':
           this.consultasService.getCountyNatality().subscribe(data => {
             this.countyNatalityData = data;
             console.log('Datos de Natalidad del Condado:', data);
+            this.tableSize = this.countyNatalityData.length;
           }, error => {
             this.toastr.error(error);
             console.error('Error en la consulta de Natalidad del Condado:', error);
@@ -225,6 +233,7 @@ onButtonClick() {
             data => {
               this.countyNatalityByAbnormalConditionsData = data;
               console.log(' Nacimientos anomalos:', data);
+              this.tableSize = this.countyNatalityByAbnormalConditionsData.length;
             },error => {
               console.error('Error en la consulta de nacimientos anomalos:', error);
             }
@@ -245,6 +254,7 @@ onButtonClick() {
               data =>{
                 console.log("Datos de getAllCongenitalAbnormalities(): ", data);
                 this.congenitalResponse = data;
+                this.tableSize = this.congenitalResponse.length;
               },error => {
                 console.log(error);
               }
@@ -255,6 +265,7 @@ onButtonClick() {
             data => {
               console.log("Datos de getAllByFatherRace(): ", data);
               this.fatherRaceResponse = data;
+              this.tableSize = this.fatherRaceResponse.length;
             },error => {
               console.log(error);
             }
@@ -266,10 +277,24 @@ onButtonClick() {
                 console.log("Datos de getAllMaternalMorbidity(): ", data);
                 this.maternalMorbidityResponse = data;
                 console.log("SIZE = ", this.maternalMorbidityResponse.length);
+                this.tableSize = this.maternalMorbidityResponse.length;
               },error => {
                 console.log(error);
               }
             )
+        break;
+        case 'NPRDLM':
+              this.consultasService.getAllMotherRace().subscribe(
+                data => {
+                  console.log("Datos de getAllMotherRace(): ", data);
+                  this.motherRaceResponse = data;
+                  console.log("SIZE = ", this.motherRaceResponse.length);
+                  this.tableSize = this.motherRaceResponse.length;
+                },error => {
+                  console.log(error);
+                  this.toastr.error(error);
+                }
+              )
         break;
         default:
 
@@ -580,6 +605,22 @@ mostrarGraficoRectangular(){
           )
         }else{
           this.toastr.info("Debes realizar una busqueda para graficar");
+        }
+      break;
+      case 'NPRDLM':
+        if(this.motherRaceResponse.length > 0){
+          this.consultasService.getMotherRaceFilters().subscribe(
+            data => {
+              this.motherRaceFilters = data;
+              this.sharedService.setDataMotherRaceFilters(this.motherRaceFilters);
+              this.router.navigate(['/consultas/mother']);
+            },error => {
+              this.toastr.error(error);
+              console.log(error);
+            }
+          )
+        }else{
+
         }
       break;
 

@@ -38,4 +38,8 @@ public interface BigQueryService {
     List<MotherRaceResponse> getAllMotherRace() throws Exception;
 
     MotherRaceFiltersResponse getMotherRaceFilters() throws Exception;
+
+    List<PaymentResponse> getAllPayments() throws Exception;
+
+    PaymentFiltersResponse getPaymentFilters() throws Exception;
 }

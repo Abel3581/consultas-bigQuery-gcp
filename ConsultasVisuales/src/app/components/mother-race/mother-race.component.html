@@ -1,0 +1,24 @@
+<div class="container mx-auto my-auto max-w-3xl">
+  <div class="my-10">
+    <h1 class="text-center font-bold">Natalidad por raza de la madre a nivel de condado</h1>
+    <h2 class="text-center">Año: 2018-01-01 | 2017-01-01 | 2016-01-01 </h2>
+  </div>
+  <h3>Births</h3>
+  <apx-chart
+  [series]="chartOptions.series!"
+  [chart]="chartOptions.chart!"
+  [dataLabels]="chartOptions.dataLabels!"
+  [plotOptions]="chartOptions.plotOptions!"
+  [yaxis]="chartOptions.yaxis!"
+  [xaxis]="chartOptions.xaxis!"
+  [legend]="chartOptions.legend!"
+  [colors]="chartOptions.colors!"
+  [grid]="chartOptions.grid!"
+  ></apx-chart>
+  <div class="flex justify-center">
+    <button routerLink="/consultas/natalidad" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">
+      Volver
+    </button>
+  </div>
+</div>
+
