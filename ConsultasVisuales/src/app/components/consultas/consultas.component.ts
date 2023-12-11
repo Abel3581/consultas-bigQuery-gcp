@@ -22,6 +22,8 @@ import { MaternalMorbidityResponse } from 'src/app/model/maternal/maternal-morbi
 import { MaternalMorbidityFilters } from 'src/app/model/maternal/maternal-morbidity-filters';
 import { MotherRaceResponse } from 'src/app/model/motherRace/mother-race-response';
 import { MotherRaceFilters } from 'src/app/model/motherRace/mother-race-filters';
+import { PaymentResponse } from 'src/app/model/payment/payment-response';
+import { PaymentFiltersResponse } from 'src/app/model/payment/payment-filters-response';
 
 
 
@@ -91,6 +93,8 @@ export class ConsultasComponent implements OnInit{
   maternalMorbidityFilters!: MaternalMorbidityFilters;
   motherRaceResponse: MotherRaceResponse[] = [];
   motherRaceFilters!: MotherRaceFilters;
+  paymentResponse: PaymentResponse[] = [];
+  paymentFiltersResponse!: PaymentFiltersResponse;
 
   selectedOption: string = 'VAC'; // Esta propiedad almacena el valor seleccionado
 
@@ -205,6 +209,8 @@ onButtonClick() {
     this.fatherRaceResponse = [];
     this.maternalMorbidityResponse = [];
     this.motherRaceResponse = [];
+    this.paymentResponse = [];
+
     this.tableSize = 0;
     if (this.selectedOption) {
       switch (this.selectedOption) {
@@ -295,6 +301,19 @@ onButtonClick() {
                   this.toastr.error(error);
                 }
               )
+        break;
+        case 'NPPSETDP':
+                this.consultasService.getAllPayments().subscribe(
+                  data => {
+                    console.log(data);
+                    this.paymentResponse = data;
+                    this.tableSize = this.paymentResponse.length;
+                    console.log("SIZE = ", this.paymentResponse.length);
+                  },error => {
+                    console.log(error);
+                    this.toastr.error(error);
+                  }
+                )
         break;
         default:
 
@@ -620,7 +639,23 @@ mostrarGraficoRectangular(){
             }
           )
         }else{
-
+          this.toastr.info("Debes realizar una busqueda para graficar");
+        }
+      break;
+      case 'NPPSETDP':
+        if(this.paymentResponse.length > 0){
+          this.consultasService.getPaymentFilters().subscribe(
+            data => {
+              this.paymentFiltersResponse = data;
+              this.sharedService.setDataPaymentFilters(this.paymentFiltersResponse);
+              this.router.navigate(['/consultas/payment']);
+            },error => {
+              this.toastr.error(error);
+              console.log(error);
+            }
+          )
+        }else{
+          this.toastr.info("Debes realizar una busqueda para graficar");
         }
       break;
 

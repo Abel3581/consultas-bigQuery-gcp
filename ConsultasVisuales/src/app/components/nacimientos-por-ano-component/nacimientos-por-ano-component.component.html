@@ -1,6 +1,7 @@
-<div class="container mx-auto my-auto max-w-4xl">
+<div class="container mx-auto my-auto max-w-3xl">
   <div class="my-10">
     <h1 class="text-center font-bold">Nacimientos por año en todos los condados de EE.UU</h1>
+    <h2 class="text-center">Año: 2018-01-01 | 2017-01-01 | 2016-01-01 </h2>
   </div>
     <apx-chart
       [series]="chartOptions.series"
@@ -8,5 +9,10 @@
       [xaxis]="chartOptions.xaxis"
       [title]="chartOptions.title"
     ></apx-chart>
+    <div class="flex justify-center">
+      <button routerLink="/consultas/natalidad" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">
+        Volver
+      </button>
+    </div>
 </div>
 

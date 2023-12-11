@@ -23,6 +23,7 @@ import { CongenitalAbnormaliesComponent } from './congenital-abnormalies/congeni
 import { FatherRaceComponent } from './father-race/father-race.component';
 import { MaternalMorbidityComponent } from './maternal-morbidity/maternal-morbidity.component';
 import { MotherRaceComponent } from './mother-race/mother-race.component';
+import { PaymentFiltersComponent } from './payment-filters/payment-filters.component';
 
 
 
@@ -44,7 +45,8 @@ import { MotherRaceComponent } from './mother-race/mother-race.component';
     CongenitalAbnormaliesComponent,
     FatherRaceComponent,
     MaternalMorbidityComponent,
-    MotherRaceComponent
+    MotherRaceComponent,
+    PaymentFiltersComponent
 
   ],
   imports: [

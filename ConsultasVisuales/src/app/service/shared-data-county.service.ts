@@ -8,12 +8,14 @@ import { CongenitalFilters } from '../model/congenital-filters';
 import { FatherRaceFilters } from '../model/father-race-filters';
 import { MaternalMorbidityFilters } from '../model/maternal/maternal-morbidity-filters';
 import { MotherRaceFilters } from '../model/motherRace/mother-race-filters';
+import { PaymentFiltersResponse } from '../model/payment/payment-filters-response';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedDataCountyService {
+
 
    constructor() { }
 
@@ -69,6 +71,20 @@ export class SharedDataCountyService {
   setDataMotherRaceFilters(data: MotherRaceFilters) {
     console.log("Datos de setDataMaternalFilters (antes de emitir): ", data);
     this.dataMotherRaceFilters.next(data);
+  }
+  // Datos grafico PaymentFilters
+  private dataPaymentFilters = new BehaviorSubject<PaymentFiltersResponse | null>(null);
+  dataPaymentFiltersAsObservable$ = this.dataPaymentFilters.asObservable();
+  setDataPaymentFilters(data: PaymentFiltersResponse) {
+    console.log("Datos de setDataPaymentFilters (antes de emitir): ", data);
+    this.dataPaymentFilters.next(data);
+  }
+
+  private dataUserAdmin = new BehaviorSubject<string>('');
+  dataUserAdmin$ = this.dataUserAdmin.asObservable();
+  setDataUserAdmin(userAdmin: string) {
+    console.log("Datos userAdmin antes de emitir", userAdmin);
+    this.dataUserAdmin.next(userAdmin);
   }
 
 

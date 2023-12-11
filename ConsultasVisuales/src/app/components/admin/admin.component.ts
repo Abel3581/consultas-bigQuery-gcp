@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminRequest } from 'src/app/model/admin-request';
 import { ConsultasService } from 'src/app/service/consultas.service';
+import { SharedDataCountyService } from 'src/app/service/shared-data-county.service';
 
 @Component({
   selector: 'app-admin',
@@ -13,9 +14,10 @@ import { ConsultasService } from 'src/app/service/consultas.service';
 })
 export class AdminComponent {
   adminForm: FormGroup;
+  userAdmin: string = "";
   //userAdmin: AdminRequest = { userAdmin: '' };
   constructor(private consultService:ConsultasService, private toastr: ToastrService,
-    private router: Router, private fb: FormBuilder){
+    private router: Router, private fb: FormBuilder, private sharedService: SharedDataCountyService){
       this.adminForm = fb.group({
         userAdmin:['', [Validators.required, Validators.email]]
       })
@@ -31,6 +33,8 @@ export class AdminComponent {
         (response) => {
           console.log('Éxito:', response);
           this.toastr.success(response.message);
+          this.userAdmin = "Abel123";
+          this.sharedService.setDataUserAdmin(this.userAdmin);
           this.adminForm.reset();
         setTimeout(() => {
           this.router.navigate(['/natalidad']);

@@ -1,0 +1,51 @@
+
+<div class="container mx-auto my-auto max-w-3xl">
+  <div class="my-10">
+    <h1 class="text-center font-bold">Natalidad por condado según el tipo de pago, "Obra Social"</h1>
+    <h2 class="text-center">Año: 2018-01-01 | 2017-01-01 | 2016-01-01 </h2>
+  </div>
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [title]="chartOptions.title"
+    ></apx-chart>
+      <!-- Agrega una tarjeta (card) con la información de las fuentes de pago -->
+  <div class="my-8 p-6 bg-white rounded-md shadow-md">
+    <h2 class="text-lg font-semibold mb-4">Información de Fuentes de Pago:</h2>
+    <table class="table-auto mx-auto">
+      <thead>
+        <tr>
+          <!-- categories: ['Unknown or Not Stated','Other','Self Pay','Private Insurance','Medicaid'], -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border px-4 py-2">Otro</td>
+          <td class="border px-4 py-2">Other</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">Medicaid (programa de asistencia médica en Estados Unidos)</td>
+          <td class="border px-4 py-2">Medicaid</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">Pago Personal</td>
+          <td class="border px-4 py-2">Self Pay</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">Seguro Privado</td>
+          <td class="border px-4 py-2">Private Insurance</td>
+        </tr>
+        <tr>
+          <td class="border px-4 py-2">Desconocido o No Especificado</td>
+          <td class="border px-4 py-2">Unknown or Not Stated</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    <div class="flex justify-center mb-4">
+      <button routerLink="/consultas/natalidad" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">
+        Volver
+      </button>
+    </div>
+</div>

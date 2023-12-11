@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CountyNatalityResponse } from '../model/county-natality-response';
@@ -24,6 +24,8 @@ import { MaternalMorbidityResponse } from '../model/maternal/maternal-morbidity-
 import { MaternalMorbidityFilters } from '../model/maternal/maternal-morbidity-filters';
 import { MotherRaceResponse } from '../model/motherRace/mother-race-response';
 import { MotherRaceFilters } from '../model/motherRace/mother-race-filters';
+import { PaymentResponse } from '../model/payment/payment-response';
+import { PaymentFiltersResponse } from '../model/payment/payment-filters-response';
 
 @Injectable({
   providedIn: 'root'
@@ -157,6 +159,14 @@ export class ConsultasService {
 
   getMotherRaceFilters(): Observable<MotherRaceFilters>{
     return this.http.get<MotherRaceFilters>(`${this.urlApi}/mother/filters`)
+  }
+
+  getAllPayments(): Observable<PaymentResponse[]>{
+    return this.http.get<PaymentResponse[]>(`${this.urlApi}/payment`);
+  }
+
+  getPaymentFilters(): Observable<PaymentFiltersResponse>{
+    return this.http.get<PaymentFiltersResponse>(`${this.urlApi}/payment/filters`);
   }
 
 }

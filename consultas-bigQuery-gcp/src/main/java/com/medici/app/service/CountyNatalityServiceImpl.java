@@ -1,6 +1,7 @@
 package com.medici.app.service;
 
 import com.medici.app.dto.CountyNatalityResponse;
+import com.medici.app.dto.response.CountyNatalityResponseId;
 import com.medici.app.entity.CountyNatality;
 import com.medici.app.mapper.CountyNatalityMapper;
 import com.medici.app.repository.CountyNatalityRepository;
@@ -26,14 +27,13 @@ public class CountyNatalityServiceImpl implements CountyNatalityService {
     }
 
     @Override
-    public List<CountyNatalityResponse> getById(Long id) {
+    public CountyNatalityResponseId getById(Long id) {
         Optional<CountyNatality> countyNatalityOptional = countyNatalityRepository.findById(id);
         if(countyNatalityOptional.isEmpty()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Consulta con id: %s no encontrada",id));
         }
-        CountyNatalityResponse response = mapper.mapToCountyNatality(countyNatalityOptional.get());
-        List<CountyNatalityResponse> responses = new ArrayList<>();
-        responses.add(response);
-        return responses;
+        CountyNatalityResponseId response = mapper.mapToCountyNatality(countyNatalityOptional.get());
+
+        return response;
     }
 }

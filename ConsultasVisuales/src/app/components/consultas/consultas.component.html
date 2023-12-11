@@ -15,13 +15,14 @@
       class="w-3/5 h-10 bg-white border border-slate-200 text-gray-900 text-sm rounded-lg   border-s-2 focus:ring-blue-500 focus:border-blue-500 block  p-2.5 ">
       <option value="VAC" selected="Choose a state">Escoge una busqueda</option>
       <option value="NDC">Natalidad del condado</option>
-      <option value="PRN">Condado de residencia y Nacimientos</option>
+      <!-- <option value="PRN">Condado de residencia y Nacimientos</option> -->
       <option value="NCPCA">Natalidad del condado por condiciones anormales</option>
-      <option value="CAE">Condado de residencia, condiciones anormalesCheckedDesc y edad de la madre</option>
+      <!-- <option value="CAE">Condado de residencia, condiciones anormalesCheckedDesc y edad de la madre</option> -->
       <option value="NPACPC">Nacimientos por anomalías congénitas por condado</option>
       <option value="NPRDP">Natalidad por raza del padre a nivel de condado</option>
       <option value="NPMMC">Natalidad por morbilidad materna a nivel de condado</option>
       <option value="NPRDLM">Natalidad por raza de la madre a nivel de condado</option>
+      <option value="NPPSETDP">Natalidad por condado según el tipo de pago</option>
     </select>
     <div class="">
       <button type="button" (click)="onButtonClick()"
@@ -442,6 +443,47 @@
               Mothers Single Race Code
             </th>
           </ng-container>
+          <ng-container *ngIf="selectedOption === 'NPPSETDP'">
+            <th scope="col" class="px-6 py-4 bg-[#bef264]">
+              Year
+            </th>
+            <th scope="col" class="px-6 py-4">
+              Births
+            </th>
+            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              County of Residence
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Age of Mother
+            </th>
+            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Pre pregnancy BMI
+            </th>
+            <th scope="col" class="px-6  py-4  text-gray-700 whitespace-nowrap">
+              Birth Weight gms
+            </th>
+            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap ">
+              Number of prenatal wks
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Oe gestational age wks
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Pre pregnancy bmi
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Birth Weight gms
+            </th>
+            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              County of residence fips
+            </th>
+            <th scope="col" class="px-6  py-4  text-gray-700 whitespace-nowrap">
+              Source of Payment
+            </th>
+            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Source of Payment Code
+            </th>
+          </ng-container>
         </thead>
         <tbody>
           <ng-container *ngIf="selectedOption === 'NDC' && countyNatalityData && countyNatalityData.length > 0;">
@@ -684,7 +726,7 @@
               </td>
             </tr>
           </ng-container>
-          <ng-container *ngIf="selectedOption === 'NPRDLM'">
+          <ng-container *ngIf="selectedOption === 'NPRDLM' && motherRaceResponse && motherRaceResponse.length > 0">
             <tr *ngFor="let item of motherRaceResponse" class="bg-[#a3e635] border-b border-bg-[#bef264]">
               <td class="px-6 py-4 font-medium bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
                 {{ item.year }}
@@ -724,6 +766,49 @@
               </td>
               <td class="px-6 py-4 text-center bg-[#bef264] text-gray-700 whitespace-nowrap">
                 {{item.mothersSingleRaceCode}}
+              </td>
+            </tr>
+          </ng-container>
+          <ng-container *ngIf="selectedOption === 'NPPSETDP' && paymentResponse && paymentResponse.length > 0">
+            <tr *ngFor="let item of paymentResponse" class="bg-[#a3e635] border-b border-bg-[#bef264]">
+              <td class="px-6 py-4 font-medium bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+                {{ item.year }}
+              </td>
+              <td class="px-6 py-4 text-center">
+                {{ item.births }}
+              </td>
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+                {{ item.county_of_Residence }}
+              </td>
+              <td class="px-6 py-4 text-center">
+                {{ item.ave_Age_of_Mother }}
+              </td>
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center ">
+                {{ item.ave_Pre_pregnancy_BMI }}
+              </td>
+              <td class="px-6 py-4  text-gray-700 whitespace-nowrap text-center">
+                {{item.ave_Birth_Weight_gms}}
+              </td>
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+                {{item.ave_Number_of_Prenatal_Wks}}
+              </td>
+              <td class="px-6 py-4 text-center">
+                {{item.ave_OE_Gestational_Age_Wks}}
+              </td>
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+                {{item.ave_Pre_pregnancy_BMI}}
+              </td>
+              <td class="px-6 py-4 text-center">
+                {{item.ave_Birth_Weight_gms}}
+              </td>
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+                {{item.county_of_Residence_FIPS}}
+              </td>
+              <td class="px-6 py-4 text-center">
+                {{item.sourceOfPayment}}
+              </td>
+              <td class="px-6 py-4 text-center bg-[#bef264] text-gray-700 whitespace-nowrap">
+                {{item.sourceOfPaymentCode}}
               </td>
             </tr>
           </ng-container>
