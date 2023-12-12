@@ -12,7 +12,7 @@ export type ChartOptions = {
   chart: ApexChart;
   responsive: ApexResponsive[];
   labels: any;
-
+  colors: string[];
 };
 
 import { SharedDataServiceService } from 'src/app/service/shared-data-service.service';
@@ -48,7 +48,8 @@ export class DistributedColumnsComponent implements OnInit {
             }
           }
         }
-      ]
+      ],
+      colors: ['#FF5733', '#33FF57', '#5733FF', '#FFFF33', '#33FFFF', '#FF33FF', '#FF9900'] // Agrega esta propiedad
     };
   }
 

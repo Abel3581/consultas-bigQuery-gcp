@@ -24,7 +24,9 @@ import { FatherRaceComponent } from './father-race/father-race.component';
 import { MaternalMorbidityComponent } from './maternal-morbidity/maternal-morbidity.component';
 import { MotherRaceComponent } from './mother-race/mother-race.component';
 import { PaymentFiltersComponent } from './payment-filters/payment-filters.component';
-
+import { ShutdownModalComponent } from './shutdown-modal/shutdown-modal.component';
+import { UptimeService } from '../service/uptime.service';
+import { FooterComponent } from '../shared/footer/footer.component';
 
 
 
@@ -39,6 +41,7 @@ import { PaymentFiltersComponent } from './payment-filters/payment-filters.compo
     GraficoCircularComponent,
     DistributedColumnsComponent,
     NavbarComponent,
+    FooterComponent,
     GraficoSearchIdComponent,
     NacimientosPorAnoComponentComponent,
     AbnormalFiltersComponent,
@@ -46,7 +49,10 @@ import { PaymentFiltersComponent } from './payment-filters/payment-filters.compo
     FatherRaceComponent,
     MaternalMorbidityComponent,
     MotherRaceComponent,
-    PaymentFiltersComponent
+    PaymentFiltersComponent,
+    ShutdownModalComponent,
+
+
 
   ],
   imports: [
@@ -64,6 +70,9 @@ import { PaymentFiltersComponent } from './payment-filters/payment-filters.compo
     }),
 
 
-  ],providers:[ConsultasService, SharedDataServiceService, CountyNatalityServiceService]
+
+  ],providers:[ConsultasService, SharedDataServiceService, CountyNatalityServiceService, UptimeService],
+
+  exports:[NavbarComponent]
 })
 export class ComponentsModule { }

@@ -24,6 +24,7 @@ import { MotherRaceResponse } from 'src/app/model/motherRace/mother-race-respons
 import { MotherRaceFilters } from 'src/app/model/motherRace/mother-race-filters';
 import { PaymentResponse } from 'src/app/model/payment/payment-response';
 import { PaymentFiltersResponse } from 'src/app/model/payment/payment-filters-response';
+import { UptimeService } from 'src/app/service/uptime.service';
 
 
 
@@ -100,7 +101,7 @@ export class ConsultasComponent implements OnInit{
 
 constructor(private consultasService: ConsultasService, private fb: FormBuilder,
     private toastr: ToastrService, private sharedDataService: SharedDataServiceService,
-    private router: Router, private sharedService: SharedDataCountyService){
+    private router: Router, private sharedService: SharedDataCountyService, private upTimeService: UptimeService){
     this.consultaForm = this.fb.group({
       nameUser: ['', [Validators.required, Validators.email]],
       nameConsult: ['', [Validators.required]],

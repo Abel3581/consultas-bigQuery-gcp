@@ -22,7 +22,7 @@
             <div class="col-span-4">
               <!-- <label for="small-input" class="block mb-2 text-md font-bold text-gray-700">Usuario: </label> -->
 
-              <input formControlName="userAdmin" placeholder="Ingresar password" id="small-input" class="w-full h-10 p-2 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs">
+              <input formControlName="userAdmin" type="password" placeholder="Ingresar password" id="small-input" class="w-full h-10 p-2 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs">
               <div *ngIf="adminForm.get('userAdmin')?.hasError('required') && adminForm.get('userAdmin')?.touched" class="text-red-500 text-xs mb-1 ml-1">El admin es requerido</div>
               <div *ngIf="adminForm.get('userAdmin')?.hasError('email') && adminForm.get('userAdmin')?.touched" class="text-red-500 text-xs mb-1 ml-1">Ingrese un correo electrónico válido</div>
               <!-- <div *ngIf="adminForm.invalid && adminForm.touched" class="text-red-500 text-xs mb-1 ml-1">

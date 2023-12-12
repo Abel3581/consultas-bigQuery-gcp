@@ -10,14 +10,17 @@ import { ConsultasService } from './service/consultas.service';
 import { SharedDataServiceService } from './service/shared-data-service.service';
 import { FooterComponent } from './shared/footer/footer.component';
 import { CountyNatalityServiceService } from './service/county-natality-service.service';
-
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxUiLoaderInterceptor } from './interceptor/ngx-ui-loader.interceptor';
+import { UptimeService } from './service/uptime.service';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
+
 
 
 
@@ -34,12 +37,15 @@ import { CountyNatalityServiceService } from './service/county-natality-service.
       // preventDuplicates: false, // Evitar duplicados
     }),
      ToastNoAnimationModule,
+     // Import NgxUiLoaderModule
+    NgxUiLoaderModule,
+
 
   ],
-  exports:[],
+  exports:[ ],
 
 
-  providers:[ConsultasService, SharedDataServiceService, CountyNatalityServiceService],
+  providers:[{provide: HTTP_INTERCEPTORS,useClass: NgxUiLoaderInterceptor,multi:true},ConsultasService, SharedDataServiceService, CountyNatalityServiceService, UptimeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

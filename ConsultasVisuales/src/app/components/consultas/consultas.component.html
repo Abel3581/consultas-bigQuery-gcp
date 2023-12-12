@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="  w-full h-screen flex flex-col justify-normal items-center p-8">
-  <div class=" relative  bg-black w-11/12 h-60  rounded-lg  flex flex-row justify-normal">
+  <div class=" bg-black w-11/12 h-60  rounded-lg  flex flex-row justify-normal">
     <div class=" w-5/6 flex justify-center">
       <h1 class="text-3xl p-20 font-bold text-white">Tasa de natalidad de los condados de EE.UU.</h1>
     </div>
@@ -30,7 +30,7 @@
     </div>
 
     <!-- Mostrar grafico y modal -->
-    <div *ngIf="mostrarGraficoColumnas" class="fixed inset-0 overflow-y-auto z-50 ">
+    <div *ngIf="mostrarGraficoColumnas" class="fixed  overflow-y-auto z-20 ">
 
       <div class=" flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <!-- Background overlay -->
@@ -43,7 +43,7 @@
 
         <!-- Modal panel -->
         <div
-          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle  sm:max-w-4xl sm:w-full "
+          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle   sm:w-full "
           role="dialog" aria-modal="true" aria-labelledby="modal-headline">
           <!-- Contenido del modal -->
           <h1 class="text-center mt-10">Natalidad por año y condado de los EEUU</h1>
@@ -59,16 +59,11 @@
         </div>
       </div>
     </div>
-
-    <!-- <div *ngIf="!mostrarGraficoColumnas">
-      <button class="btn btn-primary" (click)="mostrarGraficoColumnas = true">Consultar</button>
-    </div> -->
-
   </div>
   <!-- Mostrar grafico -->
   <div class="flex justify-center">
     <div
-      class="mt-20 flex flex-row justify-center bg-white border border-gray-200 shadow absolute w-1/2 h-20  rounded-lg pt-4">
+      class="mt-20 flex flex-row justify-center  bg-white border border-gray-200 shadow absolute  w-1/2 h-20  rounded-lg pt-4">
       <div class="flex flex-row">
         <div class="flex items-baseline ">
           <label for="year" class="block text-md font-bold text-gray-700 ">Año: </label>
@@ -141,74 +136,73 @@
         <thead class="text-xs text-gray-700 uppercase bg-[#a3e635] border-b border-bg-[#bef264]">
           <ng-container *ngIf="selectedOption === 'VAC' || selectedOption === ''">
             <th scope="col" class="px-6 py-4 bg-[#bef264]">
-              Year
+              Año
             </th>
             <th scope="col" class="px-6 py-4">
-              Births
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              County of Residence
-            </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Age of Mother
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Pre pregnancy BMI
-            </th>
-
-            <th scope="col" class="px-6  py-4  text-gray-700 whitespace-nowrap">
-              Birth Weight gms
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap ">
-              Number of prenatal wks
-            </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Oe gestational age wks
+              Nacimientos
             </th>
             <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Pre pregnancy bmi
+              Condado de Residencia
             </th>
             <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Birth Weight gms
+              Edad de la Madre
             </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              County of residence fips
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              BMI Preembarazo
             </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Peso al Nacer (g)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Número de Semanas Prenatales
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Edad Gestacional OE (semanas)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              BMI Preembarazo
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Peso al Nacer (g)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              FIPS del Condado de Residencia
+            </th>
+
           </ng-container>
           <ng-container *ngIf="selectedOption === 'NDC'">
             <th scope="col" class="px-6 py-4 bg-[#bef264]">
-              Year
+              Año
             </th>
             <th scope="col" class="px-6 py-4">
-              Births
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              County of Residence
-            </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Age of Mother
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Pre pregnancy BMI
-            </th>
-
-            <th scope="col" class="px-6  py-4  text-gray-700 whitespace-nowrap">
-              Birth Weight gms
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap ">
-              Number of prenatal wks
-            </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Oe gestational age wks
+              Nacimientos
             </th>
             <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Pre pregnancy bmi
+              Condado de Residencia
             </th>
             <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Birth Weight gms
+              Edad de la Madre
             </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              County of residence fips
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              BMI Preembarazo
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Peso al Nacer (g)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Número de Semanas Prenatales
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Edad Gestacional OE (semanas)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              BMI Preembarazo
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Peso al Nacer (g)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              FIPS del Condado de Residencia
             </th>
           </ng-container>
           <ng-container *ngIf="selectedOption === 'PRN'">
@@ -221,44 +215,43 @@
           </ng-container>
           <ng-container *ngIf="selectedOption === 'NCPCA'">
             <th scope="col" class="px-6 py-4 bg-[#bef264]">
-              Year
+              Año
             </th>
             <th scope="col" class="px-6 py-4">
-              Births
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              County of Residence
-            </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Age of Mother
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Pre pregnancy BMI
-            </th>
-            <th scope="col" class="px-6  py-4 text-gray-700 whitespace-nowrap">
-
-              Abnormal Conditions
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Birth Weight gms
-            </th>
-            <th scope="col" class="px-6  py-4 text-gray-700 whitespace-nowrap">
-              Imp gestional age wks
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap ">
-              Number of prenatal wks
-            </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Oe gestational age wks
+              Nacimientos
             </th>
             <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Pre pregnancy bmi
+              Condado de Residencia
             </th>
             <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Birth Weight gms
+              Edad de la Madre
             </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              County of residence fips
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              BMI Preembarazo
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Condiciones Anormales
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Peso al Nacer (g)
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Edad Gestacional Imp. (semanas)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Número de Semanas Prenatales
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Edad Gestacional OE (semanas)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              BMI Preembarazo
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Peso al Nacer (g)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              FIPS del Condado de Residencia
             </th>
           </ng-container>
           <ng-container *ngIf="selectedOption === 'CAE'">
@@ -280,208 +273,205 @@
           </ng-container>
           <ng-container *ngIf="selectedOption === 'NPACPC'">
             <th scope="col" class="px-6 py-4 bg-[#bef264]">
-              Year
+              Año
             </th>
             <th scope="col" class="px-6 py-4">
-              Births
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              County of Residence
-            </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Age of Mother
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Pre pregnancy BMI
-            </th>
-
-            <th scope="col" class="px-6  py-4  text-gray-700 whitespace-nowrap">
-              Birth Weight gms
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap ">
-              Number of prenatal wks
-            </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Oe gestational age wks
+              Nacimientos
             </th>
             <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Pre pregnancy bmi
+              Condado de Residencia
             </th>
             <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Birth Weight gms
+              Edad de la Madre
             </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              County of residence fips
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              IMC Preembarazo
             </th>
-            <th scope="col" class="px-6  py-4  text-gray-700 whitespace-nowrap">
-              congenital Checked Desc
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Peso al Nacer (gramos)
             </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              congenital Checked YN
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Número de Semanas Prenatales
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Edad Gestacional OE (semanas)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              IMC Preembarazo
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Código de Área del Condado de Residencia (FIPS)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Descripción Verificada de Congénitos Desc
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              ¿Congénito Verificado YN?
             </th>
           </ng-container>
           <ng-container *ngIf="selectedOption === 'NPRDP'">
             <th scope="col" class="px-6 py-4 bg-[#bef264]">
-              Year
+              Año
             </th>
             <th scope="col" class="px-6 py-4">
-              Births
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              County of Residence
-            </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Age of Mother
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Pre pregnancy BMI
-            </th>
-            <th scope="col" class="px-6  py-4  text-gray-700 whitespace-nowrap">
-              Birth Weight gms
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap ">
-              Number of prenatal wks
-            </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Oe gestational age wks
+              Nacimientos
             </th>
             <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Pre pregnancy bmi
+              Condado de Residencia
             </th>
             <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Birth Weight gms
+              Edad de la Madre
             </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              County of residence fips
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              IMC Preembarazo
             </th>
-            <th scope="col" class="px-6  py-4  text-gray-700 whitespace-nowrap">
-              fathers Single Race
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Peso al Nacer (gramos)
             </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              fathers Single Race Code
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Número de Semanas Prenatales
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Edad Gestacional OE (semanas)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              IMC Preembarazo
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Peso al Nacer (gramos)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Código de Área del Condado de Residencia (FIPS)
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Raza Única de los Padres
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Código de Raza Única de los Padres
             </th>
           </ng-container>
           <ng-container *ngIf="selectedOption === 'NPMMC'">
             <th scope="col" class="px-6 py-4 bg-[#bef264]">
-              Year
+              Año
             </th>
             <th scope="col" class="px-6 py-4">
-              Births
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              County of Residence
-            </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Age of Mother
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Pre pregnancy BMI
-            </th>
-            <th scope="col" class="px-6  py-4  text-gray-700 whitespace-nowrap">
-              Birth Weight gms
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap ">
-              Number of prenatal wks
-            </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Oe gestational age wks
+              Nacimientos
             </th>
             <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Pre pregnancy bmi
+              Condado de Residencia
             </th>
             <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Birth Weight gms
+              Edad de la Madre
             </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              County of residence fips
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              IMC Preembarazo
             </th>
-            <th scope="col" class="px-6  py-4  text-gray-700 whitespace-nowrap">
-              Maternal Morbidity Desc
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Peso al Nacer (gramos)
             </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Maternal Morbidity YN
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Número de Semanas Prenatales
             </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Edad Gestacional OE (semanas)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              IMC Preembarazo
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Peso al Nacer (gramos)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Código de Área del Condado de Residencia (FIPS)
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Descripción de Morbilidad Materna Desc
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              ¿Morbilidad Materna Verificada YN?
+            </th>
+
           </ng-container>
           <ng-container *ngIf="selectedOption === 'NPRDLM'">
             <th scope="col" class="px-6 py-4 bg-[#bef264]">
-              Year
+              Año
             </th>
             <th scope="col" class="px-6 py-4">
-              Births
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              County of Residence
-            </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Age of Mother
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Pre pregnancy BMI
-            </th>
-            <th scope="col" class="px-6  py-4  text-gray-700 whitespace-nowrap">
-              Birth Weight gms
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap ">
-              Number of prenatal wks
-            </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Oe gestational age wks
+              Nacimientos
             </th>
             <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Pre pregnancy bmi
+              Condado de Residencia
             </th>
             <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Birth Weight gms
+              Edad de la Madre
             </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              County of residence fips
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              IMC Preembarazo
             </th>
-            <th scope="col" class="px-6  py-4  text-gray-700 whitespace-nowrap">
-              Mothers Single Race
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Peso al Nacer (gramos)
             </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Mothers Single Race Code
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Número de Semanas Prenatales
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Edad Gestacional OE (semanas)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              IMC Preembarazo
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Peso al Nacer (gramos)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Código de Área del Condado de Residencia (FIPS)
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Raza Única de las Madres
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Código de Raza Única de las Madres
             </th>
           </ng-container>
           <ng-container *ngIf="selectedOption === 'NPPSETDP'">
             <th scope="col" class="px-6 py-4 bg-[#bef264]">
-              Year
+              Año
             </th>
             <th scope="col" class="px-6 py-4">
-              Births
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              County of Residence
-            </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Age of Mother
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Pre pregnancy BMI
-            </th>
-            <th scope="col" class="px-6  py-4  text-gray-700 whitespace-nowrap">
-              Birth Weight gms
-            </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap ">
-              Number of prenatal wks
-            </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Oe gestational age wks
+              Nacimientos
             </th>
             <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Pre pregnancy bmi
+              Condado de Residencia
             </th>
             <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
-              Birth Weight gms
+              Edad de la Madre
             </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              County of residence fips
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              IMC Preembarazo
             </th>
-            <th scope="col" class="px-6  py-4  text-gray-700 whitespace-nowrap">
-              Source of Payment
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Peso al Nacer (gramos)
             </th>
-            <th scope="col" class="px-6  py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
-              Source of Payment Code
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Número de Semanas Prenatales
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Edad Gestacional OE (semanas)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              IMC Preembarazo
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Peso al Nacer (gramos)
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Código de Área del Condado de Residencia (FIPS)
+            </th>
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+              Fuente de Pago
+            </th>
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+              Código de Fuente de Pago
             </th>
           </ng-container>
         </thead>
@@ -626,16 +616,13 @@
               <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
                 {{item.ave_Pre_pregnancy_BMI}}
               </td>
-              <td class="px-6 py-4 text-center">
-                {{item.ave_Birth_Weight_gms}}
-              </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4  text-gray-700 whitespace-nowrap text-center">
                 {{item.county_of_Residence_FIPS}}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center bg-[#bef264] text-gray-700 whitespace-nowrap">
                 {{item.congenitalAbnormalityCheckedDesc}}
               </td>
-              <td class="px-6 py-4 text-center bg-[#bef264] text-gray-700 whitespace-nowrap">
+              <td class="px-6 py-4 text-center  text-gray-700 whitespace-nowrap">
                 {{item.congenitalAbnormalityCheckedYN}}
               </td>
             </tr>
@@ -885,3 +872,4 @@
     </div>
   </div>
 </div>
+<app-footer></app-footer>

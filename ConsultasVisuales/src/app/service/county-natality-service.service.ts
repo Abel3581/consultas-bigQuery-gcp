@@ -14,8 +14,8 @@ export class CountyNatalityServiceService {
   constructor(private http: HttpClient) { }
 
 
-  getByIdCountyNatality(id: number): Observable<CountySearchIdResponse[]>{
-    return this.http.get<CountySearchIdResponse[]>(`${this.urlCounty}/${id}`).pipe(
+  getByIdCountyNatality(id: number): Observable<CountySearchIdResponse>{
+    return this.http.get<CountySearchIdResponse>(`${this.urlCounty}/${id}`).pipe(
       catchError(this.handleError));
   }
 

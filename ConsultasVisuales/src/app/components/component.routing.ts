@@ -15,6 +15,7 @@ import { FatherRaceComponent } from './father-race/father-race.component';
 import { MaternalMorbidityComponent } from './maternal-morbidity/maternal-morbidity.component';
 import { MotherRaceComponent } from './mother-race/mother-race.component';
 import { PaymentFiltersComponent } from './payment-filters/payment-filters.component';
+import { FooterComponent } from '../shared/footer/footer.component';
 
 
 
@@ -68,6 +69,7 @@ const routes: Routes = [
     { path: 'maternal', component: MaternalMorbidityComponent},
     { path: 'mother', component: MotherRaceComponent},
     { path: 'payment', component: PaymentFiltersComponent},
+    { path: 'footer', component: FooterComponent},
     {
       path: '',
       redirectTo: '',

@@ -62,7 +62,6 @@ export class ConsultasService {
       catchError(this.handleError));
   }
 
-
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // Errores del lado del cliente

@@ -1,0 +1,15 @@
+<div class="fixed inset-0 overflow-y-auto z-50 flex items-center justify-center">
+  <div class="bg-black bg-opacity-50 relative inset-0"></div>
+  <div class="bg-white p-8 rounded-lg flex flex-col items-center justify-center mx-4 sm:mx-auto sm:max-w-lg">
+    <h1 class="text-2xl font-bold mb-4">Confirmar apagado</h1>
+    <div class="mb-4">
+      <label for="password" class="block mb-2">Contraseña:</label>
+      <input [(ngModel)]="password" id="password" type="password" class="border p-2 w-full">
+    </div>
+    <div class="flex justify-end">
+      <button class="px-4 py-2 bg-red-500 text-white rounded mr-2" (click)="onNoClick()">Cancelar</button>
+      <button class="px-4 py-2 bg-green-500 text-white rounded" (click)="onShutdownClick()">Apagar</button>
+    </div>
+  </div>
+</div>
+

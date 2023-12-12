@@ -22,7 +22,7 @@ export class SearchComponent implements OnInit{
   consultaDetalle: ConsultaDetalleResponse[] = [];
   commentResponseList!: CommentResponse[];
   contadorMessage!: number;
-  countyNatalitySearchIdResponse: CountySearchIdResponse[] = [];
+  countyNatalitySearchIdResponse!: CountySearchIdResponse;
   mostrarGrafico: boolean = false;
 
 

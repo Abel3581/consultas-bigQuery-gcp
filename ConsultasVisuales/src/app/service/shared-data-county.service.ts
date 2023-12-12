@@ -19,9 +19,9 @@ export class SharedDataCountyService {
 
    constructor() { }
 
-  private dataSearchId = new BehaviorSubject<CountySearchIdResponse[]>([]);
+  private dataSearchId = new BehaviorSubject<CountySearchIdResponse | null>(null);
   dataSearchIdBehavior$ =  this.dataSearchId.asObservable();
-  setDataSearchId(data: CountySearchIdResponse[]) {
+  setDataSearchId(data: CountySearchIdResponse) {
     console.log("Datos de setDataearchId (antes de emitir): ", data);
     this.dataSearchId.next(data);
   }

@@ -32,89 +32,89 @@
       <th scope="col" class="px-6 py-4 " *ngIf="showColumn('id')">
         Id
       </th>
-      <th scope="col" class="px-6 py-3" *ngIf="showColumn('year')">
+      <th scope="col" class="px-6 py-3 bg-indigo-400" *ngIf="showColumn('year')">
         Year
       </th>
       <th scope="col" class="px-6 py-3" *ngIf="showColumn('county_of_Residence')">
           County_of_Residence
       </th>
-      <th scope="col" class="px-6 py-3" *ngIf="showColumn('county_of_Residence_FIPS')">
+      <th scope="col" class="px-6 py-3 bg-indigo-400" *ngIf="showColumn('county_of_Residence_FIPS')">
           County_of_Residence_FIPS
       </th>
       <th scope="col" class="px-6 py-3" *ngIf="showColumn('births')">
         Births
       </th>
-      <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Age_of_Mother')">
+      <th scope="col" class="px-6 py-3 bg-indigo-400" *ngIf="showColumn('ave_Age_of_Mother')">
         Ave_Age_of_Mother
       </th>
       <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_OE_Gestational_Age_Wks')">
         Ave_OE_Gestational_Age
       </th>
-      <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_LMP_Gestational_Age_Wks')">
+      <th scope="col" class="px-6 py-3 bg-indigo-400" *ngIf="showColumn('ave_LMP_Gestational_Age_Wks')">
         Ave_LMP_Gestational_Age
       </th>
       <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Birth_Weight_gms')">
         Ave_Birth_Weight_gms
       </th>
-      <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Pre_pregnancy_BMI')">
+      <th scope="col" class="px-6 py-3 bg-indigo-400" *ngIf="showColumn('ave_Pre_pregnancy_BMI')">
         Ave_Pre_pregnancy_BMI
       </th>
       <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Number_of_Prenatal_Wks')">
         Ave_Number_of_Prenatal_Wks
       </th>
-      <th scope="col" class="px-6 py-3" *ngIf="showColumn('abnormalConditionsCheckedDesc')">
+      <th scope="col" class="px-6 py-3 bg-indigo-400 " *ngIf="showColumn('abnormalConditionsCheckedDesc')">
         Abnormal_Conditions
       </th>
       <th scope="col" class="px-6 py-3" *ngIf="showColumn('abnormalConditionsCheckedYN')">
         Abnormal_ConditionsChecked_YN
       </th>
-     <th >
+     <th class="bg-indigo-400 text-center">
       Graficar
      </th>
     </thead>
     <tbody>
       <tr *ngFor="let detalle of consultaDetalle" class="bg-[#d8b4fe] border-b border-[#d8b4fe] ">
-        <td *ngIf="showColumn('id')" scope="row" class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap ">
+        <td *ngIf="showColumn('id')" scope="row" class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap bg-[#c084fc]">
             {{detalle.id}}
         </td>
-        <td *ngIf="showColumn('year')" class="px-6 py-4">
+        <td *ngIf="showColumn('year')" class="px-6 py-4 bg-indigo-400 text-yellow-50">
             {{detalle.year}}
         </td>
-        <td *ngIf="showColumn('county_of_Residence')" class="px-6 py-4">
+        <td *ngIf="showColumn('county_of_Residence')" class="px-6 py-4 bg-[#c084fc]">
             {{detalle.county_of_Residence}}
         </td>
-        <td *ngIf="showColumn('county_of_Residence_FIPS')" class="px-6 py-4">
+        <td *ngIf="showColumn('county_of_Residence_FIPS')" class="px-6 py-4 bg-indigo-400 text-yellow-50">
             {{detalle.county_of_Residence_FIPS}}
         </td>
-        <td *ngIf="showColumn('births')" class="px-6 py-4">
+        <td *ngIf="showColumn('births')" class="px-6 py-4 bg-[#c084fc]">
           {{detalle.births}}
         </td>
-        <td *ngIf="showColumn('ave_Age_of_Mother')" class="px-6 py-4">
+        <td *ngIf="showColumn('ave_Age_of_Mother')" class="px-6 py-4 bg-indigo-400 text-yellow-50 ">
           {{detalle.ave_Age_of_Mother}}
         </td>
-        <td *ngIf="showColumn('ave_OE_Gestational_Age_Wks')" class="px-6 py-4">
+        <td *ngIf="showColumn('ave_OE_Gestational_Age_Wks')" class="px-6 py-4 bg-[#c084fc]">
           {{detalle.ave_OE_Gestational_Age_Wks}}
         </td>
-        <td *ngIf="showColumn('ave_LMP_Gestational_Age_Wks')" class="px-6 py-4">
+        <td *ngIf="showColumn('ave_LMP_Gestational_Age_Wks')" class="px-6 py-4 bg-indigo-400 text-yellow-50">
           {{detalle.ave_LMP_Gestational_Age_Wks}}
         </td>
-        <td *ngIf="showColumn('ave_Birth_Weight_gms')" class="px-6 py-4" >
+        <td *ngIf="showColumn('ave_Birth_Weight_gms')" class="px-6 py-4 bg-[#c084fc]" >
           {{detalle.ave_Birth_Weight_gms}}
         </td>
-        <td *ngIf="showColumn('ave_Pre_pregnancy_BMI')" class="px-6 py-4">
+        <td *ngIf="showColumn('ave_Pre_pregnancy_BMI')" class="px-6 py-4 bg-indigo-400 text-yellow-50">
           {{detalle.ave_Pre_pregnancy_BMI}}
         </td>
-        <td *ngIf="showColumn('ave_Number_of_Prenatal_Wks')" class="px-6 py-4">
+        <td *ngIf="showColumn('ave_Number_of_Prenatal_Wks')" class="px-6 py-4 bg-[#c084fc]">
           {{detalle.ave_Number_of_Prenatal_Wks}}
         </td>
-        <td *ngIf="showColumn('abnormalConditionsCheckedDesc')" class="px-6 py-4">
+        <td *ngIf="showColumn('abnormalConditionsCheckedDesc')" class="px-6 py-4 bg-indigo-400 text-yellow-50">
           {{detalle.abnormalConditionsCheckedDesc}}
         </td>
-        <td *ngIf="showColumn('abnormalConditionsCheckedYN')" class="px-6 py-4">
+        <td *ngIf="showColumn('abnormalConditionsCheckedYN')" class="px-6 py-4 bg-[#c084fc]">
           {{detalle.abnormalConditionsCheckedYN}}
         </td>
-        <td class="px-6 py-4">
-          <button (click)="graficar(detalle.id)" class="text-white bg-[#be28c9] hover:bg-orange-300 focus:outline-none focus:ring-4  font-sans rounded-full text-xs px-4 py-1.5 text-center ">Graficar</button>
+        <td class="px-6 py-4 bg-indigo-400 ">
+          <button (click)="graficar(detalle.id)" class="text-yellow-50 bg-[#be28c9] hover:bg-orange-300 focus:outline-none focus:ring-4  font-sans rounded-full text-xs px-4 py-1.5 text-center ">Graficar</button>
         </td>
       </tr>
     </tbody>
@@ -141,14 +141,6 @@
 
     <!-- Modal panel -->
     <div class="inline-block align-bottom  bg-white rounded-lg text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle  sm:max-w-5xl sm:w-full " role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-      <!-- Contenido del modal -->
-      <!-- <h1 class="text-center mt-10">
-        <span class="font-bold">Año:</span>
-         "{{selectedYear}}"&nbsp;&nbsp;
-         <span class="font-bold">Condado:</span>
-         "{{selectedCounty}}"</h1>
-      <h2></h2> -->
-      <!-- <app-grafico-circular></app-grafico-circular> -->
       <app-grafico-search-id></app-grafico-search-id>
       <button (click)="cerrarGrafico()" class="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700 focus:outline-none">
         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
