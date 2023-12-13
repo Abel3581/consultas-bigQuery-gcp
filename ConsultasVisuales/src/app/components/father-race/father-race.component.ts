@@ -68,13 +68,13 @@ export class FatherRaceComponent implements OnInit {
           data.white,
         ];
         this.chartOptions.xaxis!.categories = [
-          'Native Hawaiian or Other Pacific Islander',
-          'American Indian or Alaska Native',
-          'More than one race',
-          'Asian',
-          'Black or African American',
-          'Unknown or Not Stated',
-          'White',
+          ['Nativo de Hawái u', 'Otro Isleño del Pacífico'],
+          ['Indígena Americano', 'o Nativo de Alaska'],
+          'Más de una raza',
+          'Asiático',
+          'Negro o Afroamericano',
+          'Desconocido o No Especificado',
+          'Blanco',
         ]
       }
     })

@@ -16,10 +16,13 @@ import { SharedDataCountyService } from 'src/app/service/shared-data-county.serv
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit{
+
   comentarioForm: FormGroup;
   consultaId!: number;
   nameConsult!: string;
   consultaDetalle: ConsultaDetalleResponse[] = [];
+  pageSize: number = 100;
+  currentPage: number = 1;
   commentResponseList!: CommentResponse[];
   contadorMessage!: number;
   countyNatalitySearchIdResponse!: CountySearchIdResponse;
@@ -68,7 +71,7 @@ loadConsultaDetalle(): void {
       (data) => {
         this.consultaDetalle = data;
         this.commentResponseList = data[0].commentResponseList;
-        //console.log(data);
+        console.log("Size = ",this.consultaDetalle.length);
         //console.log(data[0]); // Muestra el primer elemento en la consola
         console.log(data[0].commentResponseList); // Muestra commentResponseList del primer elemento en la consola
         this.contadorMessage = this.commentResponseList.length;
@@ -121,6 +124,34 @@ enviarComentario() {
 
 cerrarGrafico() {
   this.mostrarGrafico = false;
+}
+
+get totalItems(): number {
+  return this.consultaDetalle.length;
+}
+
+get totalPages(): number {
+  return Math.ceil(this.totalItems / this.pageSize);
+}
+
+// Función para obtener los elementos de la página actual
+getItems(): ConsultaDetalleResponse[] {
+  const startIndex = (this.currentPage - 1) * this.pageSize;
+  const endIndex = startIndex + this.pageSize;
+  return this.consultaDetalle.slice(startIndex, endIndex);
+}
+
+// Método para avanzar y retroceder
+goToPreviousPage() {
+  if (this.currentPage > 1) {
+    this.currentPage--;
+  }
+}
+
+goToNextPage() {
+  if (this.currentPage < this.totalPages) {
+    this.currentPage++;
+  }
 }
 
 

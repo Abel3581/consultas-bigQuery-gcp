@@ -86,13 +86,12 @@ export class MotherRaceComponent implements OnInit{
       },
       xaxis: {
         categories: [
-          ["White"],
-          ["Black or", "African American"],
-          ["Asian"],
-          ["More than", "one race"],
-          ["American Indian", "or Alaska Native"],
-          ["Native Hawaiian", "or Other", "Pacific Islander"],
-
+          ["Blanco"],
+          ["Negro o", "Afroamericano"],
+          ["Asiático"],
+          ["Más de", "una raza"],
+          ["Indígena Americano", "o Nativo de Alaska"],
+          ["Nativo Hawaiano", "u Otro", "Isleño del Pacífico"],
         ],
         labels: {
           style: {

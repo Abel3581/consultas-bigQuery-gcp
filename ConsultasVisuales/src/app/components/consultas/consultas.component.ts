@@ -317,8 +317,7 @@ onButtonClick() {
                 )
         break;
         default:
-
-          break;
+        break;
       }
     }
 }
@@ -386,6 +385,17 @@ getDataForConsulta(): any[] {
       return this.countyNatalityByAbnormalConditionsData;
     case 'CAE':
       return this.abnormalConditionsFiltersData;
+    case 'NPRDP':
+      return this.fatherRaceResponse;
+    case 'NPACPC':
+      return this.congenitalResponse;
+    case 'NPMMC':
+      return this.maternalMorbidityResponse;
+    case 'NPRDLM':
+      return this.motherRaceResponse;
+    case 'NPPSETDP':
+      return this.paymentResponse;
+
     default:
       return [];
   }

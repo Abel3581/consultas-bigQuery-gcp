@@ -30,7 +30,7 @@ export class NacimientosPorAnoComponentComponent implements OnInit {
         categories: [],
       },
       title: {
-        text: 'Births',
+        text: 'Nacimientos',
       },
     };
   }

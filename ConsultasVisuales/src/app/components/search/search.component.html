@@ -27,106 +27,120 @@
 <!-- Tabla -->
 <div class="  w-full h-screen flex flex-col justify-normal items-center p-8">
   <div class="relative  mt-16 w-11/12 h-96 overflow-x-auto shadow-2xl sm:rounded-lg ">
-  <table class="w-full  text-sm text-left rtl:text-right text-gray-700">
-    <thead class="border-b text-xs text-gray-700 uppercase bg-[#c084fc]">
-      <th scope="col" class="px-6 py-4 " *ngIf="showColumn('id')">
-        Id
-      </th>
-      <th scope="col" class="px-6 py-3 bg-indigo-400" *ngIf="showColumn('year')">
-        Year
-      </th>
-      <th scope="col" class="px-6 py-3" *ngIf="showColumn('county_of_Residence')">
-          County_of_Residence
-      </th>
-      <th scope="col" class="px-6 py-3 bg-indigo-400" *ngIf="showColumn('county_of_Residence_FIPS')">
-          County_of_Residence_FIPS
-      </th>
-      <th scope="col" class="px-6 py-3" *ngIf="showColumn('births')">
-        Births
-      </th>
-      <th scope="col" class="px-6 py-3 bg-indigo-400" *ngIf="showColumn('ave_Age_of_Mother')">
-        Ave_Age_of_Mother
-      </th>
-      <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_OE_Gestational_Age_Wks')">
-        Ave_OE_Gestational_Age
-      </th>
-      <th scope="col" class="px-6 py-3 bg-indigo-400" *ngIf="showColumn('ave_LMP_Gestational_Age_Wks')">
-        Ave_LMP_Gestational_Age
-      </th>
-      <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Birth_Weight_gms')">
-        Ave_Birth_Weight_gms
-      </th>
-      <th scope="col" class="px-6 py-3 bg-indigo-400" *ngIf="showColumn('ave_Pre_pregnancy_BMI')">
-        Ave_Pre_pregnancy_BMI
-      </th>
-      <th scope="col" class="px-6 py-3" *ngIf="showColumn('ave_Number_of_Prenatal_Wks')">
-        Ave_Number_of_Prenatal_Wks
-      </th>
-      <th scope="col" class="px-6 py-3 bg-indigo-400 " *ngIf="showColumn('abnormalConditionsCheckedDesc')">
-        Abnormal_Conditions
-      </th>
-      <th scope="col" class="px-6 py-3" *ngIf="showColumn('abnormalConditionsCheckedYN')">
-        Abnormal_ConditionsChecked_YN
-      </th>
-     <th class="bg-indigo-400 text-center">
-      Graficar
-     </th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let detalle of consultaDetalle" class="bg-[#d8b4fe] border-b border-[#d8b4fe] ">
-        <td *ngIf="showColumn('id')" scope="row" class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap bg-[#c084fc]">
-            {{detalle.id}}
-        </td>
-        <td *ngIf="showColumn('year')" class="px-6 py-4 bg-indigo-400 text-yellow-50">
-            {{detalle.year}}
-        </td>
-        <td *ngIf="showColumn('county_of_Residence')" class="px-6 py-4 bg-[#c084fc]">
-            {{detalle.county_of_Residence}}
-        </td>
-        <td *ngIf="showColumn('county_of_Residence_FIPS')" class="px-6 py-4 bg-indigo-400 text-yellow-50">
-            {{detalle.county_of_Residence_FIPS}}
-        </td>
-        <td *ngIf="showColumn('births')" class="px-6 py-4 bg-[#c084fc]">
-          {{detalle.births}}
-        </td>
-        <td *ngIf="showColumn('ave_Age_of_Mother')" class="px-6 py-4 bg-indigo-400 text-yellow-50 ">
-          {{detalle.ave_Age_of_Mother}}
-        </td>
-        <td *ngIf="showColumn('ave_OE_Gestational_Age_Wks')" class="px-6 py-4 bg-[#c084fc]">
-          {{detalle.ave_OE_Gestational_Age_Wks}}
-        </td>
-        <td *ngIf="showColumn('ave_LMP_Gestational_Age_Wks')" class="px-6 py-4 bg-indigo-400 text-yellow-50">
-          {{detalle.ave_LMP_Gestational_Age_Wks}}
-        </td>
-        <td *ngIf="showColumn('ave_Birth_Weight_gms')" class="px-6 py-4 bg-[#c084fc]" >
-          {{detalle.ave_Birth_Weight_gms}}
-        </td>
-        <td *ngIf="showColumn('ave_Pre_pregnancy_BMI')" class="px-6 py-4 bg-indigo-400 text-yellow-50">
-          {{detalle.ave_Pre_pregnancy_BMI}}
-        </td>
-        <td *ngIf="showColumn('ave_Number_of_Prenatal_Wks')" class="px-6 py-4 bg-[#c084fc]">
-          {{detalle.ave_Number_of_Prenatal_Wks}}
-        </td>
-        <td *ngIf="showColumn('abnormalConditionsCheckedDesc')" class="px-6 py-4 bg-indigo-400 text-yellow-50">
-          {{detalle.abnormalConditionsCheckedDesc}}
-        </td>
-        <td *ngIf="showColumn('abnormalConditionsCheckedYN')" class="px-6 py-4 bg-[#c084fc]">
-          {{detalle.abnormalConditionsCheckedYN}}
-        </td>
-        <td class="px-6 py-4 bg-indigo-400 ">
-          <button (click)="graficar(detalle.id)" class="text-yellow-50 bg-[#be28c9] hover:bg-orange-300 focus:outline-none focus:ring-4  font-sans rounded-full text-xs px-4 py-1.5 text-center ">Graficar</button>
-        </td>
-      </tr>
-    </tbody>
-    <ng-container *ngIf="consultaDetalle.length === 0">
-      <tr class="" >
-          <td colspan="13" class=" py-4 text-center font-bold">No hay datos disponibles</td>
-      </tr>
-    </ng-container>
-  </table>
+    <table class="w-full text-sm text-left rtl:text-right text-gray-700">
+      <thead class="border-b text-xs text-gray-700 uppercase bg-[#c084fc] ">
+        <th scope="col" class="px-6 py-4 table-cell" *ngIf="showColumn('id')">
+          Id
+        </th>
+        <th scope="col" class="px-6 py-3 bg-indigo-400 table-cell" *ngIf="showColumn('year')">
+            Año
+        </th>
+        <th scope="col" class="px-6 py-3 table-cell" *ngIf="showColumn('county_of_Residence')">
+            Condado_de_Residencia
+        </th>
+        <th scope="col" class="px-6 py-3 bg-indigo-400 table-cell" *ngIf="showColumn('county_of_Residence_FIPS')">
+            Condado_de_Residencia_FIPS
+        </th>
+        <th scope="col" class="px-6 py-3 table-cell" *ngIf="showColumn('births')">
+            Nacimientos
+        </th>
+        <th scope="col" class="px-6 py-3 bg-indigo-400 table-cell" *ngIf="showColumn('ave_Age_of_Mother')">
+            Edad_Promedio_de_la_Madre
+        </th>
+        <th scope="col" class="px-6 py-3 table-cell" *ngIf="showColumn('ave_OE_Gestational_Age_Wks')">
+            Edad_Gestacional_Promedio_OE
+        </th>
+        <th scope="col" class="px-6 py-3 bg-indigo-400 table-cell" *ngIf="showColumn('ave_LMP_Gestational_Age_Wks')">
+            Edad_Gestacional_Promedio_LMP
+        </th>
+        <th scope="col" class="px-6 py-3 table-cell" *ngIf="showColumn('ave_Birth_Weight_gms')">
+            Peso_de_Nacimiento_Promedio_gms
+        </th>
+        <th scope="col" class="px-6 py-3 bg-indigo-400 table-cell" *ngIf="showColumn('ave_Pre_pregnancy_BMI')">
+            BMI_Promedio_Antes_del_Embarazo
+        </th>
+        <th scope="col" class="px-6 py-3 table-cell" *ngIf="showColumn('ave_Number_of_Prenatal_Wks')">
+            Número_Promedio_de_Semanas_Prenatales
+        </th>
+        <!-- <th scope="col" class="px-6 py-3 bg-indigo-400 table-cell" *ngIf="showColumn('abnormalConditionsCheckedDesc')">
+            Condiciones_Anormales
+        </th>
+        <th scope="col" class="px-6 py-3 table-cell" *ngIf="showColumn('abnormalConditionsCheckedYN')">
+            Condiciones_Anormales_Verificadas_YN
+        </th> -->
+        <th scope="col" class="px-6 py-3 bg-indigo-400 text-center table-cell">
+          Graficar
+        </th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detalle of getItems()" class="bg-[#d8b4fe] border-b border-[#d8b4fe] ">
+          <td scope="row" class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap bg-[#c084fc] table-cell" [ngClass]="{'bg-[#c084fc]': showColumn('id')}">
+              {{detalle.id}}
+          </td>
+          <td class="px-6 py-4 bg-indigo-400 text-yellow-50 table-cell" [ngClass]="{'bg-indigo-400': showColumn('year')}" >
+              {{detalle.year}}
+          </td>
+          <td class="px-6 py-4 bg-[#c084fc] table-cell" [ngClass]="{'bg-[#c084fc]': showColumn('county_of_Residence')}">
+              {{detalle.county_of_Residence}}
+          </td>
+          <td  class="px-6 py-4 bg-indigo-400 text-yellow-50 table-cell" [ngClass]="{'bg-indigo-400': showColumn('county_of_Residence_FIPS')}">
+              {{detalle.county_of_Residence_FIPS}}
+          </td>
+          <td class="px-6 py-4 bg-[#c084fc] table-cell" [ngClass]="{'bg-[#c084fc]': showColumn('births')}">
+            {{detalle.births}}
+          </td>
+          <td class="px-6 py-4 bg-indigo-400 text-yellow-50 table-cell" [ngClass]="{'bg-indigo-400': showColumn('ave_Age_of_Mother')}">
+            {{detalle.ave_Age_of_Mother}}
+          </td>
+          <td class="px-6 py-4 bg-[#c084fc] table-cell" [ngClass]="{'bg-[#c084fc]': showColumn('ave_OE_Gestational_Age_Wks')}">
+            {{detalle.ave_OE_Gestational_Age_Wks}}
+          </td>
+          <td class="px-6 py-4 bg-indigo-400 text-yellow-50 table-cell" [ngClass]="{'bg-indigo-400': showColumn('ave_LMP_Gestational_Age_Wks')}">
+            {{detalle.ave_LMP_Gestational_Age_Wks}}
+          </td>
+          <td class="px-6 py-4 bg-[#c084fc] table-cell" [ngClass]="{'bg-[#c084fc]': showColumn('ave_Birth_Weight_gms')}">
+            {{detalle.ave_Birth_Weight_gms}}
+          </td>
+          <td class="px-6 py-4 bg-indigo-400 text-yellow-50 table-cell" [ngClass]="{'bg-indigo-400': showColumn('ave_Pre_pregnancy_BMI')}">
+            {{detalle.ave_Pre_pregnancy_BMI}}
+          </td>
+          <td class="px-6 py-4 bg-[#c084fc] table-cell" [ngClass]="{'bg-[#c084fc]': showColumn('ave_Number_of_Prenatal_Wks')}">
+            {{detalle.ave_Number_of_Prenatal_Wks}}
+          </td>
+          <!-- <td class="px-6 py-4 bg-indigo-400 text-yellow-50 table-cell" [ngClass]="{'bg-indigo-400': showColumn('abnormalConditionsCheckedDesc')}" >
+            {{detalle.abnormalConditionsCheckedDesc}}
+          </td>
+          <td class="px-6 py-4 bg-[#c084fc] " [ngClass]="{'bg-[#c084fc]': showColumn('abnormalConditionsCheckedYN')}" >
+            {{detalle.abnormalConditionsCheckedYN}}
+          </td> -->
+          <td class="px-6 py-4 bg-indigo-400 table-cell">
+            <button (click)="graficar(detalle.id)" class="text-yellow-50 bg-[#be28c9] hover:bg-orange-300 focus:outline-none focus:ring-4  font-sans rounded-full text-xs px-4 py-1.5 text-center">Graficar</button>
+          </td>
+        </tr>
+      </tbody>
+      <ng-container *ngIf="consultaDetalle.length === 0">
+        <tr class="" >
+            <td colspan="13" class=" py-4 text-center font-bold">No hay datos disponibles</td>
+        </tr>
+      </ng-container>
+    </table>
+    <div class="pagination-container ">
+      <pagination
+        [(ngModel)]="currentPage"
+        [totalItems]="totalItems"
+        [itemsPerPage]="pageSize"
+        [maxSize]="totalItems"
+        [boundaryLinks]="true"
+        [rotate]="false"
+      ></pagination>
+    </div>
+  </div>
+  <div class="pagination-buttons">
+    <button class="btn-pagination bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" (click)="goToPreviousPage()" [disabled]="currentPage === 1">Prev</button>
+    <span class="pagination-label mx-2">{{ currentPage }} / {{ totalPages }}</span>
+    <button class="btn-pagination bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r" (click)="goToNextPage()" [disabled]="currentPage === totalPages">Next</button>
   </div>
 </div>
-
  <!-- Mostrar grafico y modal -->
  <div *ngIf="mostrarGrafico" class="fixed inset-0 overflow-y-auto z-50 ">
 

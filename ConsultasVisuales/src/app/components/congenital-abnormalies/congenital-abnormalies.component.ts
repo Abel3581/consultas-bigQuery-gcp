@@ -88,9 +88,9 @@ export class CongenitalAbnormaliesComponent implements OnInit{
           rotate: -45
         },
         categories: [
-          "Unknown or Not Stated",
-          "None checked",
-          "At least one checked",
+          "Desconocido o No Especificado",
+          "Ninguno Seleccionado",
+          "Al Menos Uno Seleccionado",
 
         ],
         tickPlacement: "on"

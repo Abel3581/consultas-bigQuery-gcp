@@ -41,9 +41,9 @@ export class MaternalMorbidityComponent implements OnInit{
       },
       xaxis: {
         categories: [
-          "Unknown or Not Stated",
-          "None checked",
-          "At least one checked"
+          "Desconocido o No Especificado",
+          "Ninguno seleccionado",
+          "Al menos uno seleccionado",
         ]
       }
     };

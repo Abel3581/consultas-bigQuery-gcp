@@ -14,6 +14,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxUiLoaderInterceptor } from './interceptor/ngx-ui-loader.interceptor';
 import { UptimeService } from './service/uptime.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -39,6 +40,7 @@ import { UptimeService } from './service/uptime.service';
      ToastNoAnimationModule,
      // Import NgxUiLoaderModule
     NgxUiLoaderModule,
+    NgxPaginationModule
 
 
   ],

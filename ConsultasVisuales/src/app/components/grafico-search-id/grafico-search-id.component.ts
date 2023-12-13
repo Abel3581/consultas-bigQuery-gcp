@@ -35,9 +35,9 @@ export class GraficoSearchIdComponent implements OnInit {
       chart: {
         type: "donut"
       },
-      labels: ['Births','ave_Pre_pregnancy_BMI','ave_Age_of_Mother','ave_Birth_Weight_gms',
-              'data.ave_LMP_Gestational_Age_Wks','ave_Number_of_Prenatal_Wks','ave_OE_Gestational_Age_Wks',
-              'ave_Pre_pregnancy_BMI'],
+      labels:['Nacimientos', 'BMI Promedio Antes del Embarazo', 'Edad Promedio de la Madre', 'Peso de Nacimiento Promedio en gramos',
+      'Edad Gestacional Promedio (Datos)', 'Número Promedio de Semanas Prenatales', 'Edad Gestacional Promedio (OE)',
+      'BMI Promedio Antes del Embarazo'],
       responsive: [
         {
           breakpoint: 480,

@@ -88,9 +88,9 @@ export class AbnormalFiltersComponent implements OnInit{
       },
       xaxis: {
         categories: [
-          ["None", "Checked"],
-          ["Unknown", "Or Not","State"],
-          ["At Least", "One Checked"],
+          ["Ninguno", "Seleccionado"],
+          ["Desconocido", "O No", "Indicado"],
+          ["Al Menos", "Uno Seleccionado"]
 
         ],
         labels: {
