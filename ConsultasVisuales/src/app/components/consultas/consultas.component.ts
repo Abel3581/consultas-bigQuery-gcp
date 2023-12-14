@@ -45,7 +45,6 @@ export class ConsultasComponent implements OnInit{
     '2016-01-01',
 
   ];
-
   // Opciones para el condado de residencia
   county_of_Residence: string[] = [
     'Calhoun County, AL',
@@ -69,14 +68,10 @@ export class ConsultasComponent implements OnInit{
     'San Luis Obispo County, CA',
     'Canyon County, ID'
   ];
-
-
   // Variables para almacenar las selecciones
   selectedYear: string = "2018-01-01";
   selectedCounty : string = "Calhoun County, AL";
-
   userAdmin: string = '';
-
   showChart: boolean = false;
   consultaForm: FormGroup;
   countyNatalityData: CountyNatalityResponse [] = [];
@@ -98,6 +93,8 @@ export class ConsultasComponent implements OnInit{
   paymentFiltersResponse!: PaymentFiltersResponse;
 
   selectedOption: string = 'VAC'; // Esta propiedad almacena el valor seleccionado
+  pageSize: number = 10;
+  currentPage: number = 1;
 
 constructor(private consultasService: ConsultasService, private fb: FormBuilder,
     private toastr: ToastrService, private sharedDataService: SharedDataServiceService,
@@ -211,13 +208,15 @@ onButtonClick() {
     this.maternalMorbidityResponse = [];
     this.motherRaceResponse = [];
     this.paymentResponse = [];
-
+    this.currentPage = 1;
     this.tableSize = 0;
     if (this.selectedOption) {
+      this.currentPage = 1;
       switch (this.selectedOption) {
         case 'NDC':
           this.consultasService.getCountyNatality().subscribe(data => {
             this.countyNatalityData = data;
+            this.currentPage = 1;
             console.log('Datos de Natalidad del Condado:', data);
             this.tableSize = this.countyNatalityData.length;
           }, error => {
@@ -229,6 +228,7 @@ onButtonClick() {
           this.consultasService.getCountyNatalityResidenceAndBirths().subscribe(
             data => {
               this.countyNatalityResidenceAndBirthsData = data;
+              this.currentPage = 1;
               console.log('Filtros por condado y nacimientos:', data);
             }, error => {
               console.error('Error en la consulta de Natalidad del Condado:', error);
@@ -239,6 +239,7 @@ onButtonClick() {
           this.consultasService.getCountyNatalityByAbnormalConditions().subscribe(
             data => {
               this.countyNatalityByAbnormalConditionsData = data;
+              this.currentPage = 1;
               console.log(' Nacimientos anomalos:', data);
               this.tableSize = this.countyNatalityByAbnormalConditionsData.length;
             },error => {
@@ -261,6 +262,7 @@ onButtonClick() {
               data =>{
                 console.log("Datos de getAllCongenitalAbnormalities(): ", data);
                 this.congenitalResponse = data;
+                this.currentPage = 1;
                 this.tableSize = this.congenitalResponse.length;
               },error => {
                 console.log(error);
@@ -272,6 +274,7 @@ onButtonClick() {
             data => {
               console.log("Datos de getAllByFatherRace(): ", data);
               this.fatherRaceResponse = data;
+              this.currentPage = 1;
               this.tableSize = this.fatherRaceResponse.length;
             },error => {
               console.log(error);
@@ -283,6 +286,7 @@ onButtonClick() {
               data => {
                 console.log("Datos de getAllMaternalMorbidity(): ", data);
                 this.maternalMorbidityResponse = data;
+                this.currentPage = 1;
                 console.log("SIZE = ", this.maternalMorbidityResponse.length);
                 this.tableSize = this.maternalMorbidityResponse.length;
               },error => {
@@ -295,6 +299,7 @@ onButtonClick() {
                 data => {
                   console.log("Datos de getAllMotherRace(): ", data);
                   this.motherRaceResponse = data;
+                  this.currentPage = 1;
                   console.log("SIZE = ", this.motherRaceResponse.length);
                   this.tableSize = this.motherRaceResponse.length;
                 },error => {
@@ -308,6 +313,7 @@ onButtonClick() {
                   data => {
                     console.log(data);
                     this.paymentResponse = data;
+                    this.currentPage = 1;
                     this.tableSize = this.paymentResponse.length;
                     console.log("SIZE = ", this.paymentResponse.length);
                   },error => {
@@ -671,8 +677,80 @@ mostrarGraficoRectangular(){
       break;
 
       default:
+        this.toastr.info("Debes realizar una busqueda para graficar");
       break;
     }
+  }
+}
+
+get totalItems(): number{
+  if(this.selectedOption){
+    switch(this.selectedOption){
+      case 'NDC':
+        return this.countyNatalityData.length;
+      case 'NCPCA':
+        return this.countyNatalityByAbnormalConditionsData.length;
+      case 'NPACPC':
+        return this.congenitalResponse.length;
+      case 'NPRDP':
+        return this.fatherRaceResponse.length;
+      case 'NPMMC':
+        return this.maternalMorbidityResponse.length;
+      case 'NPRDLM':
+        return this.motherRaceResponse.length;
+      case 'NPPSETDP':
+        return this.paymentResponse.length;
+      default:
+        return 0;
+
+    }
+  }else return 0;
+
+  // NDC, NCPCA
+}
+
+get totalPages(): number{
+  return Math.ceil(this.totalItems! / this.pageSize);
+}
+
+// Función para obtener los elementos de la página actual
+getItems(): any | undefined[] {
+  const startIndex = (this.currentPage - 1) * this.pageSize;
+  const endIndex = startIndex + this.pageSize;
+  if(this.selectedOption){
+    switch(this.selectedOption){
+      case 'NDC':
+        return this.countyNatalityData.slice(startIndex, endIndex);
+        case 'NCPCA':
+          return this.countyNatalityByAbnormalConditionsData.slice(startIndex, endIndex);
+        case 'NPACPC':
+          return this.congenitalResponse.slice(startIndex, endIndex);
+        case 'NPRDP':
+          return this.fatherRaceResponse.slice(startIndex, endIndex);
+        case 'NPMMC':
+          return this.maternalMorbidityResponse.slice(startIndex, endIndex);
+        case 'NPRDLM':
+          return this.motherRaceResponse.slice(startIndex, endIndex);
+        case 'NPPSETDP':
+          return this.paymentResponse.slice(startIndex, endIndex);
+        default:
+          return 0;
+    }
+
+  }else return 0;
+
+}
+
+// Método para avanzar y retroceder
+goToPreviousPage() {
+  if (this.currentPage > 1) {
+    this.currentPage--;
+  }
+}
+
+goToNextPage() {
+  if (this.currentPage < this.totalPages) {
+    this.currentPage++;
   }
 }
 

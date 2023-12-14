@@ -48,7 +48,7 @@ export class AdminComponent {
       );
     }else{
       this.adminForm.markAsTouched();
-      this.toastr.warning("Ingresa el admin para iniciar la app.  ️");
+      this.toastr.warning("Ingresa el password para iniciar la app.  ️");
 
     }
 

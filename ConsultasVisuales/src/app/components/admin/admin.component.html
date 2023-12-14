@@ -1,45 +1,33 @@
 <app-navbar></app-navbar>
 <div class="  w-full h-screen flex flex-col justify-normal items-center p-8">
-    <div  class=" relative  bg-[#64c7f2] w-11/12 h-60  rounded-lg  flex flex-row justify-normal">
-        <div class=" w-3/5 flex justify-center" >
-            <h1 class="text-3xl p-20 font-bold text-gray-700">Natalidad EE.UU </h1>
-
-        </div>
-        <div class="  w-2/5 flex justify-center">
-            <img
-            class=" w-40 h-32 md:w-72 md:h-60  "
-            src="./../../../assets/img/home-removebg-preview.png"
-            alt=""
-          />
-        </div>
+  <div class=" relative  bg-[#64c7f2] w-11/12 h-60  rounded-lg  flex flex-row justify-normal">
+    <div class=" w-3/5 flex justify-end mt-3">
+      <h1 class="text-2xl p-10 font-bold text-yellow-50">Tasa de natalidad en los condados de Estados Unidos</h1>
     </div>
-
-
-      <div class="grid grid-cols-6 gap-4 bg-white border border-gray-200  shadow absolute mt-44 w-1/2 h-32   rounded-lg " >
-        <div class="col-start-1 col-end-7 flex justify-center items-center ">
-          <form [formGroup]="adminForm" (ngSubmit)="enviarSolicitud()" class="grid grid-cols-6 gap-4">
-
-            <div class="col-span-4">
-              <!-- <label for="small-input" class="block mb-2 text-md font-bold text-gray-700">Usuario: </label> -->
-
-              <input formControlName="userAdmin" type="password" placeholder="Ingresar password" id="small-input" class="w-full h-10 p-2 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs">
-              <div *ngIf="adminForm.get('userAdmin')?.hasError('required') && adminForm.get('userAdmin')?.touched" class="text-red-500 text-xs mb-1 ml-1">El admin es requerido</div>
-              <div *ngIf="adminForm.get('userAdmin')?.hasError('email') && adminForm.get('userAdmin')?.touched" class="text-red-500 text-xs mb-1 ml-1">Ingrese un correo electrónico válido</div>
-              <!-- <div *ngIf="adminForm.invalid && adminForm.touched" class="text-red-500 text-xs mb-1 ml-1">
-                Formulario inválido
-              </div> -->
-
-            </div>
-
-            <div class="col-span-2 flex items-center">
-              <button type="submit" class="focus:outline-none font-bold text-gray-700 bg-[#64c7f2] hover:bg-[#64c7f2] focus:ring-4 focus:bg-[#64c7f2]  rounded-lg text-sm px-5 h-10 ml-2">Ingresar</button>
-            </div>
-          </form>
+    <div class="  w-2/5 flex justify-center">
+      <img class=" w-40 h-32 md:w-72 md:h-60  " src="./../../../assets/img/home-removebg-preview.png" alt="" />
+    </div>
+  </div>
+  <div class="grid grid-cols-6 gap-4 bg-white border border-gray-200  shadow absolute mt-44 w-1/2 h-32   rounded-lg ">
+    <div class="col-start-1 col-end-7 flex justify-center items-center ">
+      <form [formGroup]="adminForm" (ngSubmit)="enviarSolicitud()" class="grid grid-cols-6 gap-4">
+        <div class="col-span-4">
+          <input formControlName="userAdmin" type="password" placeholder="Ingresar password" id="small-input"
+            class="w-full h-10 p-2 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs">
+          <div *ngIf="adminForm.get('userAdmin')?.hasError('required') && adminForm.get('userAdmin')?.touched"
+            class="text-red-500 font-semibold text-xs mb-1 ml-1">El password es requerido</div>
+          <div *ngIf="adminForm.get('userAdmin')?.hasError('email') && adminForm.get('userAdmin')?.touched"
+            class="text-red-500 font-semibold text-xs mb-1 ml-1">Ingrese un password válido</div>
         </div>
-      </div>
-
-      <div class="text-center ">
-        <h5 class="text-center mt-20 text-cyan-400">Ingresar el admin para activar la app</h5>
-      </div>
-
+        <div class="col-span-2 flex items-center">
+          <button type="submit"
+            class="focus:outline-none font-bold text-white bg-[#64c7f2] hover:bg-[#64c7f2] focus:ring-4 focus:bg-[#a72685]  rounded-lg text-sm px-5 h-10 ml-2">Ingresar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="text-center ">
+    <h5 class="text-center mt-20 text-cyan-400">Ingresa el password para activar la app</h5>
+  </div>
 </div>
+<app-footer></app-footer>

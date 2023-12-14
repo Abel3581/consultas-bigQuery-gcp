@@ -25,7 +25,7 @@ export class PaymentFiltersComponent implements OnInit{
 
       },
       xaxis: {
-        categories: ['Unknown or Not Stated','Other','Self Pay','Private Insurance','Medicaid'],
+        categories: ['No Especificado','Otro','Pago Personal','Seguro Privado','Medicaid'],
       },
       title: {
         text: 'Source_of_Payment_Code',

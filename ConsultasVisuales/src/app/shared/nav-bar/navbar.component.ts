@@ -35,6 +35,27 @@ export class NavbarComponent implements OnInit{
     }else if (rutaActual.includes('/buscar')) {
       this.navbarColorClass = 'bg-[#d8b4fe]';
       this.urlConsultas = true;
+    }else if (rutaActual.includes('/nacimientos')){
+      this.navbarColorClass = 'bg-[#bef264]';
+      this.urlConsultas = true;
+    }else if (rutaActual.includes('/abnormal')){
+      this.navbarColorClass = 'bg-[#bef264]';
+      this.urlConsultas = true;
+    }else if (rutaActual.includes('/congenital')){
+      this.navbarColorClass = 'bg-[#bef264]';
+      this.urlConsultas = true;
+    }else if (rutaActual.includes('/father')){
+      this.navbarColorClass = 'bg-[#bef264]';
+      this.urlConsultas = true;
+    }else if (rutaActual.includes('/maternal')){
+      this.navbarColorClass = 'bg-[#bef264]';
+      this.urlConsultas = true;
+    }else if (rutaActual.includes('/mother')){
+      this.navbarColorClass = 'bg-[#bef264]';
+      this.urlConsultas = true;
+    }else if (rutaActual.includes('/payment')){
+      this.navbarColorClass = 'bg-[#bef264]';
+      this.urlConsultas = true;
     }
 
     this.sharedService.dataUserAdmin$.subscribe(data => {

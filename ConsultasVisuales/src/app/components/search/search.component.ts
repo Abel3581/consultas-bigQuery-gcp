@@ -21,13 +21,15 @@ export class SearchComponent implements OnInit{
   consultaId!: number;
   nameConsult!: string;
   consultaDetalle: ConsultaDetalleResponse[] = [];
-  pageSize: number = 100;
+  pageSize: number = 50;
   currentPage: number = 1;
   commentResponseList!: CommentResponse[];
   contadorMessage!: number;
   countyNatalitySearchIdResponse!: CountySearchIdResponse;
   mostrarGrafico: boolean = false;
-
+  //Comment
+  currentPageComment = 1;
+  commentsPerPage = 5;
 
   constructor(private route: ActivatedRoute, private consultService:ConsultasService,
     private formBuilder: FormBuilder, private toastr: ToastrService, private countyService:CountyNatalityServiceService,
@@ -154,6 +156,11 @@ goToNextPage() {
   }
 }
 
+//Comment
+getCommentsForPage(): CommentResponse[] {
+  const startIndex = (this.currentPageComment - 1) * this.commentsPerPage;
+  return this.commentResponseList.slice(startIndex, startIndex + this.commentsPerPage);
+}
 
 
 }
