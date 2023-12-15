@@ -1,11 +1,11 @@
 <app-navbar></app-navbar>
 <div class="  w-full h-auto flex flex-col justify-normal items-center p-8">
-  <div class=" relative  bg-[#d8b4fe] w-11/12 h-60  rounded-lg  flex flex-row justify-normal">
-    <div class=" w-3/5 flex justify-center">
-      <h1 class="text-3xl p-20 font-bold text-gray-700">Agregar comentario</h1>
+  <div class="relative bg-gradient-to-r from-[#c084fc] to-[#d8b4fe] w-11/12 h-60 rounded-lg flex flex-row justify-center items-center">
+    <div class="w-3/5 flex flex-col justify-center items-center">
+      <h1 class="text-4xl p-6 font-bold text-white">Bienvenido a la Sección de Comentarios</h1>
     </div>
-    <div class="  w-2/5 flex justify-center">
-      <img class="w-40 h-32 md:w-72 md:h-60 " src="./../../../assets/img/buscar.png" alt="" />
+    <div class="w-2/5 flex justify-center">
+      <img class="w-40 h-32 md:w-72 md:h-60" src="./../../../assets/img/buscar.png" alt="" />
     </div>
   </div>
   <div
@@ -23,49 +23,44 @@
 </div>
 <!-- Tabla -->
 <div class="  w-full h-screen flex flex-col justify-normal items-center p-8">
-  <div class="relative  mt-16 w-11/12 h-96 overflow-x-auto shadow-2xl sm:rounded-lg ">
+  <div class="relative  mt-16 w-11/12 h-96 overflow-x-auto shadow-2xl sm:rounded-lg "
+  style="background: linear-gradient(to right, #c084fc, #d8b4fe);">
     <table class="w-full text-sm text-left rtl:text-right text-gray-700">
-      <thead class="border-b text-xs text-gray-700 uppercase bg-[#c084fc] ">
+      <thead class="border-b text-xs text-gray-700 uppercase  ">
         <th scope="col" class="px-6 py-4 table-cell" *ngIf="showColumn('id')">
           Id
         </th>
-        <th scope="col" class="px-6 py-3 bg-indigo-400 table-cell" *ngIf="showColumn('year')">
+        <th scope="col" class="px-6 py-3  table-cell" *ngIf="showColumn('year')">
           Año
         </th>
         <th scope="col" class="px-6 py-3 table-cell" *ngIf="showColumn('county_of_Residence')">
           Condado_de_Residencia
         </th>
-        <th scope="col" class="px-6 py-3 bg-indigo-400 table-cell" *ngIf="showColumn('county_of_Residence_FIPS')">
+        <th scope="col" class="px-6 py-3  table-cell" *ngIf="showColumn('county_of_Residence_FIPS')">
           Condado_de_Residencia_FIPS
         </th>
         <th scope="col" class="px-6 py-3 table-cell" *ngIf="showColumn('births')">
           Nacimientos
         </th>
-        <th scope="col" class="px-6 py-3 bg-indigo-400 table-cell" *ngIf="showColumn('ave_Age_of_Mother')">
+        <th scope="col" class="px-6 py-3  table-cell" *ngIf="showColumn('ave_Age_of_Mother')">
           Edad_Promedio_de_la_Madre
         </th>
         <th scope="col" class="px-6 py-3 table-cell" *ngIf="showColumn('ave_OE_Gestational_Age_Wks')">
           Edad_Gestacional_Promedio_OE
         </th>
-        <th scope="col" class="px-6 py-3 bg-indigo-400 table-cell" *ngIf="showColumn('ave_LMP_Gestational_Age_Wks')">
+        <th scope="col" class="px-6 py-3  table-cell" *ngIf="showColumn('ave_LMP_Gestational_Age_Wks')">
           Edad_Gestacional_Promedio_LMP
         </th>
         <th scope="col" class="px-6 py-3 table-cell" *ngIf="showColumn('ave_Birth_Weight_gms')">
           Peso_de_Nacimiento_Promedio_gms
         </th>
-        <th scope="col" class="px-6 py-3 bg-indigo-400 table-cell" *ngIf="showColumn('ave_Pre_pregnancy_BMI')">
+        <th scope="col" class="px-6 py-3  table-cell" *ngIf="showColumn('ave_Pre_pregnancy_BMI')">
           BMI_Promedio_Antes_del_Embarazo
         </th>
         <th scope="col" class="px-6 py-3 table-cell" *ngIf="showColumn('ave_Number_of_Prenatal_Wks')">
           Número_Promedio_de_Semanas_Prenatales
         </th>
-        <!-- <th scope="col" class="px-6 py-3 bg-indigo-400 table-cell" *ngIf="showColumn('abnormalConditionsCheckedDesc')">
-            Condiciones_Anormales
-        </th>
-        <th scope="col" class="px-6 py-3 table-cell" *ngIf="showColumn('abnormalConditionsCheckedYN')">
-            Condiciones_Anormales_Verificadas_YN
-        </th> -->
-        <th scope="col" class="px-6 py-3 bg-indigo-400 text-center table-cell">
+        <th scope="col" class="px-6 py-3  text-center table-cell">
           Graficar
         </th>
       </thead>
@@ -204,27 +199,23 @@
 </div>
 
 <!-- Formulario comentario -->
-<div class=" mb-10   w-full h-screen  flex justify-center">
-
-  <div class="w-full h-3/5 max-w-md bg-white border border-gray-200 rounded-lg shadow drop-shadow-lg ">
+<div class="mb-10 w-full h-screen flex justify-center">
+  <div class="w-full h-3/5 max-w-md bg-white border border-gray-200 rounded-lg shadow drop-shadow-lg">
     <div class="flex items-center justify-center h-auto">
-      <form [formGroup]="comentarioForm" (ngSubmit)="enviarComentario()" class="mt-10 w-3/4  ">
-        <div class="bg-white  text-gray-900 text-sm rounded-lg  block p-2.5">
-          <!-- Agrega campos para el nombre de usuario, nombre de consulta y comentario -->
-          <input type="email" formControlName="nameUser" placeholder="Nombre de Usuario"
+      <form [formGroup]="comentarioForm" (ngSubmit)="enviarComentario()" class="mt-10 w-3/4">
+        <div class="bg-white text-gray-900 text-sm rounded-lg block p-4">
+          <label for="nameUser" class="block text-xs font-semibold text-gray-600">Nombre de Usuario</label>
+          <input type="text" id="nameUser" formControlName="nameUser" placeholder="Nombre de Usuario"
             class="w-full mb-2.5 p-2 border rounded-lg" />
-            <div *ngIf="comentarioForm.get('nameUser')?.hasError('required') && comentarioForm.get('nameUser')?.touched"
+          <div *ngIf="comentarioForm.get('nameUser')?.hasError('required') && comentarioForm.get('nameUser')?.touched"
             class="text-red-500 text-xs mb-1 ml-1">
-            El usuario es requerido
+            El nombre de usuario es requerido
           </div>
-          <div *ngIf="comentarioForm.get('nameUser')?.hasError('email') && comentarioForm.get('nameUser')?.touched"
-            class="text-red-500 text-xs mb-1 ml-1">
-            Ingrese un correo electrónico válido
-          </div>
-          <!--<input type="text"  placeholder="Nombre de Consulta" class="w-full mb-2.5 p-2 border rounded-lg" />-->
-          <textarea maxlength="150" formControlName="comment" placeholder="Comentario"
+
+          <label for="comment" class="block text-xs font-semibold text-gray-600 mt-4">Comentario</label>
+          <textarea id="comment" maxlength="150" formControlName="comment" placeholder="Comentario"
             class="w-full mb-2.5 p-2 border rounded-lg"></textarea>
-            <div *ngIf="comentarioForm.get('comment')?.hasError('required') && comentarioForm.get('comment')?.touched"
+          <div *ngIf="comentarioForm.get('comment')?.hasError('required') && comentarioForm.get('comment')?.touched"
             class="text-red-500 text-xs mb-1 ml-1">
             El comentario es requerido
           </div>
@@ -238,11 +229,10 @@
             class="focus:outline-none font-bold text-white bg-indigo-400 hover:bg-[#a855f7] focus:ring-4 focus:bg-[#2c7c94] rounded-lg text-sm px-5 w-full h-10">
             Guardar Comentario
           </button>
-
         </div>
       </form>
     </div>
-
   </div>
 </div>
+
 <app-footer></app-footer>

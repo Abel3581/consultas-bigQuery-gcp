@@ -1,11 +1,11 @@
 <app-navbar></app-navbar>
 <div class="  w-full h-screen flex flex-col justify-normal items-center p-8">
-  <div class=" bg-black w-11/12 h-60  rounded-lg  flex flex-row justify-normal">
-    <div class=" w-5/6 flex justify-center">
-      <h1 class="text-3xl p-20 font-bold text-white">Tasa de natalidad de los condados de EE.UU.</h1>
+  <div class=" bg-black w-11/12 h-60 rounded-lg flex flex-row justify-normal">
+    <div class="w-5/6 flex justify-center">
+      <h1 class="text-3xl p-10 md:p-20 font-bold text-yellow-50">Tasa de natalidad de los condados de EE.UU.</h1>
     </div>
-    <div class="  w-2/5 flex justify-center">
-      <img class=" w-40 h-32 md:w-96 md:h-60  " src="./../../../assets/img/condados.png" alt="" />
+    <div class="w-2/5 flex justify-center">
+      <img class="w-40 h-32 md:w-96 md:h-60" src="./../../../assets/img/condados.png" alt="" />
     </div>
   </div>
   <div
@@ -128,72 +128,73 @@
     </div>
 
   </div>
+  <!-- Tabla -->
   <div class="h-screen w-full">
     <div class="relative  mt-44  h-96 overflow-x-auto shadow-md sm:rounded-lg ">
-      <table class="w-full  text-sm text-left rtl:text-right text-gray-700">
+      <table class="w-full text-center text-sm  rtl:text-right text-gray-700">
         <thead class="text-xs text-gray-700 uppercase bg-[#a3e635] border-b border-bg-[#bef264]">
           <ng-container *ngIf="selectedOption === 'VAC' || selectedOption === ''">
-            <th scope="col" class="px-6 py-4 bg-[#bef264]">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] table-cell">
               Año
             </th>
-            <th scope="col" class="px-6 py-4">
+            <th scope="col" class="px-6 py-4 table-cell">
               Nacimientos
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Condado de Residencia
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Edad de la Madre
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               BMI Preembarazo
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell ">
               Peso al Nacer (g)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Número de Semanas Prenatales
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Edad Gestacional OE (semanas)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               BMI Preembarazo
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               FIPS del Condado de Residencia
             </th>
 
           </ng-container>
           <ng-container *ngIf="selectedOption === 'NDC'">
-            <th scope="col" class="px-6 py-4 bg-[#bef264]">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] table-cell">
               Año
             </th>
-            <th scope="col" class="px-6 py-4">
+            <th scope="col" class="px-6 py-4 table-cell">
               Nacimientos
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell ">
               Condado de Residencia
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Edad de la Madre
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               BMI Preembarazo
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Peso al Nacer (g)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Número de Semanas Prenatales
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Edad Gestacional OE (semanas)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               BMI Preembarazo
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               FIPS del Condado de Residencia
             </th>
           </ng-container>
@@ -206,40 +207,40 @@
             </th>
           </ng-container>
           <ng-container *ngIf="selectedOption === 'NCPCA'">
-            <th scope="col" class="px-6 py-4 bg-[#bef264]">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] table-cell">
               Año
             </th>
-            <th scope="col" class="px-6 py-4">
+            <th scope="col" class="px-6 py-4 table-cell">
               Nacimientos
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell ">
               Condado de Residencia
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Edad de la Madre
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               BMI Preembarazo
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Condiciones Anormales
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Peso al Nacer (g)
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Edad Gestacional Imp. (semanas)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Número de Semanas Prenatales
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Edad Gestacional OE (semanas)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               BMI Preembarazo
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               FIPS del Condado de Residencia
             </th>
           </ng-container>
@@ -260,196 +261,196 @@
 
           </ng-container>
           <ng-container *ngIf="selectedOption === 'NPACPC'">
-            <th scope="col" class="px-6 py-4 bg-[#bef264]">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] table-cell">
               Año
             </th>
-            <th scope="col" class="px-6 py-4">
+            <th scope="col" class="px-6 py-4 table-cell">
               Nacimientos
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Condado de Residencia
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell ">
               Edad de la Madre
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               IMC Preembarazo
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Peso al Nacer (gramos)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Número de Semanas Prenatales
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Edad Gestacional OE (semanas)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               IMC Preembarazo
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Código de Área del Condado de Residencia (FIPS)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Descripción Verificada de Congénitos Desc
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               ¿Congénito Verificado YN?
             </th>
           </ng-container>
           <ng-container *ngIf="selectedOption === 'NPRDP'">
-            <th scope="col" class="px-6 py-4 bg-[#bef264]">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] table-cell">
               Año
             </th>
-            <th scope="col" class="px-6 py-4">
+            <th scope="col" class="px-6 py-4 table-cell">
               Nacimientos
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Condado de Residencia
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Edad de la Madre
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               IMC Preembarazo
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Peso al Nacer (gramos)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Número de Semanas Prenatales
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Edad Gestacional OE (semanas)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               IMC Preembarazo
             </th>
-            <th scope="col" class="px-6 py-4  text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4  text-gray-700 whitespace-nowrap table-cell ">
               Código de Área del Condado de Residencia (FIPS)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Raza Única de los Padres
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Código de Raza Única de los Padres
             </th>
           </ng-container>
           <ng-container *ngIf="selectedOption === 'NPMMC'">
-            <th scope="col" class="px-6 py-4 bg-[#bef264]">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] table-cell">
               Año
             </th>
-            <th scope="col" class="px-6 py-4">
+            <th scope="col" class="px-6 py-4 table-cell ">
               Nacimientos
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Condado de Residencia
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Edad de la Madre
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               IMC Preembarazo
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Peso al Nacer (gramos)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell ">
               Número de Semanas Prenatales
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Edad Gestacional OE (semanas)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               IMC Preembarazo
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Peso al Nacer (gramos)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Código de Área del Condado de Residencia (FIPS)
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Descripción de Morbilidad Materna Desc
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               ¿Morbilidad Materna Verificada YN?
             </th>
 
           </ng-container>
           <ng-container *ngIf="selectedOption === 'NPRDLM'">
-            <th scope="col" class="px-6 py-4 bg-[#bef264]">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] table-cell">
               Año
             </th>
-            <th scope="col" class="px-6 py-4">
+            <th scope="col" class="px-6 py-4 table-cell">
               Nacimientos
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Condado de Residencia
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Edad de la Madre
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               IMC Preembarazo
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Peso al Nacer (gramos)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Número de Semanas Prenatales
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Edad Gestacional OE (semanas)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               IMC Preembarazo
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Código de Área del Condado de Residencia (FIPS)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Raza Única de las Madres
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Código de Raza Única de las Madres
             </th>
           </ng-container>
           <ng-container *ngIf="selectedOption === 'NPPSETDP'">
-            <th scope="col" class="px-6 py-4 bg-[#bef264]">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] table-cell">
               Año
             </th>
-            <th scope="col" class="px-6 py-4">
+            <th scope="col" class="px-6 py-4 table-cell">
               Nacimientos
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Condado de Residencia
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Edad de la Madre
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               IMC Preembarazo
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Peso al Nacer (gramos)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Número de Semanas Prenatales
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Edad Gestacional OE (semanas)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               IMC Preembarazo
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Código de Área del Condado de Residencia (FIPS)
             </th>
-            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
               Fuente de Pago
             </th>
-            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap">
+            <th scope="col" class="px-6 py-4 text-gray-700 whitespace-nowrap table-cell">
               Código de Fuente de Pago
             </th>
           </ng-container>
@@ -457,34 +458,34 @@
         <tbody>
           <ng-container *ngIf="selectedOption === 'NDC' && countyNatalityData && countyNatalityData.length > 0;">
             <tr *ngFor="let item of getItems()" class="bg-[#a3e635] border-b border-bg-[#bef264]">
-              <td class="px-6 py-4 font-medium bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 font-medium bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{ item.year }}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{ item.births }}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{ item.county_of_Residence }}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{ item.ave_Age_of_Mother }}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center ">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{ item.ave_Pre_pregnancy_BMI }}
               </td>
-              <td class="px-6 py-4  text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4  text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.ave_Birth_Weight_gms}}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.ave_Number_of_Prenatal_Wks}}
               </td>
-              <td class="px-6 py-4 text-center text-gray-700 whitespace-nowrap">
+              <td class="px-6 py-4 text-center text-gray-700 whitespace-nowrap table-cell">
                 {{item.ave_OE_Gestational_Age_Wks}}
               </td>
-              <td class="px-6 py-4  text-center bg-[#bef264] text-gray-700 whitespace-nowrap">
+              <td class="px-6 py-4  text-center bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
                 {{item.ave_Pre_pregnancy_BMI}}
               </td>
-              <td class="px-6 py-4  text-center">
+              <td class="px-6 py-4  text-center table-cell">
                 {{item.county_of_Residence_FIPS}}
               </td>
             </tr>
@@ -503,41 +504,41 @@
           </ng-container>
           <ng-container
             *ngIf="selectedOption === 'NCPCA' && countyNatalityByAbnormalConditionsData && countyNatalityByAbnormalConditionsData.length > 0;">
-            <tr *ngFor="let item of getItems()" class="bg-[#a3e635] border-b border-bg-[#bef264]">
-              <td class="px-6 py-4 font-medium bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+            <tr *ngFor="let item of getItems()" class="bg-[#a3e635] border-b border-bg-[#bef264] ">
+              <td class="px-6 py-4 font-medium bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell" >
                 {{ item.year }}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{ item.births }}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{ item.county_of_Residence }}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{ item.ave_Age_of_Mother }}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center ">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{ item.ave_Pre_pregnancy_BMI }}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{item.abnormalConditionsCheckedDesc}}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.ave_Birth_Weight_gms}}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{item.abnormalConditionsCheckedYN}}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.ave_Number_of_Prenatal_Wks}}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{item.ave_OE_Gestational_Age_Wks}}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.ave_Pre_pregnancy_BMI}}
               </td>
-              <td class="px-6 py-4 text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.county_of_Residence_FIPS}}
               </td>
             </tr>
@@ -603,41 +604,41 @@
           </ng-container>
           <ng-container *ngIf="selectedOption === 'NPRDP' && fatherRaceResponse && fatherRaceResponse.length > 0">
             <tr *ngFor="let item of getItems()" class="bg-[#a3e635] border-b border-bg-[#bef264]">
-              <td class="px-6 py-4 font-medium bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 font-medium bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{ item.year }}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{ item.births }}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{ item.county_of_Residence }}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{ item.ave_Age_of_Mother }}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center ">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{ item.ave_Pre_pregnancy_BMI }}
               </td>
-              <td class="px-6 py-4  text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4  text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.ave_Birth_Weight_gms}}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.ave_Number_of_Prenatal_Wks}}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{item.ave_OE_Gestational_Age_Wks}}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.ave_Pre_pregnancy_BMI}}
               </td>
 
-              <td class="px-6 py-4 text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 text-gray-700 whitespace-nowrap text-centertable-cell ">
                 {{item.county_of_Residence_FIPS}}
               </td>
-              <td class="px-6 py-4 text-center bg-[#bef264]">
+              <td class="px-6 py-4 text-center bg-[#bef264] table-cell">
                 {{item.fathersSingleRace}}
               </td>
-              <td class="px-6 py-4 text-center text-gray-700 whitespace-nowrap">
+              <td class="px-6 py-4 text-center text-gray-700 whitespace-nowrap table-cell">
                 {{item.fathersSingleRaceCode}}
               </td>
             </tr>
@@ -645,123 +646,123 @@
           <ng-container
             *ngIf="selectedOption === 'NPMMC' && maternalMorbidityResponse && maternalMorbidityResponse.length > 0">
             <tr *ngFor="let item of getItems()" class="bg-[#a3e635] border-b border-bg-[#bef264]">
-              <td class="px-6 py-4 font-medium bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 font-medium bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{ item.year }}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{ item.births }}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{ item.county_of_Residence }}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{ item.ave_Age_of_Mother }}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center ">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{ item.ave_Pre_pregnancy_BMI }}
               </td>
-              <td class="px-6 py-4  text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4  text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.ave_Birth_Weight_gms}}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.ave_Number_of_Prenatal_Wks}}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{item.ave_OE_Gestational_Age_Wks}}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.ave_Pre_pregnancy_BMI}}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{item.ave_Birth_Weight_gms}}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.county_of_Residence_FIPS}}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{item.maternalMorbidityDesc}}
               </td>
-              <td class="px-6 py-4 text-center bg-[#bef264] text-gray-700 whitespace-nowrap">
+              <td class="px-6 py-4 text-center bg-[#bef264] text-gray-700 whitespace-nowrap table-cell">
                 {{item.maternalMorbidityYN}}
               </td>
             </tr>
           </ng-container>
           <ng-container *ngIf="selectedOption === 'NPRDLM' && motherRaceResponse && motherRaceResponse.length > 0">
             <tr *ngFor="let item of getItems()" class="bg-[#a3e635] border-b border-bg-[#bef264]">
-              <td class="px-6 py-4 font-medium bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 font-medium bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{ item.year }}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{ item.births }}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{ item.county_of_Residence }}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{ item.ave_Age_of_Mother }}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center ">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{ item.ave_Pre_pregnancy_BMI }}
               </td>
-              <td class="px-6 py-4  text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4  text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.ave_Birth_Weight_gms}}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.ave_Number_of_Prenatal_Wks}}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{item.ave_OE_Gestational_Age_Wks}}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.ave_Pre_pregnancy_BMI}}
               </td>
-              <td class="px-6 py-4 text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.county_of_Residence_FIPS}}
               </td>
-              <td class="px-6 py-4 text-center bg-[#bef264]">
+              <td class="px-6 py-4 text-center bg-[#bef264] table-cell">
                 {{item.mothersSingleRace}}
               </td>
-              <td class="px-6 py-4 text-center text-gray-700 whitespace-nowrap">
+              <td class="px-6 py-4 text-center text-gray-700 whitespace-nowrap table-cell">
                 {{item.mothersSingleRaceCode}}
               </td>
             </tr>
           </ng-container>
           <ng-container *ngIf="selectedOption === 'NPPSETDP' && paymentResponse && paymentResponse.length > 0">
             <tr *ngFor="let item of getItems()" class="bg-[#a3e635] border-b border-bg-[#bef264]">
-              <td class="px-6 py-4 font-medium bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 font-medium bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell ">
                 {{ item.year }}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{ item.births }}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{ item.county_of_Residence }}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell ">
                 {{ item.ave_Age_of_Mother }}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center ">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{ item.ave_Pre_pregnancy_BMI }}
               </td>
-              <td class="px-6 py-4  text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4  text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.ave_Birth_Weight_gms}}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.ave_Number_of_Prenatal_Wks}}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-6 py-4 text-center table-cell">
                 {{item.ave_OE_Gestational_Age_Wks}}
               </td>
-              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 bg-[#bef264] text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.ave_Pre_pregnancy_BMI}}
               </td>
-              <td class="px-6 py-4 text-gray-700 whitespace-nowrap text-center">
+              <td class="px-6 py-4 text-gray-700 whitespace-nowrap text-center table-cell">
                 {{item.county_of_Residence_FIPS}}
               </td>
-              <td class="px-6 py-4 text-center bg-[#bef264]">
+              <td class="px-6 py-4 text-center bg-[#bef264] table-cell">
                 {{item.sourceOfPayment}}
               </td>
-              <td class="px-6 py-4 text-center text-gray-700 whitespace-nowrap">
+              <td class="px-6 py-4 text-center text-gray-700 whitespace-nowrap table-cell">
                 {{item.sourceOfPaymentCode}}
               </td>
             </tr>

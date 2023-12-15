@@ -19,7 +19,7 @@ export class AdminComponent {
   constructor(private consultService:ConsultasService, private toastr: ToastrService,
     private router: Router, private fb: FormBuilder, private sharedService: SharedDataCountyService){
       this.adminForm = fb.group({
-        userAdmin:['', [Validators.required, Validators.email]]
+        userAdmin:['', [Validators.required]]
       })
     }
 
@@ -43,6 +43,7 @@ export class AdminComponent {
         (error) => {
           console.error('Error:', error);
           this.toastr.error(error);
+          this.adminForm.reset();
 
         }
       );

@@ -20,7 +20,7 @@ public class DataSeederConfig implements CommandLineRunner {
     private void createAdmin() {
         Admin admin = new Admin();
         admin.setId(1L);
-        admin.setUserAdmin("admin@gmail.com");
+        admin.setUserAdmin("12345678");
         adminRepository.save(admin);
     }
 }

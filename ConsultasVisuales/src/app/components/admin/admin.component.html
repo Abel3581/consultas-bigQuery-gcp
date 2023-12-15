@@ -16,8 +16,8 @@
             class="w-full h-10 p-2 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-xs">
           <div *ngIf="adminForm.get('userAdmin')?.hasError('required') && adminForm.get('userAdmin')?.touched"
             class="text-red-500 font-semibold text-xs mb-1 ml-1">El password es requerido</div>
-          <div *ngIf="adminForm.get('userAdmin')?.hasError('email') && adminForm.get('userAdmin')?.touched"
-            class="text-red-500 font-semibold text-xs mb-1 ml-1">Ingrese un password válido</div>
+          <!-- <div *ngIf="adminForm.get('userAdmin')?.hasError('email') && adminForm.get('userAdmin')?.touched"
+            class="text-red-500 font-semibold text-xs mb-1 ml-1">Ingrese un password válido</div> -->
         </div>
         <div class="col-span-2 flex items-center">
           <button type="submit"

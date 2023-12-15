@@ -1,47 +1,43 @@
 <app-navbar></app-navbar>
 
-<div class="  w-full h-auto flex flex-col justify-normal items-center p-8">
-  <div class=" relative  bg-[#fecaca] w-11/12 h-60  rounded-lg  flex flex-row justify-normal">
-    <div class=" w-3/5 flex justify-center">
+<div class="w-full h-auto flex flex-col justify-normal items-center p-8">
+  <div class="relative bg-gradient-to-r from-[#FFB6C1] to-[#F08080] w-11/12 h-60 rounded-lg flex flex-row justify-normal">
+    <div class="w-3/5 flex justify-center">
       <h1 class="text-3xl p-20 font-bold text-gray-700">Consultas guardadas</h1>
     </div>
-    <div class="  w-2/5 flex justify-center">
-      <img class=" w-40 h-32 md:w-72 md:h-60 " src="./../../../assets/img/todos.png" alt="" />
+    <div class="w-2/5 flex justify-center">
+      <img class="w-40 h-32 md:w-72 md:h-60" src="./../../../assets/img/todos.png" alt="" />
     </div>
   </div>
 
-  <div
-    class=" flex flex-row justify-center bg-white border border-gray-200  shadow absolute mt-44 w-1/2 h-32   rounded-lg pt-8">
-    <div class="">
-
+  <div class="flex flex-row justify-center bg-white border border-gray-200 shadow absolute mt-44 w-1/2 h-32 rounded-lg pt-8">
+    <div>
       <button type="button" (click)="loadConsults()"
-        class="focus:outline-none font-bold text-gray-700 bg-[#fecaca] hover:bg-[#fca5a5] focus:ring-4 focus:bg-[#fecaca]  rounded-lg text-sm px-5 w-40 h-10 ">Ver
+        class="focus:outline-none font-bold text-gray-700 bg-gradient-to-r from-[#FFB6C1] to-[#F08080] hover:bg-gradient-to-r from-[#FF8C9A] to-[#E86161] focus:ring-4 focus:bg-gradient-to-r from-[#FFB6C1] to-[#F08080] rounded-lg text-sm px-5 w-40 h-10 ">Ver
         consultas</button>
     </div>
   </div>
 
-  <div class="  w-full h-screen flex flex-col justify-normal items-center p-8">
-    <div class="relative  mt-32 w-full h-96 overflow-x-auto shadow-2xl sm:rounded-lg ">
-      <table class="w-full  text-sm text-left rtl:text-right text-gray-700">
+  <div class="w-full h-screen flex flex-col justify-normal items-center p-8">
+    <div class="relative mt-32 w-full h-96 overflow-x-auto shadow-2xl sm:rounded-lg">
+      <table class="w-full text-sm text-left rtl:text-right text-gray-700">
         <thead class="text-xs text-gray-700 uppercase ">
           <tr class="">
-            <th scope="col" class="px-6 py-3 bg-[#fecaca]">
+            <th scope="col" class="px-6 py-3 bg-gradient-to-r from-[#FFB6C1] to-[#F08080]">
               ID
             </th>
-
-            <th scope="col" class="px-6 py-3 bg-[#fee2e2]">
+            <th scope="col" class="px-6 py-3 bg-gradient-to-r from-[#FEDCDC] to-[#FFB6C1]">
               Comentario
             </th>
-            <th scope="col" class="px-6 py-3 bg-[#fecaca]">
+            <th scope="col" class="px-6 py-3 bg-gradient-to-r from-[#FFB6C1] to-[#FEDCDC]">
               Nombre de la consulta
             </th>
-            <th scope="col" class="px-6 py-3 bg-[#fee2e2]">
+            <th scope="col" class="px-6 py-3 bg-gradient-to-r from-[#FEDCDC] to-[#FFB6C1]">
               Nombre usuario
             </th>
-            <th scope="col" class="px-6 py-3 bg-[#fecaca]">
+            <th scope="col" class="px-6 py-3 bg-gradient-to-r from-[#FFB6C1] to-[#FEDCDC]">
               Ver tabla
             </th>
-
           </tr>
         </thead>
         <tbody>
