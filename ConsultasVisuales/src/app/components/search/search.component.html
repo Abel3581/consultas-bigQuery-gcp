@@ -17,8 +17,8 @@
       <p>Cantidad de mensajes: <span class="text-red-500 text-lg">{{contadorMessage}}</span></p>
     </div>
   </div>
-  <div class="text-purple-400 text-center mt-36">
-    <h2><span class="font-bold">Nombre Consulta:</span> {{nameConsult}}</h2>
+  <div class=" text-center mt-36">
+    <h2 class="font-semibold">Nombre Consulta: <span class="text-purple-400">{{nameConsult}}</span></h2>
   </div>
 </div>
 <!-- Tabla -->
@@ -174,25 +174,7 @@
 </div>
 
 <!-- List Comments -->
-<!-- <div class="md:container md:mx-auto px-60 mb-16 ">
-  <h2 class="pb-10 text-center">Lista de comentarios de usuarios</h2>
-  <ul role="list" class="divide-y divide-gray-100">
-    <li *ngFor="let comentario of commentResponseList" class="flex justify-between gap-x-6 py-5">
-      <div class="flex min-w-0 gap-x-4">
-        <img class="h-12 w-12 flex-none rounded-sm bg-gray-50" src="./../../../assets/img/comment.png" alt="">
-        <div class="min-w-0 flex-auto">
-          <p class="text-sm font-semibold leading-6 text-gray-900">{{ comentario.nameUser }}</p>
-          <p class="mt-1 ml-5 truncate text-xs leading-5 text-gray-500">{{ comentario.comment }}</p>
-        </div>
-      </div>
-      <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-        <p class="text-sm leading-6 text-gray-900">Fecha</p>
-        <p class="mt-1 text-xs leading-5 text-gray-500"><time datetime="2023-01-23T13:23Z">{{ comentario.creationDate | date:'medium' }}</time></p>
-      </div>
-    </li>
-  </ul>
-</div> -->
-<div class="md:container md:mx-auto px-60 mb-16" *ngIf="commentResponseList.length > 0">
+<div class="md:container md:mx-auto px-60 mb-16 h-96" *ngIf="commentResponseList.length > 0">
   <h2 class="pb-10 text-center">Lista de comentarios de usuarios</h2>
   <ul role="list" class="divide-y divide-gray-100 h-40">
     <li *ngFor="let comentario of getCommentsForPage()" class="flex justify-between gap-x-6 py-5">
@@ -211,7 +193,7 @@
     </li>
   </ul>
   <!-- Controles de paginación -->
-  <div class="flex justify-center mt-4" *ngIf="commentResponseList.length > 0">
+  <div class="flex justify-center mt-28" *ngIf="commentResponseList.length > 0">
     <button class=" font-bold text-white bg-indigo-400 hover:bg-[#a855f7] py-2 px-4 rounded-l"
       (click)="currentPageComment = currentPageComment - 1" [disabled]="currentPageComment === 1">Prev</button>
     <span class="mx-2">{{ currentPageComment }}</span>
@@ -229,22 +211,26 @@
       <form [formGroup]="comentarioForm" (ngSubmit)="enviarComentario()" class="mt-10 w-3/4  ">
         <div class="bg-white  text-gray-900 text-sm rounded-lg  block p-2.5">
           <!-- Agrega campos para el nombre de usuario, nombre de consulta y comentario -->
-          <input type="text" formControlName="nameUser" placeholder="Nombre de Usuario"
+          <input type="email" formControlName="nameUser" placeholder="Nombre de Usuario"
             class="w-full mb-2.5 p-2 border rounded-lg" />
-          <div *ngIf="comentarioForm.get('nameUser')?.hasError('required') && comentarioForm.get('nameUser')?.touched"
+            <div *ngIf="comentarioForm.get('nameUser')?.hasError('required') && comentarioForm.get('nameUser')?.touched"
             class="text-red-500 text-xs mb-1 ml-1">
             El usuario es requerido
           </div>
-          <div *ngIf="comentarioForm.get('nameUser')!.hasError('email') && comentarioForm.get('nameUser')!.touched"
+          <div *ngIf="comentarioForm.get('nameUser')?.hasError('email') && comentarioForm.get('nameUser')?.touched"
             class="text-red-500 text-xs mb-1 ml-1">
             Ingrese un correo electrónico válido
           </div>
           <!--<input type="text"  placeholder="Nombre de Consulta" class="w-full mb-2.5 p-2 border rounded-lg" />-->
-          <textarea formControlName="comment" placeholder="Comentario"
+          <textarea maxlength="150" formControlName="comment" placeholder="Comentario"
             class="w-full mb-2.5 p-2 border rounded-lg"></textarea>
-          <div class="text-red-500 text-xs mb-1 ml-1"
-            *ngIf="comentarioForm.get('comment')?.hasError('required') && comentarioForm.get('comment')?.touched">
+            <div *ngIf="comentarioForm.get('comment')?.hasError('required') && comentarioForm.get('comment')?.touched"
+            class="text-red-500 text-xs mb-1 ml-1">
             El comentario es requerido
+          </div>
+          <div *ngIf="comentarioForm.get('comment')?.hasError('maxLength') && comentarioForm.get('comment')?.touched"
+            class="text-red-500 text-xs mb-1 ml-1">
+            El comentario no debe exceder los 150 caracteres
           </div>
         </div>
         <div class="flex flex-row mt-4 space-x-1">

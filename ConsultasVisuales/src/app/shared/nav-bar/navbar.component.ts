@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ConsultasService } from 'src/app/service/consultas.service';
 import { SharedDataCountyService } from 'src/app/service/shared-data-county.service';
 import { UptimeService } from 'src/app/service/uptime.service';
 
@@ -17,7 +19,8 @@ export class NavbarComponent implements OnInit{
   urlConsultas: boolean = false;
   appReset: boolean = true;
   constructor(private router: Router, private sharedService: SharedDataCountyService,
-    private upTimeService: UptimeService) {}
+    private upTimeService: UptimeService, private consultaService: ConsultasService,
+    private toastr: ToastrService) {}
 
   ngOnInit() {
     this.startUptimeTimer();
@@ -92,5 +95,30 @@ export class NavbarComponent implements OnInit{
       this.uptime = this.upTimeService.getUptime();
     }, 1000);
   }
+
+  showModal: boolean = false;
+
+  confirmReset() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
+  restApp(): void {
+
+    this.consultaService.appReset().subscribe(
+      data => {
+        this.toastr.success(data.message);
+        console.log(data);
+        this.closeModal();
+      },error => {
+        this.toastr.error(error);
+        console.log(error);
+      }
+    )
+  }
+
 
 }

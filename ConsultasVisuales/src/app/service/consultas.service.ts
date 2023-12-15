@@ -40,7 +40,7 @@ export class ConsultasService {
   constructor(private http: HttpClient) { }
 
   public getCountyNatality(): Observable<CountyNatalityResponse[]> {
-    return this.http.get<CountyNatalityResponse[]>(`${this.urlApi}/county-natality`) .pipe(
+    return this.http.get<CountyNatalityResponse[]>(`${this.urlApi}/county-natality`).pipe(
       catchError(this.handleError)
     );
   }
@@ -166,6 +166,12 @@ export class ConsultasService {
 
   getPaymentFilters(): Observable<PaymentFiltersResponse>{
     return this.http.get<PaymentFiltersResponse>(`${this.urlApi}/payment/filters`);
+  }
+
+  appReset(): Observable<MessageResponse>{
+    return this.http.delete<MessageResponse>(`${this.urlAdmin}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
 }

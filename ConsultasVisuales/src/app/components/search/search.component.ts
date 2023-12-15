@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router, RouterLink } from '@angular/router';
+import { max } from 'd3';
 import { ToastrService } from 'ngx-toastr';
 import { CommentResponse } from 'src/app/model/comment-response';
 import { ConsultaDetalleResponse } from 'src/app/model/consulta-detalle-response';
@@ -37,8 +38,7 @@ export class SearchComponent implements OnInit{
 
     this.comentarioForm = this.formBuilder.group({
       nameUser: ['', [Validators.required, Validators.email]],
-      //nameConsult: '',
-      comment: ['', Validators.required],
+      comment: ['', [Validators.required, Validators.maxLength(150)]],
     });
   }
 
