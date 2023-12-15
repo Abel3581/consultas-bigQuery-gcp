@@ -29,7 +29,7 @@ export class SearchComponent implements OnInit{
   mostrarGrafico: boolean = false;
   //Comment
   currentPageComment = 1;
-  commentsPerPage = 5;
+  commentsPerPage = 3;
 
   constructor(private route: ActivatedRoute, private consultService:ConsultasService,
     private formBuilder: FormBuilder, private toastr: ToastrService, private countyService:CountyNatalityServiceService,

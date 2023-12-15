@@ -6,4 +6,6 @@ public interface AdminService {
 
 
     boolean adminExistsByUsername(String username);
+
+    void appRest();
 }

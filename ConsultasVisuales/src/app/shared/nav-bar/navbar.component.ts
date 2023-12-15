@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit{
   navbarColorClass = 'bg-[#64c7f2]';
   user: string = "";
   urlConsultas: boolean = false;
+  appReset: boolean = true;
   constructor(private router: Router, private sharedService: SharedDataCountyService,
     private upTimeService: UptimeService) {}
 
@@ -26,36 +27,47 @@ export class NavbarComponent implements OnInit{
     if (rutaActual.includes(' ')) {
       this.navbarColorClass = this.navbarColorClass;
       this.urlConsultas = false;
+      this.appReset = true;
     } else if (rutaActual.includes('/natalidad')) {
       this.navbarColorClass = 'bg-[#bef264]';
       this.urlConsultas = true;
+      this.appReset = false;
     }else if (rutaActual.includes('/todos')) {
       this.navbarColorClass = 'bg-[#fecaca]';
       this.urlConsultas = true;
+      this.appReset = false;
     }else if (rutaActual.includes('/buscar')) {
       this.navbarColorClass = 'bg-[#d8b4fe]';
       this.urlConsultas = true;
+      this.appReset = false;
     }else if (rutaActual.includes('/nacimientos')){
       this.navbarColorClass = 'bg-[#bef264]';
       this.urlConsultas = true;
+      this.appReset = false;
     }else if (rutaActual.includes('/abnormal')){
       this.navbarColorClass = 'bg-[#bef264]';
       this.urlConsultas = true;
+      this.appReset = false;
     }else if (rutaActual.includes('/congenital')){
       this.navbarColorClass = 'bg-[#bef264]';
       this.urlConsultas = true;
+      this.appReset = false;
     }else if (rutaActual.includes('/father')){
       this.navbarColorClass = 'bg-[#bef264]';
       this.urlConsultas = true;
+      this.appReset = false;
     }else if (rutaActual.includes('/maternal')){
       this.navbarColorClass = 'bg-[#bef264]';
       this.urlConsultas = true;
+      this.appReset = false;
     }else if (rutaActual.includes('/mother')){
       this.navbarColorClass = 'bg-[#bef264]';
       this.urlConsultas = true;
+      this.appReset = false;
     }else if (rutaActual.includes('/payment')){
       this.navbarColorClass = 'bg-[#bef264]';
       this.urlConsultas = true;
+      this.appReset = false;
     }
 
     this.sharedService.dataUserAdmin$.subscribe(data => {
