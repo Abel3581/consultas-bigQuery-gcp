@@ -10,9 +10,11 @@ import com.medici.app.service.injectdependency.BigQueryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -609,5 +611,35 @@ public class BigQueryServiceImpl implements BigQueryService {
         response.setUnknownOrNotStated(unknownOrNotStated);
         response.setSelfPay(selfPay);
         return response;
+    }
+
+    @Async
+    public CompletableFuture<List<PaymentResponse>> getAllPaymentsAsync() {
+        try {
+            QueryJobConfiguration queryJobConfiguration = QueryJobConfiguration.newBuilder(BigQueryUrlConstants.GET_BY_PAYMENT).build();
+            Job job = bigquery.create(JobInfo.newBuilder(queryJobConfiguration).build());
+            job = job.waitFor();
+
+            if (job == null) {
+                throw new Exception("Job no longer exists");
+            }
+
+            if (job.getStatus().getError() != null) {
+                throw new Exception(job.getStatus().getError().toString());
+            }
+
+            TableResult result = job.getQueryResults();
+            List<PaymentResponse> responses = StreamSupport.stream(result.iterateAll().spliterator(), false)
+                    .map(bitQueryMapper::mapToPaymentResponse)
+                    .collect(Collectors.toList());
+
+            log.info("Tamaño response = " + responses.size());
+            return CompletableFuture.completedFuture(responses);
+
+        } catch (Exception e) {
+            CompletableFuture<List<PaymentResponse>> future = new CompletableFuture<>();
+            future.completeExceptionally(e);
+            return future;
+        }
     }
 }

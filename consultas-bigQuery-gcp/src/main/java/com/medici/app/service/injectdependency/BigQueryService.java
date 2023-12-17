@@ -5,6 +5,7 @@ import com.medici.app.dto.*;
 import com.medici.app.dto.response.*;
 
 import java.util.List;
+import java.util.concurrent.CompletionStage;
 
 
 public interface BigQueryService {
@@ -42,4 +43,6 @@ public interface BigQueryService {
     List<PaymentResponse> getAllPayments() throws Exception;
 
     PaymentFiltersResponse getPaymentFilters() throws Exception;
+
+
 }

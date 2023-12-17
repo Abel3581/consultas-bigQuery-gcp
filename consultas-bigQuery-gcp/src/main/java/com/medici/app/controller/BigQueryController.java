@@ -5,13 +5,15 @@ import com.medici.app.dto.response.*;
 import com.medici.app.service.BigQueryServiceImpl;
 import com.medici.app.service.injectdependency.BigQueryService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
+@Log4j2
 @RestController
 @RequestMapping("data")
 @RequiredArgsConstructor
@@ -130,6 +132,18 @@ public class BigQueryController {
         PaymentFiltersResponse response = bigQueryService.getPaymentFilters();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @GetMapping("/payment/async")
+    public CompletableFuture<ResponseEntity<List<PaymentResponse>>> getAllPaymentsAsync(){
+        return bigQueryServiceInterface.getAllPaymentsAsync()
+                .thenApply(response -> ResponseEntity.status(HttpStatus.OK).body(response))
+                .exceptionally(ex -> {
+                    log.error("Error al obtener los pagos: " + ex.getMessage());
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                });
+    }
+
+
 
 
 
